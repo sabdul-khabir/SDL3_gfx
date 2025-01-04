@@ -1,6 +1,6 @@
 /*  
 
-SDL2_rotozoom.c: rotozoomer, zoomer and shrinker for 32bit or 8bit surfaces
+SDL3_rotozoom.c: rotozoomer, zoomer and shrinker for 32bit or 8bit surfaces
 
 Copyright (C) 2012-2014  Andreas Schiffler
 
@@ -34,7 +34,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #include <stdlib.h>
 #include <string.h>
 
-#include "SDL2_rotozoom.h"
+#include "SDL3_rotozoom.h"
 
 /* ---- Internally used structures */
 

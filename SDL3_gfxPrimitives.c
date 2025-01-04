@@ -1,6 +1,6 @@
 /* 
 
-SDL2_gfxPrimitives.c: graphics primitives for SDL2 renderers
+SDL3_gfxPrimitives.c: graphics primitives for SDL3 renderers
 
 Copyright (C) 2012-2014  Andreas Schiffler
 
@@ -32,9 +32,9 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #include <math.h>
 #include <string.h>
 
-#include "SDL2_gfxPrimitives.h"
-#include "SDL2_rotozoom.h"
-#include "SDL2_gfxPrimitives_font.h"
+#include "SDL3_gfxPrimitives.h"
+#include "SDL3_rotozoom.h"
+#include "SDL3_gfxPrimitives_font.h"
 
 /* ---- Structures */
 
@@ -45,7 +45,7 @@ typedef struct {
 	Sint16 x, y;
 	int dx, dy, s1, s2, swapdir, error;
 	Uint32 count;
-} SDL2_gfxBresenhamIterator;
+} SDL3_gfxBresenhamIterator;
 
 /*!
 \brief The structure passed to the internal Murphy iterator.
@@ -57,7 +57,7 @@ typedef struct {
 	int oct2;
 	int quad4;
 	Sint16 last1x, last1y, last2x, last2y, first1x, first1y, first2x, first2y, tempx, tempy;
-} SDL2_gfxMurphyIterator;
+} SDL3_gfxMurphyIterator;
 
 /* ---- Pixel */
 

@@ -1,6 +1,6 @@
 /*
 
-SDL2_gfxPrimitives_font.h: 8x8 font definition
+SDL3_gfxPrimitives_font.h: 8x8 font definition
 
 Copyright (C) 2012-2014  Andreas Schiffler
 

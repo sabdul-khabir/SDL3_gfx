@@ -1,6 +1,6 @@
 /*
 
-SDL2_framerate.c: framerate manager
+SDL3_framerate.c: framerate manager
 
 Copyright (C) 2012-2014  Andreas Schiffler
 
@@ -27,7 +27,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 */
 
-#include "SDL2_framerate.h"
+#include "SDL3_framerate.h"
 
 /*!
 \brief Internal wrapper to SDL_GetTicks that ensures a non-zero return value.

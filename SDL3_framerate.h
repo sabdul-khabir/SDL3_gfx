@@ -1,6 +1,6 @@
 /*
 
-SDL2_framerate.h: framerate manager
+SDL3_framerate.h: framerate manager
 
 Copyright (C) 2012-2014  Andreas Schiffler
 
@@ -27,8 +27,8 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 */
 
-#ifndef _SDL2_framerate_h
-#define _SDL2_framerate_h
+#ifndef _SDL3_framerate_h
+#define _SDL3_framerate_h
 
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
@@ -37,7 +37,7 @@ extern "C" {
 
 	/* --- */
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
 
 	/* --------- Definitions */
 
@@ -70,25 +70,25 @@ extern "C" {
 	/* ---- Function Prototypes */
 
 #ifdef _MSC_VER
-#  if defined(DLL_EXPORT) && !defined(LIBSDL2_GFX_DLL_IMPORT)
-#    define SDL2_FRAMERATE_SCOPE __declspec(dllexport)
+#  if defined(DLL_EXPORT) && !defined(LIBSDL3_GFX_DLL_IMPORT)
+#    define SDL3_FRAMERATE_SCOPE __declspec(dllexport)
 #  else
-#    ifdef LIBSDL2_GFX_DLL_IMPORT
-#      define SDL2_FRAMERATE_SCOPE __declspec(dllimport)
+#    ifdef LIBSDL3_GFX_DLL_IMPORT
+#      define SDL3_FRAMERATE_SCOPE __declspec(dllimport)
 #    endif
 #  endif
 #endif
-#ifndef SDL2_FRAMERATE_SCOPE
-#  define SDL2_FRAMERATE_SCOPE extern
+#ifndef SDL3_FRAMERATE_SCOPE
+#  define SDL3_FRAMERATE_SCOPE extern
 #endif
 
 	/* Functions return 0 or value for sucess and -1 for error */
 
-	SDL2_FRAMERATE_SCOPE void SDL_initFramerate(FPSmanager * manager);
-	SDL2_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, Uint32 rate);
-	SDL2_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
-	SDL2_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
-	SDL2_FRAMERATE_SCOPE Uint32 SDL_framerateDelay(FPSmanager * manager);
+	SDL3_FRAMERATE_SCOPE void SDL_initFramerate(FPSmanager * manager);
+	SDL3_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, Uint32 rate);
+	SDL3_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
+	SDL3_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
+	SDL3_FRAMERATE_SCOPE Uint32 SDL_framerateDelay(FPSmanager * manager);
 
 	/* --- */
 
@@ -97,4 +97,4 @@ extern "C" {
 }
 #endif
 
-#endif				/* _SDL2_framerate_h */
+#endif				/* _SDL3_framerate_h */
