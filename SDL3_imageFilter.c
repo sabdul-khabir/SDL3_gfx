@@ -1,6 +1,6 @@
 /*
 
-SDL2_imageFilter.c: byte-image "filter" routines
+SDL3_imageFilter.c: byte-image "filter" routines
 
 Copyright (C) 2012-2014  Andreas Schiffler
 Copyright (C) 2013  Sylvain Beucler
@@ -42,7 +42,7 @@ him for his work.
 #include <stdlib.h>
 #include <string.h>
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
 
 /* Use GCC intrinsics if available: they support both i386 and x86_64,
    provide ASM-grade performances, and lift the PUSHA/POPA issues. */
@@ -53,7 +53,7 @@ him for his work.
 #  include <SDL_cpuinfo.h>
 #endif
 
-#include "SDL2_imageFilter.h"
+#include "SDL3_imageFilter.h"
 
 /*!
 \brief Swaps the byte order in a 32bit integer (LSB becomes MSB, etc.). 

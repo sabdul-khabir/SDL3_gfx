@@ -20,7 +20,8 @@ TestImageFilter.c: test program for MMX filter routines
 #include <string.h>
 #include <time.h>
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 
 #ifdef WIN32
 #include <windows.h>
@@ -28,7 +29,7 @@ TestImageFilter.c: test program for MMX filter routines
 #define bcmp(s1, s2, n) memcmp ((s1), (s2), (n))
 #endif
 #endif
-#include "SDL2_imageFilter.h"
+#include "SDL3_imageFilter.h"
 
 #define SRC_SIZE 23
 
@@ -65,44 +66,44 @@ void print_result(int mmx, char *label, unsigned char *src1, unsigned char *src2
 	memset((void *)blabel, ' ', 80);
 	blabel[strlen(label)+4]=0;
 
-	printf("\n");
-        printf ("%s   pos   ", blabel);
+	SDL_Log("\n");
+	SDL_Log("%s   pos   ", blabel);
         for (i = 0; i < SRC_SIZE; i++)
-            printf("%2d ", i);
-        printf("\n");
+			  SDL_Log("%2d ", i);
+		  SDL_Log("\n");
 
-        printf ("%s   src1  ", blabel);
+		  SDL_Log("%s   src1  ", blabel);
         for (i = 0; i < SRC_SIZE; i++)
-            printf("%02x ", src1[i]);
-        printf("\n");
+			  SDL_Log("%02x ", src1[i]);
+		  SDL_Log("\n");
 
 	if (src2) {
-            printf ("%s   src2  ", blabel);
+		SDL_Log("%s   src2  ", blabel);
             for (i = 0; i < SRC_SIZE; i++)
-                printf("%02x ", src2[i]);
+					SDL_Log("%02x ", src2[i]);
 	}
-        printf("\n");
+	SDL_Log("\n");
 
-	printf ("%s %s   dest  ",mmx?"MMX":" C ",label);
+	SDL_Log("%s %s   dest  ",mmx?"MMX":" C ",label);
         for (i = 0; i < SRC_SIZE; i++)
-            printf("%02x ", dst[i]);
-        printf("\n");
+			  SDL_Log("%02x ", dst[i]);
+		  SDL_Log("\n");
 }
 
 void print_compare(unsigned char *dst1, unsigned char *dst2) 
 { 
 	total_count++;
 	if (bcmp(dst1,dst2,SRC_SIZE)==0) {
-		printf ("OK\n");
+		SDL_Log("OK\n");
 		ok_count++;
 	} else {
-		printf ("ERROR\n");
+		SDL_Log("ERROR\n");
 	}
 }
 
 void print_line() 
 {
-	printf ("------------------------------------------------------------------------\n\n\n");
+	SDL_Log ("------------------------------------------------------------------------\n\n\n");
 }
 
 /* ----------- main ---------- */
@@ -121,13 +122,13 @@ int main(int argc, char *argv[])
 			t1[i] = rand(); t2[i] = rand(); d[i] = rand();
 	}
 
-    SDL_Init(SDL_INIT_TIMER);
+	SDL_Init(0);
 
 	/* SDL_imageFilter Test */
 
-	printf ("TestImageFilter\n\n");
-	printf ("Testing an array of 23 bytes - first 16 bytes should be processed\n");
-	printf ("by MMX or C code, the last 7 bytes only by C code.\n\n");
+	SDL_Log("TestImageFilter\n\n");
+	SDL_Log("Testing an array of 23 bytes - first 16 bytes should be processed\n");
+	SDL_Log("by MMX or C code, the last 7 bytes only by C code.\n\n");
 	
 	print_line();
 	
@@ -156,7 +157,7 @@ int main(int argc, char *argv[])
 		
 		int k;
 		for (k = 0; k < sizeof(funcs)/sizeof(struct func); k++) {
-			Uint32 start;
+			Uint64 start;
 			int i;
 			
 			setup_src(src1, src2);
@@ -168,7 +169,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, t2, d, size);
 			}
-			printf("MMX %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, src2, dstc, SRC_SIZE);
@@ -177,7 +178,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, t2, d, size);
 			}
-			printf(" C  %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -203,7 +204,7 @@ int main(int argc, char *argv[])
 
 
         {
-		Uint32 start;
+		Uint64 start;
 		int i;
 		char call[1024];
 		SDL_snprintf(call, 1024, "BitNegation");
@@ -217,7 +218,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterBitNegation(t1, d, size);
 		}
-		printf("MMX %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 		
 		SDL_imageFilterMMXoff();
 		SDL_imageFilterBitNegation(src1, dstc, SRC_SIZE);
@@ -226,7 +227,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterBitNegation(t1, d, size);
 		}
-		printf(" C  %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 		
 		print_compare(dstm,dstc);
 		print_line();
@@ -256,7 +257,7 @@ int main(int argc, char *argv[])
 		
 		int k;
 		for (k = 0; k < sizeof(funcs)/sizeof(struct func); k++) {
-			Uint32 start;
+			Uint64 start;
 			int i;
 			char call[1024];
 			SDL_snprintf(call, 1024, "%s(%u)", funcs[k].name, funcs[k].arg);
@@ -270,7 +271,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			printf("MMX %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg);
@@ -279,7 +280,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			printf(" C  %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -302,7 +303,7 @@ int main(int argc, char *argv[])
 		
 		int k;
 		for (k = 0; k < sizeof(funcs)/sizeof(struct func); k++) {
-			Uint32 start;
+			Uint64 start;
 			int i;
 			char call[1024];
 			SDL_snprintf(call, 1024, "%s(%u,%u)", funcs[k].name, funcs[k].arg1, funcs[k].arg2);
@@ -316,7 +317,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg1, funcs[k].arg2);
 			}
-			printf("MMX %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg1, funcs[k].arg2);
@@ -325,7 +326,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg1, funcs[k].arg2);
 			}
-			printf(" C  %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -334,7 +335,7 @@ int main(int argc, char *argv[])
 
         
         {
-		Uint32 start;
+		Uint64 start;
 		int i;
 		char call[1024];
 		SDL_snprintf(call, 1024, "NormalizeLinear(0,33,0,255)");
@@ -348,7 +349,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterNormalizeLinear(t1, d, size, 0,33, 0,255);
 		}
-		printf("MMX %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 		
 		SDL_imageFilterMMXoff();
 		SDL_imageFilterNormalizeLinear(src1, dstc, SRC_SIZE, 0,33, 0,255);
@@ -357,7 +358,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterNormalizeLinear(t1, d, size, 0,33, 0,255);
 		}
-		printf(" C  %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 		
 		print_compare(dstm,dstc);
 		print_line();
@@ -381,7 +382,7 @@ int main(int argc, char *argv[])
 		
 		int k;
 		for (k = 0; k < sizeof(funcs)/sizeof(struct func); k++) {
-			Uint32 start;
+			Uint64 start;
 			int i;
 			char call[1024];
 			SDL_snprintf(call, 1024, "%s(%u)", funcs[k].name, funcs[k].arg);
@@ -395,7 +396,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			printf("MMX %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg);
@@ -404,7 +405,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			printf(" C  %dx%dk: %dms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -415,19 +416,19 @@ int main(int argc, char *argv[])
 	SDL_imageFilterMMXon();
 	if (SDL_imageFilterMMXdetect())
 	{
-		printf("MMX was detected\n\n");
+		SDL_Log("MMX was detected\n\n");
 	}
 	else
 	{
-		printf("MMX was NOT detected\n\n");
+		SDL_Log("MMX was NOT detected\n\n");
 	}
 
-	printf ("Result: %i of %i passed OK.\n", ok_count, total_count);
+	SDL_Log("Result: %i of %i passed OK.\n", ok_count, total_count);
 
 	SDL_Quit();
-	free(d);
-	free(t2);
-	free(t1);
+	SDL_free(d);
+	SDL_free(t2);
+	SDL_free(t1);
 
 	exit(0);
 }
