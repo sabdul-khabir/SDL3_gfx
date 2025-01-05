@@ -3367,13 +3367,13 @@ void gfxPrimitivesSetFontRotation(Uint32 rotation)
 \param b The blue value of the character to draw. 
 \param a The alpha value of the character to draw.
 
-\returns Returns 0 on success, -1 on failure.
+\returns Returns true on success, false on failure.
 */
-int characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	SDL_FRect srect;
 	SDL_FRect drect;
-	int result;
+	bool result;
 	Uint32 ix, iy;
 	const unsigned char *charpos;
 	Uint8 *curpos;
@@ -3466,14 +3466,14 @@ int characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, U
 	/*
 	* Set color 
 	*/
-	result = 0;
-	result |= SDL_SetTextureColorMod(gfxPrimitivesFont[ci], r, g, b);
-	result |= SDL_SetTextureAlphaMod(gfxPrimitivesFont[ci], a);
+	result = true;
+	result &= SDL_SetTextureColorMod(gfxPrimitivesFont[ci], r, g, b);
+	result &= SDL_SetTextureAlphaMod(gfxPrimitivesFont[ci], a);
 
 	/*
 	* Draw texture onto destination 
 	*/
-	result |= SDL_RenderTexture(renderer, gfxPrimitivesFont[ci], &srect, &drect);
+	result &= SDL_RenderTexture(renderer, gfxPrimitivesFont[ci], &srect, &drect);
 
 	return (result);
 }
@@ -3488,9 +3488,9 @@ int characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, U
 \param c The character to draw.
 \param color The color value of the character to draw (0xRRGGBBAA). 
 
-\returns Returns 0 on success, -1 on failure.
+\returns Returns true on success, false on failure.
 */
-int characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color)
+bool characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color)
 {
 	Uint8 *co = (Uint8 *)&color; 
 	return characterRGBA(renderer, x, y, c, co[0], co[1], co[2], co[3]);
@@ -3509,9 +3509,9 @@ of the character width of the current global font.
 \param s The string to draw.
 \param color The color value of the string to draw (0xRRGGBBAA). 
 
-\returns Returns 0 on success, -1 on failure.
+\returns Returns true on success, false on failure.
 */
-int stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint32 color)
+bool stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return stringRGBA(renderer, x, y, s, c[0], c[1], c[2], c[3]);
@@ -3529,17 +3529,17 @@ int stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint
 \param b The blue value of the string to draw. 
 \param a The alpha value of the string to draw.
 
-\returns Returns 0 on success, -1 on failure.
+\returns Returns true on success, false on failure.
 */
-int stringRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool stringRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	int result = 0;
+	bool result = true;
 	Sint16 curx = x;
 	Sint16 cury = y;
 	const char *curchar = s;
 
-	while (*curchar && !result) {
-		result |= characterRGBA(renderer, curx, cury, *curchar, r, g, b, a);
+	while (*curchar && result) {
+		result &= characterRGBA(renderer, curx, cury, *curchar, r, g, b, a);
 		switch (charRotation)
 		{
 		case 0:

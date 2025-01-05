@@ -426,9 +426,9 @@ int main(int argc, char *argv[])
 	printf ("Result: %i of %i passed OK.\n", ok_count, total_count);
 
 	SDL_Quit();
-	free(d);
-	free(t2);
-	free(t1);
+	SDL_free(d);
+	SDL_free(t2);
+	SDL_free(t1);
 
 	exit(0);
 }

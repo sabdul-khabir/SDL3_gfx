@@ -173,7 +173,7 @@ int main(int argc, char *argv[])
 	for (i = 0; i < state->num_windows; ++i) {
 		SDL_Renderer *renderer = state->renderers[i];
 		const char* renderer_name = SDL_GetRendererName(renderer);
-		bool isSoftwareRenderer = SDL_strcmp("software", renderer_name);
+		bool isSoftwareRenderer = 0 == SDL_strcmp("software", renderer_name);
 		SDL_Log("Renderer %i: %s %s", i, renderer_name, (!isSoftwareRenderer) ? "(Accelerated)" : "");
 		SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
 		SDL_RenderClear(renderer);
@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
 
 	/* Free common message buffer */
 	if (messageText) {
-		free(messageText);
+		SDL_free(messageText);
 	}
 
 	/* Shutdown SDL */
