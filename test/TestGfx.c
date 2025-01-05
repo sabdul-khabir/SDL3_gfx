@@ -17,9 +17,9 @@
 #include <math.h>
 #include <time.h>
 
-#include "SDL_test_common.h"
+#include <SDL3/SDL_test_common.h>
 
-#include "SDL2_gfxPrimitives.h"
+#include "SDL3_gfxPrimitives.h"
 
 static SDLTest_CommonState *state;
 
@@ -127,7 +127,7 @@ void SetViewport(SDL_Renderer *renderer, int x1, int y1, int x2, int y2)
 	clip.y = y1+BORDER;
 	clip.w = x2-x1-2*BORDER;
 	clip.h = y2-y1-2*BORDER;
-	SDL_RenderSetViewport(renderer, &clip);
+	SDL_SetRenderViewport(renderer, &clip);
 }
 
 /* Set a viewport rectangle based on a rect */
@@ -138,13 +138,13 @@ void SetViewportNoBorder(SDL_Renderer *renderer, int x1, int y1, int x2, int y2)
 	clip.y = y1;
 	clip.w = x2-x1;
 	clip.h = y2-y1;
-	SDL_RenderSetViewport(renderer, &clip);
+	SDL_SetRenderViewport(renderer, &clip);
 }
 
 /* Clear currently set viewport rectangle (if any) */
 void ClearViewport(SDL_Renderer *renderer)
 { 
-	SDL_RenderSetViewport(renderer, NULL);
+	SDL_SetRenderViewport(renderer, NULL);
 }
 
 #define TLEN 256
@@ -203,7 +203,7 @@ void ClearScreen(SDL_Renderer *renderer, const char *title)
 /* Clear a center box for accuracy testing */
 void ClearCenter(SDL_Renderer *renderer, const char *title)
 {
-	SDL_Rect r;
+	SDL_FRect r;
 	int i, j;
 	Sint16 textlength;
 
@@ -215,11 +215,11 @@ void ClearCenter(SDL_Renderer *renderer, const char *title)
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderFillRect(renderer, &r);
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-	SDL_RenderDrawRect(renderer, &r);
+	SDL_RenderRect(renderer, &r);
 	SDL_SetRenderDrawColor(renderer, 64, 64, 64, SDL_ALPHA_OPAQUE);
 	for (i = -15; i < 15; i += 5) {
   	  for (j = -15; j < 15; j += 5) {
-		  SDL_RenderDrawPoint(renderer, WIDTH/2 + i, HEIGHT/2 + j);
+		  SDL_RenderPoint(renderer, WIDTH/2 + i, HEIGHT/2 + j);
 	  }
 	}
 	textlength = (Sint16)strlen(title);
@@ -232,7 +232,7 @@ typedef int (*PrimitivesTestCaseFp)(SDL_Renderer *renderer);
 void ExecuteTest(SDL_Renderer *renderer, PrimitivesTestCaseFp testCase, int testNum, const char * testName)
 {
 	char titletext[TLEN+1];
-    Uint32 then, now, numPrimitives;
+    Uint64 then, now, numPrimitives;
 	Sint16 textlength;
 
 	ClearScreen(renderer, testName);
@@ -1493,9 +1493,9 @@ int TestTexturedPolygon(SDL_Renderer *renderer)
 	}
 
 	/* Convert 24bit image into 32bit RGBA surface */
-	picture_again = SDL_CreateRGBSurface(SDL_SWSURFACE, picture->w, picture->h, 32, rmask, gmask, bmask, amask);
+	picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 	if (picture_again == NULL) {
-		SDL_FreeSurface(picture);
+		SDL_DestroySurface(picture);
 		return -1;
 	}
 
@@ -1527,11 +1527,11 @@ int TestTexturedPolygon(SDL_Renderer *renderer)
 	SetViewport(renderer,0,80+(HEIGHT-80)/2,WIDTH/2,HEIGHT);
 	for (i=0; i<NUM_RANDOM; i += step) {
 		if (rx[i] < (WIDTH/6))  {
-			SDL_FillRect(picture_again, NULL, SDL_MapRGB(picture_again->format, 255, 0, 0));
+			SDL_FillSurfaceRect(picture_again, NULL, SDL_MapSurfaceRGB(picture_again, 255, 0, 0));
 		} else if (rx[i] < (WIDTH/3) ) {
-			SDL_FillRect(picture_again, NULL, SDL_MapRGB(picture_again->format, 0, 255, 0));
+			SDL_FillSurfaceRect(picture_again, NULL, SDL_MapSurfaceRGB(picture_again, 0, 255, 0));
 		} else {
-			SDL_FillRect(picture_again, NULL, SDL_MapRGB(picture_again->format, 0, 0, 255));
+			SDL_FillSurfaceRect(picture_again, NULL, SDL_MapSurfaceRGB(picture_again, 0, 0, 255));
 		}
 
 		texturedPolygon(renderer, &rx[i], &ry[i], 3, picture_again, 0, 0);
@@ -1547,8 +1547,8 @@ int TestTexturedPolygon(SDL_Renderer *renderer)
 	rx[2] = rx[0] + 10; ry[2] = ry[0] - 5;
 	texturedPolygon(renderer, rx, ry, 3, picture_again, 0, 0);
 
-	SDL_FreeSurface(picture);
-	SDL_FreeSurface(picture_again);
+	SDL_DestroySurface(picture);
+	SDL_DestroySurface(picture_again);
 
 	return (4 * NUM_RANDOM) / step;
 }
@@ -1709,7 +1709,7 @@ int main(int argc, char *argv[])
 {
     int i, done, drawn, test = 0;
     SDL_Event event;
-    Uint32 then, now, frames;
+    Uint64 then, now, frames;
     int numTests;
 
     /* Initialize test framework */
@@ -1718,7 +1718,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    SDL_Log("SDL2_gfx %i.%i.%i: testgfx", SDL2_GFXPRIMITIVES_MAJOR, SDL2_GFXPRIMITIVES_MINOR, SDL2_GFXPRIMITIVES_MICRO);
+    SDL_Log("SDL3_gfx %i.%i.%i: testgfx", SDL3_GFXPRIMITIVES_MAJOR, SDL3_GFXPRIMITIVES_MINOR, SDL3_GFXPRIMITIVES_MICRO);
     SDL_Log("Platform: %s", SDL_GetPlatform());
 
     for (i = 1; i < argc;) {
@@ -1736,9 +1736,8 @@ int main(int argc, char *argv[])
                  
            
         if (consumed < 0) {
-            fprintf(stderr,
-                    "Usage: %s %s [--test N]\n",
-                    argv[0], SDLTest_CommonUsage(state));
+				static const char* options[] = { "[--test #]", NULL };
+				SDLTest_CommonLogUsage(state, argv[0], options);
             return 1;
         }
         i += consumed;
@@ -1751,9 +1750,9 @@ int main(int argc, char *argv[])
     /* Create the windows and initialize the renderers */
     for (i = 0; i < state->num_windows; ++i) {
         SDL_Renderer *renderer = state->renderers[i];
-        SDL_RendererInfo info;
-        SDL_GetRendererInfo(state->renderers[i], &info);
-        SDL_Log("Renderer %i: %s %s", i, info.name, (info.flags | SDL_RENDERER_ACCELERATED) ? "(Accelerated)" : "");
+		  const char* renderer_name = SDL_GetRendererName(renderer);
+		  bool isSoftwareRenderer = SDL_strcmp("software", renderer_name);
+        SDL_Log("Renderer %i: %s %s", i, renderer_name, (!isSoftwareRenderer) ? "(Accelerated)" : "");
         SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
         SDL_RenderClear(renderer);
     }
@@ -1769,8 +1768,8 @@ int main(int argc, char *argv[])
         while (SDL_PollEvent(&event)) {
             SDLTest_CommonEvent(state, &event, &done);
 			switch (event.type) {
-				case SDL_KEYDOWN: {
-					switch (event.key.keysym.sym) {
+				case SDL_EVENT_KEY_DOWN: {
+					switch (event.key.key) {
 						case SDLK_SPACE: {
 							/* Switch to next test */
 							test++;
@@ -1780,7 +1779,7 @@ int main(int argc, char *argv[])
 					}
 					break;
 				}
-				case SDL_MOUSEBUTTONDOWN: {
+				case SDL_EVENT_MOUSE_BUTTON_DOWN: {
 					switch (event.button.button) {
 						case SDL_BUTTON_LEFT: {
 							/* Switch to next test */

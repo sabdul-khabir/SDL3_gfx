@@ -62,8 +62,8 @@ extern "C" {
 	typedef struct {
 		Uint32 framecount;
 		float rateticks;
-		Uint32 baseticks;
-		Uint32 lastticks;
+		Uint64 baseticks;
+		Uint64 lastticks;
 		Uint32 rate;
 	} FPSmanager;
 
@@ -88,7 +88,7 @@ extern "C" {
 	SDL3_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, Uint32 rate);
 	SDL3_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
 	SDL3_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
-	SDL3_FRAMERATE_SCOPE Uint32 SDL_framerateDelay(FPSmanager * manager);
+	SDL3_FRAMERATE_SCOPE Uint64 SDL_framerateDelay(FPSmanager * manager);
 
 	/* --- */
 

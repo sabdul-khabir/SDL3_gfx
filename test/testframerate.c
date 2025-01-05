@@ -20,10 +20,10 @@ freely.
 #include <math.h>
 #include <time.h>
 
-#include "SDL_test_common.h"
+#include <SDL3/SDL_test_common.h>
 
-#include "SDL2_gfxPrimitives.h"
-#include "SDL2_framerate.h"
+#include "SDL3_gfxPrimitives.h"
+#include "SDL3_framerate.h"
 
 static SDLTest_CommonState *state;
 
@@ -55,7 +55,7 @@ int dy = 5;
 int r = 255; 
 int g = 255;
 int b = 255;
-Uint32 time_passed = 0;
+Uint64 time_passed = 0;
 
 void Draw(SDL_Renderer *renderer, FPSmanager *fpsm)
 {
@@ -100,7 +100,7 @@ void Draw(SDL_Renderer *renderer, FPSmanager *fpsm)
 
 		/* Report set rate and current delay (from last iteration) */
 		if (time_passed > 0) {
-			SDL_snprintf(messageText, 1024, "Set rate: %4iHz   Last delay=%4ims / Calc.Rate=%4iHz", currentRate, time_passed, 1000 / time_passed); 
+			SDL_snprintf(messageText, 1024, "Set rate: %4iHz   Last delay=%4lldms / Calc.Rate=%4lldHz", currentRate, time_passed, 1000 / time_passed); 
 			stringRGBA (renderer, WIDTH/2 - 4*strlen(messageText),HEIGHT-24,messageText,255,255,255,255);
 		}
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 {
 	int i;
 	SDL_Event event;
-	Uint32 then, now, frames;
+	Uint64 then, now, frames;
 	FPSmanager fpsm;
 
 	/* Initialize test framework */
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-    SDL_Log("SDL2_gfx %i.%i.%i: testframerate", SDL2_GFXPRIMITIVES_MAJOR, SDL2_GFXPRIMITIVES_MINOR, SDL2_GFXPRIMITIVES_MICRO);
+    SDL_Log("SDL3_gfx %i.%i.%i: testframerate", SDL3_GFXPRIMITIVES_MAJOR, SDL3_GFXPRIMITIVES_MINOR, SDL3_GFXPRIMITIVES_MICRO);
     SDL_Log("Platform: %s", SDL_GetPlatform());
 
 	for (i = 1; i < argc;) {
@@ -159,8 +159,8 @@ int main(int argc, char *argv[])
                 }
                 
 		if (consumed < 0) {
-			SDL_Log("Usage: %s %s [--x #] [--y #]\n",
-				argv[0], SDLTest_CommonUsage(state));
+			static const char* options[] = { "[--x #]", "[--y #]", NULL };
+			SDLTest_CommonLogUsage(state, argv[0], options);
 			return 1;
 		}
 		i += consumed;
@@ -172,9 +172,9 @@ int main(int argc, char *argv[])
 	/* Create the windows and initialize the renderers */
 	for (i = 0; i < state->num_windows; ++i) {
 		SDL_Renderer *renderer = state->renderers[i];
-                SDL_RendererInfo info;
-                SDL_GetRendererInfo(state->renderers[i], &info);		                
-                SDL_Log("Renderer %i: %s %s", i, info.name, (info.flags | SDL_RENDERER_ACCELERATED) ? "(Accelerated)" : "");		
+		const char* renderer_name = SDL_GetRendererName(renderer);
+		bool isSoftwareRenderer = SDL_strcmp("software", renderer_name);
+		SDL_Log("Renderer %i: %s %s", i, renderer_name, (!isSoftwareRenderer) ? "(Accelerated)" : "");
 		SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
 		SDL_RenderClear(renderer);
 	}

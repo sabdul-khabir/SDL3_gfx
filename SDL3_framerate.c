@@ -34,9 +34,9 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 \return The tick count.
 */
-Uint32 _getTicks()
+Uint64 _getTicks()
 {
-	Uint32 ticks = SDL_GetTicks();
+	Uint64 ticks = SDL_GetTicks();
 
 	/* 
 	* Since baseticks!=0 is used to track initialization
@@ -143,12 +143,12 @@ drawing too slow), the delay is zero and the delay interpolation is reset.
 
 \return The time that passed since the last call to the function in ms. May return 0.
 */
-Uint32 SDL_framerateDelay(FPSmanager * manager)
+Uint64 SDL_framerateDelay(FPSmanager * manager)
 {
-	Uint32 current_ticks;
-	Uint32 target_ticks;
-	Uint32 the_delay;
-	Uint32 time_passed = 0;
+	Uint64 current_ticks;
+	Uint64 target_ticks;
+	Uint64 the_delay;
+	Uint64 time_passed = 0;
 
 	/*
 	* No manager, no delay
@@ -175,7 +175,7 @@ Uint32 SDL_framerateDelay(FPSmanager * manager)
 	current_ticks = _getTicks();
 	time_passed = current_ticks - manager->lastticks;
 	manager->lastticks = current_ticks;
-	target_ticks = manager->baseticks + (Uint32) ((float) manager->framecount * manager->rateticks);
+	target_ticks = manager->baseticks + (Uint64) ((float) manager->framecount * manager->rateticks);
 
 	if (current_ticks <= target_ticks) {
 		the_delay = target_ticks - current_ticks;

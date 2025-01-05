@@ -19,10 +19,10 @@ freely.
 #include <math.h>
 #include <time.h>
 
-#include "SDL_test_common.h"
+#include <SDL3/SDL_test_common.h>
 
-#include "SDL2_gfxPrimitives.h"
-#include "SDL2_rotozoom.h"
+#include "SDL3_gfxPrimitives.h"
+#include "SDL3_rotozoom.h"
 
 static SDLTest_CommonState *state;
 
@@ -52,7 +52,7 @@ void RotatePicture (SDL_Surface *picture, int rotate, int flip, int smooth, int 
 {
 	SDL_Surface *rotozoom_picture;
 	SDL_Texture *rotozoom_texture;
-	SDL_Rect dest;
+	SDL_FRect dest;
 	int framecount, framemax, frameinc;
 	double angle = 0.0, zoomf = 1.0, zoomfx = 1.0, zoomfy = 1.0;
 	SDL_Renderer *renderer = state->renderers[0];
@@ -107,12 +107,12 @@ void RotatePicture (SDL_Surface *picture, int rotate, int flip, int smooth, int 
 
 				/* Convert to texture and draw */
 				rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-				SDL_FreeSurface(rotozoom_picture);
+				SDL_DestroySurface(rotozoom_picture);
 				if (!rotozoom_texture) {
 					SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 					break;
 				}				
-				SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+				SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 				SDL_DestroyTexture(rotozoom_texture);
 			} else {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't rotozoom image\n");
@@ -138,12 +138,12 @@ void RotatePicture (SDL_Surface *picture, int rotate, int flip, int smooth, int 
 
 				/* Convert to texture and draw */
 				rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-				SDL_FreeSurface(rotozoom_picture);
+				SDL_DestroySurface(rotozoom_picture);
 				if (!rotozoom_texture) {
 					SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 					break;
 				}				
-				SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+				SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 				SDL_DestroyTexture(rotozoom_texture);
 			} else {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't rotozoom image\n");
@@ -175,12 +175,12 @@ void RotatePicture (SDL_Surface *picture, int rotate, int flip, int smooth, int 
 
 				/* Convert to texture and draw */
 				rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-				SDL_FreeSurface(rotozoom_picture);
+				SDL_DestroySurface(rotozoom_picture);
 				if (!rotozoom_texture) {
 					SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 					return;
 				}				
-				SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+				SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 				SDL_DestroyTexture(rotozoom_texture);
 			} else {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't rotozoom image\n");
@@ -194,12 +194,12 @@ void RotatePicture (SDL_Surface *picture, int rotate, int flip, int smooth, int 
 
 				/* Convert to texture and draw */
 				rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-				SDL_FreeSurface(rotozoom_picture);
+				SDL_DestroySurface(rotozoom_picture);
 				if (!rotozoom_texture) {
 					SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 					return;
 				}				
-				SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+				SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 				SDL_DestroyTexture(rotozoom_texture);
 			} else {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't rotozoom image\n");
@@ -225,7 +225,7 @@ void ZoomPicture (SDL_Surface *picture, int smooth)
 {
 	SDL_Surface *rotozoom_picture;
 	SDL_Texture *rotozoom_texture;
-	SDL_Rect dest;
+	SDL_FRect dest;
 	int framecount, framemax, frameinc;
 	double zoomxf,zoomyf;
 	SDL_Renderer *renderer = state->renderers[0];
@@ -254,12 +254,12 @@ void ZoomPicture (SDL_Surface *picture, int smooth)
 
 			/* Convert to texture and draw */
 			rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-			SDL_FreeSurface(rotozoom_picture);
+			SDL_DestroySurface(rotozoom_picture);
 			if (!rotozoom_texture) {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 				return;
 			}				
-			SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+			SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 			SDL_DestroyTexture(rotozoom_texture);
 		} else {
 			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't zoom image\n");
@@ -284,7 +284,7 @@ void RotatePicture90Degrees (SDL_Surface *picture)
 {
 	SDL_Surface *rotozoom_picture;
 	SDL_Texture *rotozoom_texture;
-	SDL_Rect dest;
+	SDL_FRect dest;
 	int framecount, framemax, frameinc;
 	int numClockwiseTurns;
 	SDL_Renderer *renderer = state->renderers[0];
@@ -309,12 +309,12 @@ void RotatePicture90Degrees (SDL_Surface *picture)
 
 			/* Convert to texture and draw */
 			rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-			SDL_FreeSurface(rotozoom_picture);
+			SDL_DestroySurface(rotozoom_picture);
 			if (!rotozoom_texture) {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 				return;
 			}				
-			SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+			SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 			SDL_DestroyTexture(rotozoom_texture);
 		} else {
 			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't rotate image: %s\n", SDL_GetError());
@@ -349,7 +349,7 @@ void RotatePicture90Degrees (SDL_Surface *picture)
 void CustomTest(SDL_Surface *picture, double a, double x, double y, int smooth){
 	SDL_Surface *rotozoom_picture;
 	SDL_Texture *rotozoom_texture;
-	SDL_Rect dest;
+	SDL_FRect dest;
 	SDL_Renderer *renderer = state->renderers[0];
 
 	SDL_Log("%s\n", messageText);
@@ -365,12 +365,12 @@ void CustomTest(SDL_Surface *picture, double a, double x, double y, int smooth){
 
 		/* Convert to texture and draw */
 		rotozoom_texture = SDL_CreateTextureFromSurface(renderer, rotozoom_picture);
-		SDL_FreeSurface(rotozoom_picture);
+		SDL_DestroySurface(rotozoom_picture);
 		if (!rotozoom_texture) {
 			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s\n", SDL_GetError());
 			return;
 		}				
-		SDL_RenderCopy(renderer, rotozoom_texture, NULL, &dest);				
+		SDL_RenderTexture(renderer, rotozoom_texture, NULL, &dest);				
 		SDL_DestroyTexture(rotozoom_texture);
 	} else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't rotozoom image\n");
@@ -474,7 +474,7 @@ void Draw (int start, int end)
 done8bit:
 
 		/* Free the picture */
-		SDL_FreeSurface(picture);
+		SDL_DestroySurface(picture);
 		if (done) return;
 		if (end <= 6) return;
 	}
@@ -575,7 +575,7 @@ done8bit:
 done24bit:
 
 		/* Free the picture */
-		SDL_FreeSurface(picture);
+		SDL_DestroySurface(picture);
                 if (done) return;			
 		if (end <= 12) return;
 	}
@@ -599,7 +599,7 @@ done24bit:
 		/* New source surface is 32bit with defined RGBA ordering */
 		/* Much faster to do this once rather than the routine on the fly */
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Converting 24bit image into 32bit RGBA surface ...\n");
-		picture_again = SDL_CreateRGBSurface(SDL_SWSURFACE, picture->w, picture->h, 32, rmask, gmask, bmask, amask);
+		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 		if (picture_again == NULL) goto done32bit;		
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
 
@@ -620,13 +620,13 @@ done24bit:
 		}
 		if (end == 14) goto done32bit;
 
-		SDL_FreeSurface(picture_again);
+		SDL_DestroySurface(picture_again);
 		picture_again=NULL;
 
 		/* New source surface is 32bit with defined ABGR ordering */
 		/* Much faster to do this once rather than the routine on the fly */
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Converting 24bit image into 32bit ABGR surface ...\n");
-		picture_again = SDL_CreateRGBSurface(SDL_SWSURFACE, picture->w, picture->h, 32, amask, bmask, gmask, rmask);
+		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, amask, bmask, gmask, rmask));
 		if (picture_again == NULL) goto done32bit;		
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
 
@@ -650,8 +650,8 @@ done24bit:
 done32bit:
 
 		/* Free the picture */
-		SDL_FreeSurface(picture);
-		if (picture_again) SDL_FreeSurface(picture_again);
+		SDL_DestroySurface(picture);
+		if (picture_again) SDL_DestroySurface(picture_again);
 		if (done) return;
 		if (end <= 16) return;
 	}
@@ -674,7 +674,7 @@ done32bit:
 
 		/* Excercise flipping functions on 32bit RGBA */
 		SDL_Log("Converting 24bit image into 32bit RGBA surface ...\n");
-		picture_again = SDL_CreateRGBSurface(SDL_SWSURFACE, picture->w, picture->h, 32, rmask, gmask, bmask, amask);
+		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 		if (picture_again == NULL) goto doneflip;
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
 
@@ -723,8 +723,8 @@ done32bit:
 doneflip:
 
 		/* Free the pictures */
-		SDL_FreeSurface(picture);
-		if (picture_again) SDL_FreeSurface(picture_again);
+		SDL_DestroySurface(picture);
+		if (picture_again) SDL_DestroySurface(picture_again);
 		if (done) return;
 		if (end <= 22) return;
 	}
@@ -745,7 +745,7 @@ doneflip:
 
 		/* Excercise flipping functions on 32bit RGBA */
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Converting 24bit image into 32bit RGBA surface ...\n");
-		picture_again = SDL_CreateRGBSurface(SDL_SWSURFACE, picture->w, picture->h, 32, rmask, gmask, bmask, amask);
+		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 		if (picture_again == NULL) goto donecustom32bit;
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
 
@@ -755,8 +755,8 @@ doneflip:
 donecustom32bit:
 
 		/* Free the picture */
-		SDL_FreeSurface(picture);
-		if (picture_again) SDL_FreeSurface(picture_again);
+		SDL_DestroySurface(picture);
+		if (picture_again) SDL_DestroySurface(picture_again);
 		if (done) return;
 
 		/* Message */
@@ -775,7 +775,7 @@ donecustom32bit:
 		CustomTest(picture, custom_angle, custom_fx, custom_fy, custom_smooth);
 
 		/* Free the picture */
-		SDL_FreeSurface(picture);
+		SDL_DestroySurface(picture);
 		if (done) return;
 		if (end <= 24) return;
 	}
@@ -796,7 +796,7 @@ donecustom32bit:
 
 		/* New source surface is 32bit with defined RGBA ordering */
 		SDL_Log("Converting 24bit image into 32bit RGBA surface ...\n");
-		picture_again = SDL_CreateRGBSurface(SDL_SWSURFACE, picture->w, picture->h, 32, rmask, gmask, bmask, amask);
+		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 		if (picture_again == NULL) goto donerotate90;
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
 
@@ -807,8 +807,8 @@ donecustom32bit:
 donerotate90:
 
 		/* Free the pictures */
-		SDL_FreeSurface(picture);
-		if (picture_again) SDL_FreeSurface(picture_again);
+		SDL_DestroySurface(picture);
+		if (picture_again) SDL_DestroySurface(picture_again);
 		if (done) return;
 		if (end <= 25) return;
 	}
@@ -825,7 +825,7 @@ int main(int argc, char *argv[])
 	int testStart = 0;
 	int testEnd = 25;
 	SDL_Event event;
-	Uint32 then, now, frames;
+	Uint64 then, now, frames;
 
 	/* Initialize test framework */
 	state = SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
@@ -833,7 +833,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-    SDL_Log("SDL2_gfx %i.%i.%i: testrotozoom", SDL2_GFXPRIMITIVES_MAJOR, SDL2_GFXPRIMITIVES_MINOR, SDL2_GFXPRIMITIVES_MICRO);
+    SDL_Log("SDL3_gfx %i.%i.%i: testrotozoom", SDL3_GFXPRIMITIVES_MAJOR, SDL3_GFXPRIMITIVES_MINOR, SDL3_GFXPRIMITIVES_MICRO);
     SDL_Log("Platform: %s", SDL_GetPlatform());
 
 	for (i = 1; i < argc;) {
@@ -859,8 +859,8 @@ int main(int argc, char *argv[])
                 }
                 
 		if (consumed < 0) {
-			SDL_Log("Usage: %s %s [--start #] [--end #]\n",
-				argv[0], SDLTest_CommonUsage(state));
+			static const char* options[] = { "[--start #]", "[--end #]", NULL };
+			SDLTest_CommonLogUsage(state, argv[0], options);
 			return 1;
 		}
 		i += consumed;
@@ -872,9 +872,9 @@ int main(int argc, char *argv[])
 	/* Create the windows and initialize the renderers */
 	for (i = 0; i < state->num_windows; ++i) {
 		SDL_Renderer *renderer = state->renderers[i];
-                SDL_RendererInfo info;
-                SDL_GetRendererInfo(state->renderers[i], &info);		                
-                SDL_Log("Renderer %i: %s %s", i, info.name, (info.flags | SDL_RENDERER_ACCELERATED) ? "(Accelerated)" : "");		
+		const char* renderer_name = SDL_GetRendererName(renderer);
+		bool isSoftwareRenderer = SDL_strcmp("software", renderer_name);
+		SDL_Log("Renderer %i: %s %s", i, renderer_name, (!isSoftwareRenderer) ? "(Accelerated)" : "");
 		SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
 		SDL_RenderClear(renderer);
 	}
