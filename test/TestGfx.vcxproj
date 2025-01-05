@@ -137,7 +137,7 @@ copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL3.lib;SDL3test.lib;SDL3_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3.lib;SDL3_test.lib;SDL3_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>..\$(Platform)\$(Configuration);..\..\sdl3gfx\$(Platform)\$(Configuration);..\..\SDL3_gfx\$(Platform)\$(Configuration);..\..\SDL\VisualC\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -146,15 +146,16 @@ copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <IgnoreSpecificDefaultLibraries>msvcrtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalOptions>/MACHINE:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>
-copy /y "..\..\SDL2-2.0.5\VisualC\$(Platform)\$(Configuration)\SDL2.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL2.dll"
-copy /y "..\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL2_gfx.dll"
+copy /y "..\..\SDL\VisualC\$(Platform)\$(Configuration)\SDL3.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL3.dll"
+copy /y "..\$(Platform)\$(Configuration)\SDL3_gfx.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL3_gfx.dll"
 copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
       </Command>
-      <Message>Copy SDL2 and SDL2_gfx DLLs</Message>
+      <Message>Copy SDL3 and SDL3_gfx DLLs</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -211,7 +212,7 @@ copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
       <OmitDefaultLibName>false</OmitDefaultLibName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL3.lib;SDL3test.lib;SDL3_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3.lib;SDL3_test.lib;SDL3_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\$(Platform)\$(Configuration);..\..\sdl3gfx\$(Platform)\$(Configuration);..\..\SDL3_gfx\$(Platform)\$(Configuration);..\..\SDL\VisualC\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -225,11 +226,11 @@ copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
     </Link>
     <PostBuildEvent>
       <Command>
-copy /y "..\..\SDL2-2.0.5\VisualC\$(Platform)\$(Configuration)\SDL2.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL2.dll"
-copy /y "..\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL2_gfx.dll"
+copy /y "..\..\SDL\VisualC\$(Platform)\$(Configuration)\SDL3.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL3.dll"
+copy /y "..\$(Platform)\$(Configuration)\SDL3_gfx.dll" "$(TargetName)\$(Platform)\$(Configuration)\SDL3_gfx.dll"
 copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
       </Command>
-      <Message>Copy SDL2, SDL2_gfx DLLs as well as test data</Message>
+      <Message>Copy SDL3, SDL3_gfx DLLs as well as test data</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

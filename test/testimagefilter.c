@@ -21,6 +21,7 @@ TestImageFilter.c: test program for MMX filter routines
 #include <time.h>
 
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 
 #ifdef WIN32
 #include <windows.h>

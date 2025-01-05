@@ -20,7 +20,7 @@ freely.
 #include <time.h>
 
 #include <SDL3/SDL_test_common.h>
-
+#include <SDL3/SDL_main.h>
 #include "SDL3_gfxPrimitives.h"
 #include "SDL3_rotozoom.h"
 
