@@ -3187,7 +3187,6 @@ int texturedPolygonMT(SDL_Renderer *renderer, const Sint16 * vx, const Sint16 * 
 		}
 	}
 
-	SDL_RenderPresent(renderer);
 	SDL_DestroyTexture(textureAsTexture);
 
 	return (result);
