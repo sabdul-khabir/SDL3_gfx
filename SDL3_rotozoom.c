@@ -36,25 +36,6 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 #include "SDL3_rotozoom.h"
 
-/* ---- Internally used structures */
-
-/*!
-\brief A 32 bit RGBA pixel.
-*/
-typedef struct tColorRGBA {
-	Uint8 r;
-	Uint8 g;
-	Uint8 b;
-	Uint8 a;
-} tColorRGBA;
-
-/*!
-\brief A 8bit Y/palette pixel.
-*/
-typedef struct tColorY {
-	Uint8 y;
-} tColorY;
-
 /*! 
 \brief Returns maximum of two numbers a and b.
 */
@@ -107,8 +88,8 @@ int _shrinkSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int factorx, int fa
 {
 	int x, y, dx, dy, dgap, ra, ga, ba, aa;
 	int n_average;
-	tColorRGBA *sp, *osp, *oosp;
-	tColorRGBA *dp;
+	SDL_Color *sp, *osp, *oosp;
+	SDL_Color *dp;
 
 	/*
 	* Averaging integer shrink
@@ -120,9 +101,9 @@ int _shrinkSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int factorx, int fa
 	/*
 	* Scan destination
 	*/
-	sp = (tColorRGBA *) src->pixels;
+	sp = (SDL_Color *) src->pixels;
 	
-	dp = (tColorRGBA *) dst->pixels;
+	dp = (SDL_Color *) dst->pixels;
 	dgap = dst->pitch - dst->w * 4;
 
 	for (y = 0; y < dst->h; y++) {
@@ -143,12 +124,12 @@ int _shrinkSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int factorx, int fa
 					sp++;
 				} 
 				/* src dx loop */
-				sp = (tColorRGBA *)((Uint8*)sp + (src->pitch - 4*factorx)); // next y
+				sp = (SDL_Color *)((Uint8*)sp + (src->pitch - 4*factorx)); // next y
 			}
 			/* src dy loop */
 
 			/* next box-x */
-			sp = (tColorRGBA *)((Uint8*)oosp + 4*factorx);
+			sp = (SDL_Color *)((Uint8*)oosp + 4*factorx);
 
 			/* Store result in destination */
 			dp->r = ra/n_average;
@@ -164,12 +145,12 @@ int _shrinkSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int factorx, int fa
 		/* dst x loop */
 
 		/* next box-y */
-		sp = (tColorRGBA *)((Uint8*)osp + src->pitch*factory);
+		sp = (SDL_Color *)((Uint8*)osp + src->pitch*factory);
 
 		/*
 		* Advance destination pointers 
 		*/
-		dp = (tColorRGBA *) ((Uint8 *) dp + dgap);
+		dp = (SDL_Color *) ((Uint8 *) dp + dgap);
 	} 
 	/* dst y loop */
 
@@ -277,8 +258,8 @@ Assumes dst surface was allocated with the correct dimensions.
 int _zoomSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int flipx, int flipy, int smooth)
 {
 	int x, y, sx, sy, ssx, ssy, *sax, *say, *csax, *csay, *salast, csx, csy, ex, ey, cx, cy, sstep, sstepx, sstepy;
-	tColorRGBA *c00, *c01, *c10, *c11;
-	tColorRGBA *sp, *csp, *dp;
+	SDL_Color *c00, *c01, *c10, *c11;
+	SDL_Color *sp, *csp, *dp;
 	int spixelgap, spixelw, spixelh, dgap, t1, t2;
 
 	/*
@@ -337,8 +318,8 @@ int _zoomSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int flipx, int flipy,
 		}
 	}
 
-	sp = (tColorRGBA *) src->pixels;
-	dp = (tColorRGBA *) dst->pixels;
+	sp = (SDL_Color *) src->pixels;
+	dp = (SDL_Color *) dst->pixels;
 	dgap = dst->pitch - dst->w * 4;
 	spixelgap = src->pitch/4;
 
@@ -436,7 +417,7 @@ int _zoomSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int flipx, int flipy,
 			/*
 			* Advance destination pointer y
 			*/
-			dp = (tColorRGBA *) ((Uint8 *) dp + dgap);
+			dp = (SDL_Color *) ((Uint8 *) dp + dgap);
 		}
 	} else {
 		/*
@@ -479,7 +460,7 @@ int _zoomSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int flipx, int flipy,
 			/*
 			* Advance destination pointer y
 			*/
-			dp = (tColorRGBA *) ((Uint8 *) dp + dgap);
+			dp = (SDL_Color *) ((Uint8 *) dp + dgap);
 		}
 	}
 
@@ -629,8 +610,8 @@ Assumes dst surface was allocated with the correct dimensions.
 void _transformSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int cx, int cy, int isin, int icos, int flipx, int flipy, int smooth)
 {
 	int x, y, t1, t2, dx, dy, xd, yd, sdx, sdy, ax, ay, ex, ey, sw, sh;
-	tColorRGBA c00, c01, c10, c11, cswap;
-	tColorRGBA *pc, *sp;
+	SDL_Color c00, c01, c10, c11, cswap;
+	SDL_Color *pc, *sp;
 	int gap;
 
 	/*
@@ -642,7 +623,7 @@ void _transformSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int cx, int cy,
 	ay = (cy << 16) - (isin * cx);
 	sw = src->w - 1;
 	sh = src->h - 1;
-	pc = (tColorRGBA*) dst->pixels;
+	pc = (SDL_Color *) dst->pixels;
 	gap = dst->pitch - dst->w * 4;
 
 	/*
@@ -659,7 +640,7 @@ void _transformSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int cx, int cy,
 				if (flipx) dx = sw - dx;
 				if (flipy) dy = sh - dy;
 				if ((dx > -1) && (dy > -1) && (dx < (src->w-1)) && (dy < (src->h-1))) {
-					sp = (tColorRGBA *)src->pixels;;
+					sp = (SDL_Color *)src->pixels;;
 					sp += ((src->pitch/4) * dy);
 					sp += dx;
 					c00 = *sp;
@@ -699,7 +680,7 @@ void _transformSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int cx, int cy,
 				sdy += isin;
 				pc++;
 			}
-			pc = (tColorRGBA *) ((Uint8 *) pc + gap);
+			pc = (SDL_Color *) ((Uint8 *) pc + gap);
 		}
 	} else {
 		for (y = 0; y < dst->h; y++) {
@@ -712,7 +693,7 @@ void _transformSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int cx, int cy,
 				if (flipx) dx = (src->w-1)-dx;
 				if (flipy) dy = (src->h-1)-dy;
 				if ((dx >= 0) && (dy >= 0) && (dx < src->w) && (dy < src->h)) {
-					sp = (tColorRGBA *) ((Uint8 *) src->pixels + src->pitch * dy);
+					sp = (SDL_Color *) ((Uint8 *) src->pixels + src->pitch * dy);
 					sp += dx;
 					*pc = *sp;
 				}
@@ -720,7 +701,7 @@ void _transformSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int cx, int cy,
 				sdy += isin;
 				pc++;
 			}
-			pc = (tColorRGBA *) ((Uint8 *) pc + gap);
+			pc = (SDL_Color *) ((Uint8 *) pc + gap);
 		}
 	}
 }
@@ -746,7 +727,7 @@ Assumes dst surface was allocated with the correct dimensions.
 void transformSurfaceY(SDL_Surface * src, SDL_Surface * dst, int cx, int cy, int isin, int icos, int flipx, int flipy)
 {
 	int x, y, dx, dy, xd, yd, sdx, sdy, ax, ay;
-	tColorY *pc, *sp;
+	Uint8 *pc, *sp;
 	int gap;
 
 	/*
@@ -756,7 +737,7 @@ void transformSurfaceY(SDL_Surface * src, SDL_Surface * dst, int cx, int cy, int
 	yd = ((src->h - dst->h) << 15);
 	ax = (cx << 16) - (icos * cx);
 	ay = (cy << 16) - (isin * cx);
-	pc = (tColorY*) dst->pixels;
+	pc = (Uint8 *) dst->pixels;
 	gap = dst->pitch - dst->w;
 	/*
 	* Clear surface to colorkey 
@@ -775,7 +756,7 @@ void transformSurfaceY(SDL_Surface * src, SDL_Surface * dst, int cx, int cy, int
 			if (flipx) dx = (src->w-1)-dx;
 			if (flipy) dy = (src->h-1)-dy;
 			if ((dx >= 0) && (dy >= 0) && (dx < src->w) && (dy < src->h)) {
-				sp = (tColorY *) (src->pixels);
+				sp = (Uint8 *) (src->pixels);
 				sp += (src->pitch * dy + dx);
 				*pc = *sp;
 			}
