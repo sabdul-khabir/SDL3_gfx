@@ -36,29 +36,6 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #include "SDL3_rotozoom.h"
 #include "SDL3_gfxPrimitives_font.h"
 
-/* ---- Structures */
-
-/*!
-\brief The structure passed to the internal Bresenham iterator.
-*/
-typedef struct {
-	Sint16 x, y;
-	int dx, dy, s1, s2, swapdir, error;
-	Uint32 count;
-} SDL3_gfxBresenhamIterator;
-
-/*!
-\brief The structure passed to the internal Murphy iterator.
-*/
-typedef struct {
-	SDL_Renderer *renderer;
-	int u, v;		/* delta x , delta y */
-	int ku, kt, kv, kd;	/* loop constants */
-	int oct2;
-	int quad4;
-	Sint16 last1x, last1y, last2x, last2y, first1x, first1y, first2x, first2y, tempx, tempy;
-} SDL3_gfxMurphyIterator;
-
 /* ---- Pixel */
 
 /*!
@@ -2125,7 +2102,7 @@ bool _pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 st
 	/* Allocate combined vertex array */
 	vx = vy = (Sint16 *) malloc(2 * sizeof(Uint16) * numpoints);
 	if (vx == NULL) {
-		return (-1);
+		return (false);
 	}
 
 	/* Update point to start of vy */
@@ -3083,7 +3060,7 @@ bool texturedPolygonMT(SDL_Renderer *renderer, const Sint16 * vx, const Sint16 *
 			gfxPrimitivesPolyIntsTemp = (int *) realloc(gfxPrimitivesPolyInts, sizeof(int) * n);
 			if (gfxPrimitivesPolyIntsTemp == NULL) {
 				/* Realloc failed - keeps original memory block, but fails this operation */
-				return(-1);
+				return(false);
 			}
 			gfxPrimitivesPolyInts = gfxPrimitivesPolyIntsTemp;
 			gfxPrimitivesPolyAllocated = n;
@@ -3412,7 +3389,7 @@ bool characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, 
 		character =	SDL_CreateSurface(
 			charWidth, charHeight, SDL_PIXELFORMAT_RGBA8888);
 		if (character == NULL) {
-			return (-1);
+			return (false);
 		}
 
 		charpos = currentFontdata + ci * charSize;
@@ -3457,7 +3434,7 @@ bool characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, 
 		* Check pointer 
 		*/
 		if (gfxPrimitivesFont[ci] == NULL) {
-			return (-1);
+			return (false);
 		}
 	}
 
@@ -3674,7 +3651,7 @@ bool bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, i
 
 	/* Transfer vertices into float arrays */
 	if ((x=(double *)malloc(sizeof(double)*(n+1)))==NULL) {
-		return(-1);
+		return(false);
 	}
 	if ((y=(double *)malloc(sizeof(double)*(n+1)))==NULL) {
 		free(x);
