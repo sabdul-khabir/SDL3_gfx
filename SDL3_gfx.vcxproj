@@ -216,10 +216,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ChangeLog" />
-    <None Include="configure.in" />
     <None Include="INSTALL" />
     <None Include="README" />
-    <None Include="SDL3_gfx.pc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

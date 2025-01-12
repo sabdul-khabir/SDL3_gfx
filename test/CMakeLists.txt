@@ -4,7 +4,10 @@ set(PROJECT_NAME TestGfx)
 # Source groups
 ################################################################################
 set(Sources
+    "testframerate.c"
     "TestGfx.c"
+    "testimagefilter.c"
+    "testrotozoom.c"
 )
 source_group("Sources" FILES ${Sources})
 
