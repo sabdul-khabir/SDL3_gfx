@@ -598,7 +598,7 @@ done24bit:
 
 		/* New source surface is 32bit with defined RGBA ordering */
 		/* Much faster to do this once rather than the routine on the fly */
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Converting 24bit image into 32bit RGBA surface ...\n");
+		SDL_Log("Converting 24bit image into 32bit RGBA surface ...\n");
 		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 		if (picture_again == NULL) goto done32bit;		
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
@@ -625,7 +625,7 @@ done24bit:
 
 		/* New source surface is 32bit with defined ABGR ordering */
 		/* Much faster to do this once rather than the routine on the fly */
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Converting 24bit image into 32bit ABGR surface ...\n");
+		SDL_Log("Converting 24bit image into 32bit ABGR surface ...\n");
 		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, amask, bmask, gmask, rmask));
 		if (picture_again == NULL) goto done32bit;		
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);
@@ -744,7 +744,7 @@ doneflip:
 		}
 
 		/* Excercise flipping functions on 32bit RGBA */
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Converting 24bit image into 32bit RGBA surface ...\n");
+		SDL_Log("Converting 24bit image into 32bit RGBA surface ...\n");
 		picture_again = SDL_CreateSurface(picture->w, picture->h, SDL_GetPixelFormatForMasks(32, rmask, gmask, bmask, amask));
 		if (picture_again == NULL) goto donecustom32bit;
 		SDL_BlitSurface(picture,NULL,picture_again,NULL);

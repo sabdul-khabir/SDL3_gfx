@@ -100,7 +100,7 @@ void Draw(SDL_Renderer *renderer, FPSmanager *fpsm)
 
 		/* Report set rate and current delay (from last iteration) */
 		if (time_passed > 0) {
-			SDL_snprintf(messageText, 1024, "Set rate: %4iHz   Last delay=%4lldms / Calc.Rate=%4lldHz", currentRate, time_passed, 1000 / time_passed); 
+			SDL_snprintf(messageText, 1024, "Set rate: %4iHz   Last delay=%4lums / Calc.Rate=%4luHz", currentRate, time_passed, 1000 / time_passed); 
 			stringRGBA (renderer, WIDTH/2 - 4*strlen(messageText),HEIGHT-24,messageText,255,255,255,255);
 		}
 

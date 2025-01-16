@@ -1,5 +1,10 @@
 SDL3_gfx ChangeLog
 
+Thr, Jan 16, 2025  03:35.00 PM
+- Added cmake files to replace autotool/autoconf 
+- Removed the xcode.zip since it is not updated
+- Fixed some logging statements
+
 Sat, Jan 04, 2025  04:00:00 PM
 - Renamed SDL2* files to SDL3*
 - Changed references to SDL header from "SDL.h" to <SDL3/SDL.h>
