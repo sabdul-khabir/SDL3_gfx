@@ -1,4 +1,4 @@
-#SDL3_gfx
+# SDL3_gfx
 > Graphics primitives and surface functions for SDL3
 
 ## Contact and License
