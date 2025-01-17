@@ -50,7 +50,7 @@ him for his work.
 #  ifdef USE_MMX
 #    include <mmintrin.h>
 #  endif
-#  include <SDL_cpuinfo.h>
+#  include <SDL3/SDL_cpuinfo.h>
 #endif
 
 #include "SDL3_imageFilter.h"

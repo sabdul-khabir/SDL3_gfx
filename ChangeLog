@@ -1,4 +1,18 @@
-SDL2_gfx ChangeLog
+SDL3_gfx ChangeLog
+
+Thr, Jan 16, 2025  03:35.00 PM
+- Added cmake files to replace autotool/autoconf 
+- Removed the xcode.zip since it is not updated
+- Fixed some logging statements
+
+Sat, Jan 04, 2025  04:00:00 PM
+- Renamed SDL2* files to SDL3*
+- Changed references to SDL header from "SDL.h" to <SDL3/SDL.h>
+- In SDL3_framerate.c, changed tick variables from Uint32 to Uint64 since SDL tick functions return a 64 bit value
+- Updated msvc project to include a x64 target
+- Update SDL3_gfxPrimitives functions to return bools instead of integers. This is the standard way SDL3 returns errors now.
+- Renamed SDL2 function to their SDL3 equivalent. For example SDL_FreeSurface() was renamed SDL_DestroySurface() in SDL3.
+- Palettes are now seperate from surfaces in SDL3. Added creation of palettes for indexed surfaces in SDL3_rotozoom
 
 Sun, Feb 11, 2018  16:55:00 PM
 - version rev to 1.0.4

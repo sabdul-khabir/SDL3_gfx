@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, t2, d, size);
 			}
-			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, src2, dstc, SRC_SIZE);
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, t2, d, size);
 			}
-			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterBitNegation(t1, d, size);
 		}
-		SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log("MMX %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 		
 		SDL_imageFilterMMXoff();
 		SDL_imageFilterBitNegation(src1, dstc, SRC_SIZE);
@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterBitNegation(t1, d, size);
 		}
-		SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log(" C  %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 		
 		print_compare(dstm,dstc);
 		print_line();
@@ -271,7 +271,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg);
@@ -280,7 +280,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg1, funcs[k].arg2);
 			}
-			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lus\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg1, funcs[k].arg2);
@@ -326,7 +326,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg1, funcs[k].arg2);
 			}
-			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
@@ -349,7 +349,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterNormalizeLinear(t1, d, size, 0,33, 0,255);
 		}
-		SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log("MMX %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 		
 		SDL_imageFilterMMXoff();
 		SDL_imageFilterNormalizeLinear(src1, dstc, SRC_SIZE, 0,33, 0,255);
@@ -358,7 +358,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < 50; i++) {
 			SDL_imageFilterNormalizeLinear(t1, d, size, 0,33, 0,255);
 		}
-		SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+		SDL_Log(" C  %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 		
 		print_compare(dstm,dstc);
 		print_line();
@@ -396,7 +396,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			SDL_Log("MMX %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log("MMX %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			SDL_imageFilterMMXoff();
 			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg);
@@ -405,7 +405,7 @@ int main(int argc, char *argv[])
 			for (i = 0; i < 50; i++) {
 				funcs[k].f(t1, d, size, funcs[k].arg);
 			}
-			SDL_Log(" C  %dx%dk: %lldms\n", i, size/1024, SDL_GetTicks() - start);
+			SDL_Log(" C  %dx%dk: %lums\n", i, size/1024, SDL_GetTicks() - start);
 			
 			print_compare(dstm,dstc);
 			print_line();
