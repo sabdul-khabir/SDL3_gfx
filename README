@@ -1,8 +1,7 @@
-/*!
+#SDL3_gfx
+> Graphics primitives and surface functions for SDL3
 
-\mainpage SDL3_gfx - Graphics primitives and surface functions for SDL3
-
-\section contact_sec Contact and License
+## Contact and License
 
 Email aschiffler at ferzkopp dot net to contact the author 
 or better check author's homepage at http://www.ferzkopp.net 
@@ -11,7 +10,7 @@ for the most up-to-date contact information.
 This library is licenced under the zlib License, see the file LICENSE for details. 
 
 
-\section intro_sec Introduction
+## Introduction
 
 The SDL3_gfx library provides the basic drawing functions such as lines,
 circles or polygons provided by SDL_gfx on SDL3 against renderers of SDL3.
@@ -20,75 +19,41 @@ The current components of the SDL3_gfx library are:
 - Graphic Primitives (SDL3_gfxPrimitives.h, SDL3_gfxPrimitives.c)
 - Surface Rotozoomer (SDL3_rotozoom.h, SDL3_rotozoom.c)
 - Framerate control (SDL3_framerate.h, SDL3_framerate.c)
-- MMX image filters (SDL3_imageFilter.h, SDL2_imageFilter.c)
+- MMX image filters (SDL3_imageFilter.h, SDL3_imageFilter.c)
 - Build-in 8x8 Font (SDL3_gfxPrimitives_font.h)
 
 Note that SDL3_gfx is compatible with SDL version 3.0 (not SDL 1.2 or 2.0).
 
-\section install_sec Installation
+## Installation
 
-\subsection unix Unix/Linux
+### Unix/Linux
 
-Use the standard autoconf/automake sequence to compile and install the library. 
-\verbatim
-        ./autogen.sh    # (optional, recommended)
-        ./configure
-        make
-        make install
-\endverbatim
-
-\\subsubsection nommx Linker Configuration
-
-The default location for the installation is /usr/local/lib and /usr/local/include. 
-This libary path may need to be added to the file the linker configuration file:
-\verbatim
-        vi /etc/ld.so.conf
+Use the standard cmake sequence to compile and install the library.
+Update the cmake file to point to your specific configuration.
+```
+        cmake ..
+        cmake --build .
+        cmake --install
         ldconfig
-\endverbatim
+```
 
-\\subsubsection nommx Non-MMX Platforms
-
-To build without MMX code enabled (i.e. ARM, PPC, AMD64 architectures):
-\verbatim
-        ./configure --disable-mmx
-        make
-        make install
-\endverbatim
-
-\subsection visualstudio Windows (VS2022)
+### Windows (VS2022)
 
 Open the SDL3_gfx.sln solution file, right click on the solution and choose 'Rebuild'.
 
 The SDL3 folder must be placed in a directory alongside SDL3_gfx (or sdl3gfx-code) and build in the same configuration, i.e. Debug or Release, beforehand so the referenced SDL3.lib file can be found.
 
-\subsection platformosx Mac OSX 
+## Test Programs
 
-The usual autotools build chain should be used. MacPorts or fink may be required.
+The tests are currently built with the library.
 
-Xcode is supported via templates. See Xcode.zip - this template only supports SDL3_gfx 
-and not the tests. For this template, the Deployment Target (the lowest version to run on) 
-is set to 10.11 and expects the SDL3.framework preinstalled in the default location: /Library/Frameworks.
-
-\section test_sec Test Programs
-
-Change to the ./test directory and run
-\verbatim
-        ./autogen.sh
-        ./configure
-        make
-\endverbatim
-to create several test programs for the libraries functions. This requires
-the SDL2_gfx library to be previously compiled and installed.
-
-See the source in the test/*.c files for some sample code and implementation hints.
-
-\section documentation_sec Documentation
+## Documentation
 
 Please refer to the Doxygen-generated API documentation found in the
 Docs/html folder as well as the test programs in the test folder.
 
-\section changelog_sec Change Log
+## Change Log
 
-\verbinclude ChangeLog
+```ChangeLog
+```
 
-*/
