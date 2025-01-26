@@ -1534,7 +1534,7 @@ SDL_Surface *shrinkSurface(SDL_Surface *src, int factorx, int factory)
 	* Lock the surface 
 	*/
 	if (SDL_MUSTLOCK(rz_src)) {
-		if (SDL_LockSurface(rz_src) < 0) {
+		if (!SDL_LockSurface(rz_src)) {
 			haveError = 1;
 			goto exitShrinkSurface;
 		}
