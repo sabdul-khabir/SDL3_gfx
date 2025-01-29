@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.16.0)
 
 # Set the project name
-project(SDL3_gfx LANGUAGES C VERSION "1.0.0")
+project(SDL3_gfx LANGUAGES C VERSION "1.0.1")
 
 ################################################################################
 # Options

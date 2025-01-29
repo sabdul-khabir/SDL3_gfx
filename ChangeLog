@@ -1,5 +1,11 @@
 SDL3_gfx ChangeLog
 
+Tue, Jan 28, 2025  07:40.00 PM
+- version rev to 1.0.1
+- Fixed bug and improvements (thanks DuilioPerez)
+- Fixed testimagefilter log formatting (SDL_Log automatically inserts a newline in SDL3)
+- Added more screenshots
+
 Thr, Jan 16, 2025  03:35.00 PM
 - Added cmake files to replace autotool/autoconf 
 - Removed the xcode.zip since it is not updated

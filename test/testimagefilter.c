@@ -33,6 +33,8 @@ TestImageFilter.c: test program for MMX filter routines
 int total_count = 0;
 int ok_count = 0;
 
+char* append_number_to_string(char* text, const char* text_end, const char* fmt, unsigned char i);
+
 void setup_src(unsigned char *src1, unsigned char *src2)
 {
 	int i;
@@ -58,49 +60,57 @@ void setup_src(unsigned char *src1, unsigned char *src2)
 
 void print_result(int mmx, char *label, unsigned char *src1, unsigned char *src2, unsigned char *dst) 
 {
+	char number_str[256];
+	const char* buf_end = number_str + 256;
+	char* res;
 	char blabel[80];
-        int i;
+   int i;
 	memset((void *)blabel, ' ', 80);
 	blabel[strlen(label)+4]=0;
 
-	SDL_Log("\n");
-	SDL_Log("%s   pos   ", blabel);
-        for (i = 0; i < SRC_SIZE; i++)
-			  SDL_Log("%2d ", i);
-		  SDL_Log("\n");
+	SDL_Log("");
+	res = number_str;
+	res += SDL_snprintf(res, buf_end - res, "%s   pos   ", blabel);
+	for (i = 0; i < SRC_SIZE; i++) {
+		//SDL_Log("%2d ", i);
+		res = append_number_to_string(res, buf_end, "%2d ", i);
+	}
+		  SDL_Log("%s", number_str);
 
-		  SDL_Log("%s   src1  ", blabel);
+		  res = number_str;
+		  res += SDL_snprintf(res, buf_end - res, "%s   src1  ", blabel);
         for (i = 0; i < SRC_SIZE; i++)
-			  SDL_Log("%02x ", src1[i]);
-		  SDL_Log("\n");
+			  res = append_number_to_string(res, buf_end, "%02x ", src1[i]);
+		  SDL_Log("%s", number_str);
 
 	if (src2) {
-		SDL_Log("%s   src2  ", blabel);
+		res = number_str;
+		res += SDL_snprintf(res, buf_end - res, "%s   src2  ", blabel);
             for (i = 0; i < SRC_SIZE; i++)
-					SDL_Log("%02x ", src2[i]);
+					res = append_number_to_string(res, buf_end, "%02x ", src2[i]);
+		SDL_Log("%s", number_str);
 	}
-	SDL_Log("\n");
-
-	SDL_Log("%s %s   dest  ",mmx?"MMX":" C ",label);
+	res = number_str;
+	res += SDL_snprintf(res, buf_end - res, "%s %s   dest  ",mmx==1?"MMX":" C ",label);
         for (i = 0; i < SRC_SIZE; i++)
-			  SDL_Log("%02x ", dst[i]);
-		  SDL_Log("\n");
+			  res = append_number_to_string(res, buf_end, "%02x ", dst[i]);
+		  SDL_Log("%s", number_str);
 }
 
 void print_compare(unsigned char *dst1, unsigned char *dst2) 
 { 
 	total_count++;
 	if (memcmp(dst1,dst2,SRC_SIZE)==0) {
-		SDL_Log("OK\n");
+		SDL_Log("OK");
 		ok_count++;
 	} else {
-		SDL_Log("ERROR\n");
+		SDL_Log("ERROR");
 	}
 }
 
 void print_line() 
 {
-	SDL_Log ("------------------------------------------------------------------------\n\n\n");
+	SDL_Log ("------------------------------------------------------------------------");
 }
 
 /* ----------- main ---------- */
@@ -428,4 +438,17 @@ int main(int argc, char *argv[])
 	SDL_free(t1);
 
 	exit(0);
+}
+
+char* append_number_to_string(char* text, const char* text_end, const char* fmt, unsigned char i)
+{
+	if (text >= text_end)
+	{
+		//Do not keep incrementing return pointer if its already past the end
+		return text;
+	}
+
+	char* cur = text;
+	cur += SDL_snprintf(cur, text_end - cur, fmt, i);
+	return cur;
 }
