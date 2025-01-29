@@ -1,6 +1,8 @@
 # SDL3_gfx
 > Graphics primitives and surface functions for SDL3
 
+![FilledCircle](https://github.com/user-attachments/assets/7c848ff5-cd66-4c56-b655-0684fffed826)
+
 ## Contact and License
 
 Email aschiffler at ferzkopp dot net to contact the author 
