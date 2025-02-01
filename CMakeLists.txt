@@ -43,16 +43,18 @@ set(ALL_FILES
 ################################################################################
 # Target
 ################################################################################
-# Use BUILD_SHARED_LIBS to determine if the library is STATIC or SHARED
+# Build an static and a dynamic library.
 if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   add_library(${PROJECT_NAME}_Shared SHARED ${ALL_FILES})
 endif()
 add_library(${PROJECT_NAME}_Static STATIC ${ALL_FILES})
-# Set 2 properties on the static target
+
+# Set 3 properties on the static target
 set_target_properties(
     ${PROJECT_NAME}_Static PROPERTIES
   OUTPUT_NAME ${PROJECT_NAME}
   ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Static
+  PUBLIC_HEADER ${Headers}
 )
 ################################################################################
 # Include directories
@@ -65,6 +67,7 @@ if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   )
 endif()
 
+# Add the include directories of standard SDL3 for static library.
 target_include_directories(${PROJECT_NAME}_Static PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
 )
@@ -72,34 +75,37 @@ target_include_directories(${PROJECT_NAME}_Static PUBLIC
 # Dependencies
 ################################################################################
 
+# In Emscripten there are only static libraries.
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   find_library(SDL3_LIB libSDL3.a)
 else()
   find_library(SDL3_LIB SDL3)
 endif()
 
-# Specify libraries directories that we will link with SDL3_gfx
+# Specify libraries directories that we will link with SDL3_gfx.
+# Static libraries don't need linking.
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   target_link_libraries(${PROJECT_NAME}_Shared PUBLIC ${SDL3_LIB})
 endif()
-target_link_libraries(${PROJECT_NAME}_Static PUBLIC ${SDL3_LIB})
 
 # copy to default locations
-if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
-  install (TARGETS ${PROJECT_NAME}_Static
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION bin)
-else()
+if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   install (TARGETS ${PROJECT_NAME}_Shared
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin)
 endif()
+# Install headers following the convension of SDL3.
+install (TARGETS ${PROJECT_NAME}_Static
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+  PUBLIC_HEADER DESTINATION include/SDL3_gfx
+)
 
 
 ################################################################################
 # Sub-projects
 ################################################################################
 # build the test also
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
+if(BUILD_TESTS)
   add_subdirectory(test)
 endif()
