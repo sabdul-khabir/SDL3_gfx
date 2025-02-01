@@ -56,11 +56,13 @@ set_target_properties(
   ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Static
   PUBLIC_HEADER "${Headers}"
 )
-set_target_properties(
-    ${PROJECT_NAME}_Shared PROPERTIES
-  OUTPUT_NAME ${PROJECT_NAME}
-  ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Shared
-)
+if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
+  set_target_properties(
+      ${PROJECT_NAME}_Shared PROPERTIES
+    OUTPUT_NAME ${PROJECT_NAME}
+    ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Shared
+  )
+endif()
 
 ################################################################################
 # Include directories
@@ -112,6 +114,6 @@ install (TARGETS ${PROJECT_NAME}_Static
 # Sub-projects
 ################################################################################
 # build the test also
-if(BUILD_TESTS)
+if(BUILD_TESTS AND NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   add_subdirectory(test)
 endif()
