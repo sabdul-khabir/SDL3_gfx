@@ -54,8 +54,14 @@ set_target_properties(
     ${PROJECT_NAME}_Static PROPERTIES
   OUTPUT_NAME ${PROJECT_NAME}
   ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Static
-  PUBLIC_HEADER ${Headers}
+  PUBLIC_HEADER "${Headers}"
 )
+set_target_properties(
+    ${PROJECT_NAME}_Shared PROPERTIES
+  OUTPUT_NAME ${PROJECT_NAME}
+  ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Shared
+)
+
 ################################################################################
 # Include directories
 ################################################################################
