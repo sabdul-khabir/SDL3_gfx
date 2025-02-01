@@ -3,6 +3,12 @@
 ################################################################################
 set(PROJECT_NAME TestGfx)
 
+# Set the right compiler linker flags for Emscripten.
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  link_directories("${EMSCRIPTEN_SYSROOT}/lib")
+  set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
+
 ################################################################################
 # Source groups
 ################################################################################
@@ -220,4 +226,11 @@ set(TEST_ASSETS
 	"sample24.bmp"
 	"sample24-box.bmp"
 )
-file(COPY ${TEST_ASSETS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  foreach(asset IN LISTS TEST_ASSETS)
+    target_compile_options(TestImageFilter PRIVATE "--preload-file=${asset}")
+    target_compile_options(TestRotozoom PRIVATE "--preload-file=${asset}")
+  endforeach()
+else()
+  file(COPY ${TEST_ASSETS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+endif()
