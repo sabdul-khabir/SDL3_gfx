@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.16.0)
 
 # Set the project name
 project(SDL3_gfx LANGUAGES C VERSION "1.0.1")
+set(SDL_REQUIRED_VERSION 3.2.0)
+string(REPLACE "." ";" SO_VERSION_COMPONENTS "${CMAKE_PROJECT_VERSION}")
+list(GET SO_VERSION_COMPONENTS 0 SO_VERSION_MAJOR)
 
 ################################################################################
 # Options
@@ -59,6 +62,7 @@ set_target_properties(
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   set_target_properties(
       ${PROJECT_NAME}_Shared PROPERTIES
+    VERSION "${CMAKE_PROJECT_VERSION}" SOVERSION "${SO_VERSION_MAJOR}"
     OUTPUT_NAME ${PROJECT_NAME}
     ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_NAME}_Shared
   )
@@ -108,6 +112,14 @@ install (TARGETS ${PROJECT_NAME}_Static
   RUNTIME DESTINATION bin
   PUBLIC_HEADER DESTINATION include/SDL3_gfx
 )
+
+################################################################################
+# pkg-config
+################################################################################
+include( GNUInstallDirs )
+configure_file(sdl3-gfx.pc.in sdl3-gfx.pc @ONLY)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sdl3-gfx.pc"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 
 
 ################################################################################
