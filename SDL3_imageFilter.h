@@ -51,16 +51,7 @@ extern "C" {
 #endif
 
 	/* Comments:                                                                           */
-	/*  1.) MMX functions work best if all data blocks are aligned on a 32 bytes boundary. */
-	/*  2.) Data that is not within an 8 byte boundary is processed using the C routine.   */
-	/*  3.) Convolution routines do not have C routines at this time.                      */
-
-	// Detect MMX capability in CPU
-	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMMXdetect(void);
-
-	// Force use of MMX off (or turn possible use back on)
-	SDL3_IMAGEFILTER_SCOPE void SDL_imageFilterMMXoff(void);
-	SDL3_IMAGEFILTER_SCOPE void SDL_imageFilterMMXon(void);
+	/*  1.) Convolution routines do not have C routines at this time.                      */
 
 	//
 	// All routines return:
@@ -83,7 +74,7 @@ extern "C" {
 	//  SDL_imageFilterMult: D = saturation(S1 * S2)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
-	//  SDL_imageFilterMultNor: D = S1 * S2   (non-MMX)
+	//  SDL_imageFilterMultNor: D = S1 * S2
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultNor(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
 	//  SDL_imageFilterMultDivby2: D = saturation255(S1/2 * S2)
@@ -100,7 +91,7 @@ extern "C" {
 	//  SDL_imageFilterBitOr: D = S1 | S2
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterBitOr(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
-	//  SDL_imageFilterDiv: D = S1 / S2   (non-MMX)
+	//  SDL_imageFilterDiv: D = S1 / S2
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
 	//  SDL_imageFilterBitNegation: D = !S
@@ -110,7 +101,7 @@ extern "C" {
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C);
 
 	//  SDL_imageFilterAddUint: D = saturation255(S + (uint)C)
-	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int C);
+	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C);
 
 	//  SDL_imageFilterAddByteToHalf: D = saturation255(S/2 + C)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsigned int length,
@@ -120,7 +111,7 @@ extern "C" {
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C);
 
 	//  SDL_imageFilterSubUint: D = saturation0(S - (uint)C)
-	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int C);
+	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C);
 
 	//  SDL_imageFilterShiftRight: D = saturation0(S >> N)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N);
