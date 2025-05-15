@@ -1553,7 +1553,7 @@ int SDL_imageFilterSobelX(unsigned char *Src, unsigned char *Dest, int rows, int
 	if ((columns < 8) || (rows < 3))
 		return (-1);
 
-	/* No non-MMX implementation yet */
+	/* No implementation yet */
 	return (-1);
 }
 
@@ -1579,6 +1579,6 @@ int SDL_imageFilterSobelXShiftRight(unsigned char *Src, unsigned char *Dest, int
 	if ((columns < 8) || (rows < 3) || (NRightShift > 7))
 		return (-1);
 
-	/* No non-MMX implementation yet */
+	/* No implementation yet */
 	return (-1);
 }

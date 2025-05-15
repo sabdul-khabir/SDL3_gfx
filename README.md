@@ -21,7 +21,7 @@ The current components of the SDL3_gfx library are:
 - Graphic Primitives (SDL3_gfxPrimitives.h, SDL3_gfxPrimitives.c)
 - Surface Rotozoomer (SDL3_rotozoom.h, SDL3_rotozoom.c)
 - Framerate control (SDL3_framerate.h, SDL3_framerate.c)
-- MMX image filters (SDL3_imageFilter.h, SDL3_imageFilter.c)
+- Image filters (SDL3_imageFilter.h, SDL3_imageFilter.c)
 - Build-in 8x8 Font (SDL3_gfxPrimitives_font.h)
 
 Note that SDL3_gfx is compatible with SDL version 3.0 (not SDL 1.2 or 2.0).
