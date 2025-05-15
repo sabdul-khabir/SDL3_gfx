@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SDL3_gfx: C:/Users/ADMIN/Documents/GitHub/SDL3_gfx/SDL3_rotozoom.c Source File</title>
+<title>SDL3_gfx: SDL3_rotozoom.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SDL3_gfx<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">SDL3_gfx<span id="projectnumber">&#160;1.0.1</span>
    </div>
    <div id="projectbrief">Graphics primitives and surface functions for SDL3</div>
   </td>
@@ -54,7 +54,7 @@ $(function(){ initResizable(false); });
 /* @license-end */
 </script>
 <div class="header">
-  <div class="headertitle"><div class="title">C:/Users/ADMIN/Documents/GitHub/SDL3_gfx/SDL3_rotozoom.c</div></div>
+  <div class="headertitle"><div class="title">SDL3_rotozoom.c</div></div>
 </div><!--header-->
 <div class="contents">
 <a href="_s_d_l3__rotozoom_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*  </span></div>
@@ -1385,7 +1385,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l01534" name="l01534"></a><span class="lineno"> 1534</span><span class="comment">        * Lock the surface </span></div>
 <div class="line"><a id="l01535" name="l01535"></a><span class="lineno"> 1535</span><span class="comment">        */</span></div>
 <div class="line"><a id="l01536" name="l01536"></a><span class="lineno"> 1536</span>        <span class="keywordflow">if</span> (SDL_MUSTLOCK(rz_src)) {</div>
-<div class="line"><a id="l01537" name="l01537"></a><span class="lineno"> 1537</span>                <span class="keywordflow">if</span> (SDL_LockSurface(rz_src) &lt; 0) {</div>
+<div class="line"><a id="l01537" name="l01537"></a><span class="lineno"> 1537</span>                <span class="keywordflow">if</span> (!SDL_LockSurface(rz_src)) {</div>
 <div class="line"><a id="l01538" name="l01538"></a><span class="lineno"> 1538</span>                        haveError = 1;</div>
 <div class="line"><a id="l01539" name="l01539"></a><span class="lineno"> 1539</span>                        <span class="keywordflow">goto</span> exitShrinkSurface;</div>
 <div class="line"><a id="l01540" name="l01540"></a><span class="lineno"> 1540</span>                }</div>
