@@ -33,9 +33,11 @@ Note that SDL3_gfx is compatible with SDL version 3.0 (not SDL 1.2 or 2.0).
 Use the standard cmake sequence to compile and install the library.
 Update the cmake file to point to your specific configuration.
 ```
+        mkdir build
+        cd build
         cmake ..
         cmake --build .
-        cmake --install
+        make --install
         ldconfig
 ```
 

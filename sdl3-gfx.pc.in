@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
+
+Name: @PROJECT_NAME@
+Description: drawing and graphical effects extension for SDL
+Version: @PROJECT_VERSION@
+Requires: sdl3 >= @SDL_REQUIRED_VERSION@
+Libs: -L${libdir} -lSDL3_gfx
+Cflags: -I${includedir}
