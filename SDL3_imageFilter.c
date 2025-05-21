@@ -43,6 +43,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 */
 #define SWAP_32(x) (((x) >> 24) | (((x) & 0x00ff0000) >> 8)  | (((x) & 0x0000ff00) << 8)  | ((x) << 24))
 
+#define MAX_BYTES_PER_PIXEL 16
 /* ------------------------------------------------------------------------------------ */
 
 /*!
@@ -596,8 +597,8 @@ int SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 */
 int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)
 {
-	unsigned int i, j, istart, D;
-	int iC[bpp + 1], k;
+	unsigned int i, j, istart;
+	int iC[MAX_BYTES_PER_PIXEL], k;
 	unsigned char *cursrc1;
 	unsigned char *curdest;
 	int result;
@@ -746,8 +747,8 @@ int SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 */
 int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)
 {
-	unsigned int i, j, istart, D;
-	int iC[bpp], k;
+	unsigned int i, j, istart;
+	int iC[MAX_BYTES_PER_PIXEL], k;
 	unsigned char *cursrc1;
 	unsigned char *curdest;
 	int result;
