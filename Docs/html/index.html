@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SDL3_gfx: Main Page</title>
+<title>SDL3_gfx: SDL3_gfx</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SDL3_gfx<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">SDL3_gfx<span id="projectnumber">&#160;1.0.1</span>
    </div>
    <div id="projectbrief">Graphics primitives and surface functions for SDL3</div>
   </td>
@@ -53,10 +53,51 @@ $(function() {
 $(function(){ initResizable(false); });
 /* @license-end */
 </script>
-<div class="header">
-  <div class="headertitle"><div class="title">SDL3_gfx Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">SDL3_gfx </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__2home_2italocapasso_2_proyectos_2_s_d_l-repos_2_s_d_l3__gfx_2_r_e_a_d_m_e"></a></p>
+<blockquote class="doxtable">
+<p>Graphics primitives and surface functions for SDL3 </p>
+</blockquote>
+<p><img src="https://github.com/user-attachments/assets/7c848ff5-cd66-4c56-b655-0684fffed826" alt="FilledCircle" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Contact and License</h1>
+<p>Email aschiffler at ferzkopp dot net to contact the author or better check author's homepage at <a href="http://www.ferzkopp.net">http://www.ferzkopp.net</a> for the most up-to-date contact information.</p>
+<p>This library is licenced under the zlib License, see the file LICENSE for details.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Introduction</h1>
+<p>The SDL3_gfx library provides the basic drawing functions such as lines, circles or polygons provided by SDL_gfx on SDL3 against renderers of SDL3.</p>
+<p>The current components of the SDL3_gfx library are:</p><ul>
+<li>Graphic Primitives (<a class="el" href="_s_d_l3__gfx_primitives_8h.html">SDL3_gfxPrimitives.h</a>, <a class="el" href="_s_d_l3__gfx_primitives_8c.html">SDL3_gfxPrimitives.c</a>)</li>
+<li>Surface Rotozoomer (<a class="el" href="_s_d_l3__rotozoom_8h.html">SDL3_rotozoom.h</a>, <a class="el" href="_s_d_l3__rotozoom_8c.html">SDL3_rotozoom.c</a>)</li>
+<li>Framerate control (<a class="el" href="_s_d_l3__framerate_8h.html">SDL3_framerate.h</a>, <a class="el" href="_s_d_l3__framerate_8c.html">SDL3_framerate.c</a>)</li>
+<li>Image filters (<a class="el" href="_s_d_l3__image_filter_8h.html">SDL3_imageFilter.h</a>, <a class="el" href="_s_d_l3__image_filter_8c.html">SDL3_imageFilter.c</a>)</li>
+<li>Build-in 8x8 Font (<a class="el" href="_s_d_l3__gfx_primitives__font_8h.html">SDL3_gfxPrimitives_font.h</a>)</li>
+</ul>
+<p>Note that SDL3_gfx is compatible with SDL version 3.0 (not SDL 1.2 or 2.0).</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Installation</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Unix/Linux</h2>
+<p>Use the standard cmake sequence to compile and install the library. Update the cmake file to point to your specific configuration. </p><div class="fragment"><div class="line">cmake ..</div>
+<div class="line">cmake --build .</div>
+<div class="line">cmake --install</div>
+<div class="line">ldconfig</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+Windows (VS2022)</h2>
+<p>Open the SDL3_gfx.sln solution file, right click on the solution and choose 'Rebuild'.</p>
+<p>The SDL3 folder must be placed in a directory alongside SDL3_gfx (or sdl3gfx-code) and build in the same configuration, i.e. Debug or Release, beforehand so the referenced SDL3.lib file can be found.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Test Programs</h1>
+<p>The tests are currently built with the library.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Documentation</h1>
+<p>Please refer to the Doxygen-generated API documentation found in the Docs/html folder as well as the test programs in the test folder.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Change Log</h1>
+<div class="fragment"></div><!-- fragment --> </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 <!-- start footer part -->

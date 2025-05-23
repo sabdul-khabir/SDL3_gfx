@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SDL3_gfx: C:/Users/ADMIN/Documents/GitHub/SDL3_gfx/SDL3_imageFilter.c File Reference</title>
+<title>SDL3_gfx: SDL3_imageFilter.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SDL3_gfx<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">SDL3_gfx<span id="projectnumber">&#160;1.0.1</span>
    </div>
    <div id="projectbrief">Graphics primitives and surface functions for SDL3</div>
   </td>
@@ -57,7 +57,7 @@ $(function(){ initResizable(false); });
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">C:/Users/ADMIN/Documents/GitHub/SDL3_gfx/SDL3_imageFilter.c File Reference</div></div>
+  <div class="headertitle"><div class="title">SDL3_imageFilter.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
@@ -76,15 +76,6 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a798ce71024ee1a1d1b174fd60fe79917" id="r_a798ce71024ee1a1d1b174fd60fe79917"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a798ce71024ee1a1d1b174fd60fe79917">SDL_imageFilterMMXdetect</a> (void)</td></tr>
-<tr class="memdesc:a798ce71024ee1a1d1b174fd60fe79917"><td class="mdescLeft">&#160;</td><td class="mdescRight">MMX detection routine (with override flag).  <br /></td></tr>
-<tr class="separator:a798ce71024ee1a1d1b174fd60fe79917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dff661660755161bb4aaf6199cd1384" id="r_a5dff661660755161bb4aaf6199cd1384"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dff661660755161bb4aaf6199cd1384">SDL_imageFilterMMXoff</a> ()</td></tr>
-<tr class="memdesc:a5dff661660755161bb4aaf6199cd1384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable MMX check for filter functions and and force to use non-MMX C based code.  <br /></td></tr>
-<tr class="separator:a5dff661660755161bb4aaf6199cd1384"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a353ee234c3b51b33c4c5c4b30db5832d" id="r_a353ee234c3b51b33c4c5c4b30db5832d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a353ee234c3b51b33c4c5c4b30db5832d">SDL_imageFilterMMXon</a> ()</td></tr>
-<tr class="memdesc:a353ee234c3b51b33c4c5c4b30db5832d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable MMX check for filter functions and use MMX code if available.  <br /></td></tr>
-<tr class="separator:a353ee234c3b51b33c4c5c4b30db5832d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f06507eb0b63198dbd67495d61c9b20" id="r_a9f06507eb0b63198dbd67495d61c9b20"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f06507eb0b63198dbd67495d61c9b20">SDL_imageFilterAdd</a> (unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)</td></tr>
 <tr class="memdesc:a9f06507eb0b63198dbd67495d61c9b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using Add: D = saturation255(S1 + S2)  <br /></td></tr>
 <tr class="separator:a9f06507eb0b63198dbd67495d61c9b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,9 +91,6 @@ Functions</h2></td></tr>
 <tr class="memitem:af4633031d40a9ea0956a2f3c6c87a384" id="r_af4633031d40a9ea0956a2f3c6c87a384"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4633031d40a9ea0956a2f3c6c87a384">SDL_imageFilterMult</a> (unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)</td></tr>
 <tr class="memdesc:af4633031d40a9ea0956a2f3c6c87a384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using Mult: D = saturation255(S1 * S2)  <br /></td></tr>
 <tr class="separator:af4633031d40a9ea0956a2f3c6c87a384"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a346db972dff9c56e3c45c904eaa3c39a" id="r_a346db972dff9c56e3c45c904eaa3c39a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a346db972dff9c56e3c45c904eaa3c39a">SDL_imageFilterMultNorASM</a> (unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int SrcLength)</td></tr>
-<tr class="memdesc:a346db972dff9c56e3c45c904eaa3c39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal ASM Filter using MultNor: D = S1 * S2.  <br /></td></tr>
-<tr class="separator:a346db972dff9c56e3c45c904eaa3c39a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f3c9fd40426bb46eba5ac167505dcc5" id="r_a5f3c9fd40426bb46eba5ac167505dcc5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f3c9fd40426bb46eba5ac167505dcc5">SDL_imageFilterMultNor</a> (unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)</td></tr>
 <tr class="memdesc:a5f3c9fd40426bb46eba5ac167505dcc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using MultNor: D = S1 * S2.  <br /></td></tr>
 <tr class="separator:a5f3c9fd40426bb46eba5ac167505dcc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,21 +115,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a812cb307cb60ef31f1ffe81a9eee6bb1" id="r_a812cb307cb60ef31f1ffe81a9eee6bb1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a812cb307cb60ef31f1ffe81a9eee6bb1">SDL_imageFilterAddByte</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)</td></tr>
 <tr class="memdesc:a812cb307cb60ef31f1ffe81a9eee6bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using AddByte: D = saturation255(S + C)  <br /></td></tr>
 <tr class="separator:a812cb307cb60ef31f1ffe81a9eee6bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a660543426c47dfec39a349eb3b8f905b" id="r_a660543426c47dfec39a349eb3b8f905b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a660543426c47dfec39a349eb3b8f905b">SDL_imageFilterAddUint</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int C)</td></tr>
-<tr class="memdesc:a660543426c47dfec39a349eb3b8f905b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using AddUint: D = saturation255((S[i] + Cs[i % 4]), Cs=Swap32((uint)C)  <br /></td></tr>
-<tr class="separator:a660543426c47dfec39a349eb3b8f905b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a966d85fa0c5974c54bbbdc5176d908d7" id="r_a966d85fa0c5974c54bbbdc5176d908d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a966d85fa0c5974c54bbbdc5176d908d7">SDL_imageFilterAddUint</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)</td></tr>
+<tr class="memdesc:a966d85fa0c5974c54bbbdc5176d908d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using AddUint: D = saturation255((S[i] + Cs[i % BPP])  <br /></td></tr>
+<tr class="separator:a966d85fa0c5974c54bbbdc5176d908d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab82db97d129c8cfc36780bcdc6286fcc" id="r_ab82db97d129c8cfc36780bcdc6286fcc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab82db97d129c8cfc36780bcdc6286fcc">SDL_imageFilterAddByteToHalf</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)</td></tr>
 <tr class="memdesc:ab82db97d129c8cfc36780bcdc6286fcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using AddByteToHalf: D = saturation255(S/2 + C)  <br /></td></tr>
 <tr class="separator:ab82db97d129c8cfc36780bcdc6286fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a657e128016cc448778007d8b6475dd65" id="r_a657e128016cc448778007d8b6475dd65"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a657e128016cc448778007d8b6475dd65">SDL_imageFilterSubByteMMX</a> (unsigned char *Src1, unsigned char *Dest, unsigned int SrcLength, unsigned char C)</td></tr>
-<tr class="memdesc:a657e128016cc448778007d8b6475dd65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal MMX Filter using SubByte: D = saturation0(S - C)  <br /></td></tr>
-<tr class="separator:a657e128016cc448778007d8b6475dd65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a387fb6f0d48cc5d08f37f7f9b92d14b2" id="r_a387fb6f0d48cc5d08f37f7f9b92d14b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a387fb6f0d48cc5d08f37f7f9b92d14b2">SDL_imageFilterSubByte</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)</td></tr>
 <tr class="memdesc:a387fb6f0d48cc5d08f37f7f9b92d14b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using SubByte: D = saturation0(S - C)  <br /></td></tr>
 <tr class="separator:a387fb6f0d48cc5d08f37f7f9b92d14b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb343ef95e22945e1d4d648b2e176e64" id="r_abb343ef95e22945e1d4d648b2e176e64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb343ef95e22945e1d4d648b2e176e64">SDL_imageFilterSubUint</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int C)</td></tr>
-<tr class="memdesc:abb343ef95e22945e1d4d648b2e176e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using SubUint: D = saturation0(S[i] - Cs[i % 4]), Cs=Swap32((uint)C)  <br /></td></tr>
-<tr class="separator:abb343ef95e22945e1d4d648b2e176e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577f295f3c6bb38e75688f97ebcde0e8" id="r_a577f295f3c6bb38e75688f97ebcde0e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a577f295f3c6bb38e75688f97ebcde0e8">SDL_imageFilterSubUint</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)</td></tr>
+<tr class="memdesc:a577f295f3c6bb38e75688f97ebcde0e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using SubUint: D = saturation0(S[i] - Cs[i % BPP])  <br /></td></tr>
+<tr class="separator:a577f295f3c6bb38e75688f97ebcde0e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68851aed2dcc5dfd2f3b258236f3b88c" id="r_a68851aed2dcc5dfd2f3b258236f3b88c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68851aed2dcc5dfd2f3b258236f3b88c">SDL_imageFilterShiftRight</a> (unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)</td></tr>
 <tr class="memdesc:a68851aed2dcc5dfd2f3b258236f3b88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using ShiftRight: D = saturation0(S &gt;&gt; N)  <br /></td></tr>
 <tr class="separator:a68851aed2dcc5dfd2f3b258236f3b88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,12 +187,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a0d21af83f0183fcd697324cffe3ab3d7" id="r_a0d21af83f0183fcd697324cffe3ab3d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d21af83f0183fcd697324cffe3ab3d7">SDL_imageFilterSobelXShiftRight</a> (unsigned char *Src, unsigned char *Dest, int rows, int columns, unsigned char NRightShift)</td></tr>
 <tr class="memdesc:a0d21af83f0183fcd697324cffe3ab3d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter using SobelXShiftRight: Dij = saturation255( ... )  <br /></td></tr>
 <tr class="separator:a0d21af83f0183fcd697324cffe3ab3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbfcc8c03e3d791ac74c955d14a135e4" id="r_afbfcc8c03e3d791ac74c955d14a135e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbfcc8c03e3d791ac74c955d14a135e4">SDL_imageFilterAlignStack</a> (void)</td></tr>
-<tr class="memdesc:afbfcc8c03e3d791ac74c955d14a135e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Align stack to 32 byte boundary,.  <br /></td></tr>
-<tr class="separator:afbfcc8c03e3d791ac74c955d14a135e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3147eb5ddd4965d65702f0e533b42974" id="r_a3147eb5ddd4965d65702f0e533b42974"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3147eb5ddd4965d65702f0e533b42974">SDL_imageFilterRestoreStack</a> (void)</td></tr>
-<tr class="memdesc:a3147eb5ddd4965d65702f0e533b42974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore previously aligned stack.  <br /></td></tr>
-<tr class="separator:a3147eb5ddd4965d65702f0e533b42974"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a700fb30611761c46a674a45cc28ff561" name="a700fb30611761c46a674a45cc28ff561"></a>
@@ -228,7 +207,7 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 <p>Swaps the byte order in a 32bit integer (LSB becomes MSB, etc.). </p>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00061">61</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00044">44</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -274,7 +253,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00542">542</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00181">181</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -319,7 +298,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00173">173</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00058">58</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -364,7 +343,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01791">1791</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00548">548</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -409,12 +388,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02068">2068</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00652">652</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
-<a id="a660543426c47dfec39a349eb3b8f905b" name="a660543426c47dfec39a349eb3b8f905b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a660543426c47dfec39a349eb3b8f905b">&#9670;&#160;</a></span>SDL_imageFilterAddUint()</h2>
+<a id="a966d85fa0c5974c54bbbdc5176d908d7" name="a966d85fa0c5974c54bbbdc5176d908d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a966d85fa0c5974c54bbbdc5176d908d7">&#9670;&#160;</a></span>SDL_imageFilterAddUint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,45 +416,30 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>bpp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>C</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Filter using AddUint: D = saturation255((S[i] + Cs[i % 4]), Cs=Swap32((uint)C) </p>
+<p>Filter using AddUint: D = saturation255((S[i] + Cs[i % BPP]) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Src1</td><td>Pointer to the start of the source byte array (S). </td></tr>
     <tr><td class="paramname">Dest</td><td>Pointer to the start of the destination byte array (D). </td></tr>
     <tr><td class="paramname">length</td><td>The number of bytes in the source array. </td></tr>
+    <tr><td class="paramname">bpp</td><td>The bytes per unit length (BPP) </td></tr>
     <tr><td class="paramname">C</td><td>Constant to add (C).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01919">1919</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="afbfcc8c03e3d791ac74c955d14a135e4" name="afbfcc8c03e3d791ac74c955d14a135e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbfcc8c03e3d791ac74c955d14a135e4">&#9670;&#160;</a></span>SDL_imageFilterAlignStack()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SDL_imageFilterAlignStack </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Align stack to 32 byte boundary,. </p>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l07326">7326</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00597">597</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -520,7 +484,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03534">3534</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01169">1169</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -565,7 +529,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01278">1278</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00390">390</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -604,7 +568,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01671">1671</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00511">511</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -649,7 +613,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01392">1392</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00429">429</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -700,7 +664,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03691">3691</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01214">1214</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -755,10 +719,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03980">3980</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01323">1323</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -813,10 +777,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l05378">5378</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01435">1435</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -871,10 +835,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l04170">4170</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01351">1351</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -929,10 +893,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l05555">5555</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01463">1463</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -987,10 +951,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l04473">4473</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01379">1379</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1045,10 +1009,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l05856">5856</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01491">1491</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1103,10 +1067,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l04830">4830</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01407">1407</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1161,10 +1125,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l06219">6219</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01519">1519</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1209,7 +1173,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01549">1549</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00468">468</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1253,70 +1217,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00308">308</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="a798ce71024ee1a1d1b174fd60fe79917" name="a798ce71024ee1a1d1b174fd60fe79917"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a798ce71024ee1a1d1b174fd60fe79917">&#9670;&#160;</a></span>SDL_imageFilterMMXdetect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int SDL_imageFilterMMXdetect </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>MMX detection routine (with override flag). </p>
-<dl class="section return"><dt>Returns</dt><dd>1 of MMX was detected, 0 otherwise. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00080">80</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="a5dff661660755161bb4aaf6199cd1384" name="a5dff661660755161bb4aaf6199cd1384"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dff661660755161bb4aaf6199cd1384">&#9670;&#160;</a></span>SDL_imageFilterMMXoff()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SDL_imageFilterMMXoff </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Disable MMX check for filter functions and and force to use non-MMX C based code. </p>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00093">93</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="a353ee234c3b51b33c4c5c4b30db5832d" name="a353ee234c3b51b33c4c5c4b30db5832d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a353ee234c3b51b33c4c5c4b30db5832d">&#9670;&#160;</a></span>SDL_imageFilterMMXon()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SDL_imageFilterMMXon </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Enable MMX check for filter functions and use MMX code if available. </p>
 
 <p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00101">101</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
@@ -1363,7 +1263,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00729">729</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00222">222</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1408,7 +1308,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02790">2790</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00907">907</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1453,7 +1353,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01000">1000</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00304">304</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1498,7 +1398,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01141">1141</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00347">347</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1543,52 +1443,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00862">862</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="a346db972dff9c56e3c45c904eaa3c39a" name="a346db972dff9c56e3c45c904eaa3c39a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a346db972dff9c56e3c45c904eaa3c39a">&#9670;&#160;</a></span>SDL_imageFilterMultNorASM()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int SDL_imageFilterMultNorASM </td>
-          <td>(</td>
-          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>Src1</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>Src2</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>Dest</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>SrcLength</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Internal ASM Filter using MultNor: D = S1 * S2. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Src1</td><td>Pointer to the start of the first source byte array (S1). </td></tr>
-    <tr><td class="paramname">Src2</td><td>Pointer to the start of the second source byte array (S2). </td></tr>
-    <tr><td class="paramname">Dest</td><td>Pointer to the start of the destination byte array (D). </td></tr>
-    <tr><td class="paramname">SrcLength</td><td>The number of bytes in the source arrays.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00792">792</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00265">265</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1651,28 +1506,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03909">3909</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="a3147eb5ddd4965d65702f0e533b42974" name="a3147eb5ddd4965d65702f0e533b42974"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3147eb5ddd4965d65702f0e533b42974">&#9670;&#160;</a></span>SDL_imageFilterRestoreStack()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SDL_imageFilterRestoreStack </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Restore previously aligned stack. </p>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l07354">7354</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01268">1268</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1717,7 +1551,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03393">3393</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01118">1118</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1762,7 +1596,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03093">3093</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01014">1014</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1807,7 +1641,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l03210">3210</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01064">1064</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1852,7 +1686,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02476">2476</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00803">803</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1903,7 +1737,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02943">2943</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00958">958</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1948,7 +1782,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02594">2594</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00853">853</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -1991,10 +1825,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l06799">6799</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01547">1547</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -2043,10 +1877,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Note: Non-MMX implementation not available for this function.</p>
+<p>Note: No implementation available for this function yet.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if filter was applied, 0 otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l07052">7052</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l01573">1573</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -2091,7 +1925,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00422">422</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00143">143</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
@@ -2136,57 +1970,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02196">2196</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00697">697</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
-<a id="a657e128016cc448778007d8b6475dd65" name="a657e128016cc448778007d8b6475dd65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a657e128016cc448778007d8b6475dd65">&#9670;&#160;</a></span>SDL_imageFilterSubByteMMX()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int SDL_imageFilterSubByteMMX </td>
-          <td>(</td>
-          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>Src1</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>Dest</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>SrcLength</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>C</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Internal MMX Filter using SubByte: D = saturation0(S - C) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Src1</td><td>Pointer to the start of the source byte array (S). </td></tr>
-    <tr><td class="paramname">Dest</td><td>Pointer to the start of the destination byte array (D). </td></tr>
-    <tr><td class="paramname">SrcLength</td><td>The number of bytes in the source array. </td></tr>
-    <tr><td class="paramname">C</td><td>Constant to subtract (C).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02130">2130</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
-
-</div>
-</div>
-<a id="abb343ef95e22945e1d4d648b2e176e64" name="abb343ef95e22945e1d4d648b2e176e64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb343ef95e22945e1d4d648b2e176e64">&#9670;&#160;</a></span>SDL_imageFilterSubUint()</h2>
+<a id="a577f295f3c6bb38e75688f97ebcde0e8" name="a577f295f3c6bb38e75688f97ebcde0e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a577f295f3c6bb38e75688f97ebcde0e8">&#9670;&#160;</a></span>SDL_imageFilterSubUint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2209,24 +1998,30 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>bpp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>C</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Filter using SubUint: D = saturation0(S[i] - Cs[i % 4]), Cs=Swap32((uint)C) </p>
+<p>Filter using SubUint: D = saturation0(S[i] - Cs[i % BPP]) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Src1</td><td>Pointer to the start of the source byte array (S1). </td></tr>
     <tr><td class="paramname">Dest</td><td>Pointer to the start of the destination byte array (D). </td></tr>
     <tr><td class="paramname">length</td><td>The number of bytes in the source array. </td></tr>
+    <tr><td class="paramname">bpp</td><td>The bytes per unit length (BPP) </td></tr>
     <tr><td class="paramname">C</td><td>Constant to subtract (C).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 0 for success or -1 for error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l02325">2325</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_s_d_l3__image_filter_8c_source.html#l00747">747</a> of file <a class="el" href="_s_d_l3__image_filter_8c_source.html">SDL3_imageFilter.c</a>.</p>
 
 </div>
 </div>
