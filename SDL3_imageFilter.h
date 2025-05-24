@@ -74,8 +74,11 @@ extern "C" {
 	//  SDL_imageFilterMult: D = saturation(S1 * S2)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
-	//  SDL_imageFilterMultNor: D = S1 * S2
+	//  SDL_imageFilterMultNor: D = S1 * S2 unbound
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultNor(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
+
+	//  SDL_imageFilterMultInv: D = 255 - ((255 - S1) * (255 - S2))
+	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
 	//  SDL_imageFilterMultDivby2: D = saturation255(S1/2 * S2)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest,
@@ -117,7 +120,8 @@ extern "C" {
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N);
 
 	//  SDL_imageFilterShiftRightUint: D = saturation0((uint)S >> N)
-	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N);
+	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsigned int length,
+		unsigned int bpp, unsigned char N);
 
 	//  SDL_imageFilterMultByByte: D = saturation255(S * C)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C);
@@ -132,7 +136,7 @@ extern "C" {
 
 	//  SDL_imageFilterShiftLeftUint: D = ((uint)S << N)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsigned int length,
-		unsigned char N);
+		unsigned int bpp, unsigned char N);
 
 	//  SDL_imageFilterShiftLeft: D = saturation255(S << N)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N);

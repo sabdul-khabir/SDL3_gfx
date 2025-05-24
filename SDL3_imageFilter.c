@@ -101,7 +101,6 @@ int SDL_imageFilterAdd(unsigned char *Src1, unsigned char *Src2, unsigned char *
 */
 int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
-	static unsigned char Mask[8] = { 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F };
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 	int result;
@@ -224,7 +223,7 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
-	int result;
+	float tmp, fSrc1, fSrc2;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
@@ -240,14 +239,10 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 
 	/* Routine to process image */
 	for (i = istart; i < length; i++) {
-		result = (int) *cursrc1 * (int) *cursrc2;
-		if (result > 255)
-			result = 255;
-		*curdst = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		cursrc2++;
-		curdst++;
+		fSrc1 = cursrc1[i] / 255.0f;
+		fSrc2 = cursrc1[i] / 255.0f;
+		tmp = fSrc1 * fSrc2;
+		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
 	return (0);
@@ -265,7 +260,7 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 */
 int SDL_imageFilterMultNor(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
-	unsigned int i, istart;
+	unsigned int i, istart, tmp;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 
 	/* Validate input parameters */
@@ -282,11 +277,47 @@ int SDL_imageFilterMultNor(unsigned char *Src1, unsigned char *Src2, unsigned ch
 
 	/* Routine to process image */
 	for (i = istart; i < length; i++) {
-		*curdst = (int)*cursrc1 * (int)*cursrc2;  // (int) for efficiency
-		/* Advance pointers */
-		cursrc1++;
-		cursrc2++;
-		curdst++;
+		tmp = (unsigned int) cursrc1[i] * (unsigned int) cursrc2[i];
+		curdst[i] = (unsigned char) tmp;
+	}
+
+	return (0);
+}
+
+/*!
+\brief Filter using MultInv: D = 255 - ((255 - S1) * (255 - S2))
+
+\param Src1 Pointer to the start of the first source byte array (S1).
+\param Src2 Pointer to the start of the second source byte array (S2).
+\param Dest Pointer to the start of the destination byte array (D).
+\param length The number of bytes in the source arrays.
+
+\return Returns 0 for success or -1 for error.
+*/
+int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+{
+	unsigned int i, istart;
+	unsigned char *cursrc1, *cursrc2, *curdst;
+	float tmp, fSrc1, fSrc2;
+
+	/* Validate input parameters */
+	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
+		return(-1);
+	if (length == 0)
+		return(0);
+
+	/* Setup to process whole image */
+	istart = 0;
+	cursrc1 = Src1;
+	cursrc2 = Src2;
+	curdst = Dest;
+
+	/* Routine to process image */
+	for (i = istart; i < length; i++) {
+		fSrc1 = cursrc1[i] / 255.0f;
+		fSrc2 = cursrc2[i] / 255.0f;
+		tmp = 1.0f - ((1.0f - fSrc1) * (1.0f - fSrc2));
+		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
 	return (0);
@@ -307,6 +338,7 @@ int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 	int result;
+	float tmp, fSrc1, fSrc2;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
@@ -322,14 +354,12 @@ int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned
 
 	/* Routine to process image */
 	for (i = istart; i < length; i++) {
-		result = ((int) *cursrc1 / 2) * (int) *cursrc2;
-		if (result > 255)
-			result = 255;
-		*curdst = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		cursrc2++;
-		curdst++;
+		fSrc1 = cursrc1[i] / 255.0f;
+		fSrc2 = cursrc2[i] / 255.0f;
+		tmp = (fSrc1 * fSrc2) / 2.0f;
+		if (tmp > 1.0f)
+			tmp = 1.0f;
+		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
 	return (0);
@@ -350,6 +380,7 @@ int SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 	int result;
+	float tmp, fSrc1, fSrc2;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
@@ -363,16 +394,14 @@ int SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned
 	cursrc2 = Src2;
 	curdst = Dest;
 
-	/* C routine to process image */
+	/* Routine to process image */
 	for (i = istart; i < length; i++) {
-		result = ((int) *cursrc1 / 2) * ((int) *cursrc2 / 2);
-		if (result > 255)
-			result = 255;
-		*curdst = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		cursrc2++;
-		curdst++;
+		fSrc1 = cursrc1[i] / 255.0f;
+		fSrc2 = cursrc2[i] / 255.0f;
+		tmp = (fSrc1 * fSrc2) / 4.0f;
+		if (tmp > 1.0f)
+			tmp = 1.0f;
+		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
 	return (0);
@@ -470,6 +499,7 @@ int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
+	float tmp, fSrc1, fSrc2;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
@@ -484,15 +514,16 @@ int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *
 	curdst = Dest;
 
 	for (i = istart; i < length; i++) {
-		if (*cursrc2 == 0) {
-			*curdst = 255;
+		if (cursrc2[i] == 0) {
+			curdst[i] = 0;
 		} else {
-			*curdst = (int)*cursrc1 / (int)*cursrc2;  // (int) for efficiency
+			fSrc1 = cursrc1[i] / 255.0f;
+			fSrc2 = cursrc2[i] / 255.0f;
+			tmp = cursrc1[i] / cursrc2[i];
+			if (tmp > 1.0f)
+				tmp = 1.0f;
+			curdst[i] = (unsigned char) (tmp * 255);
 		}
-		/* Advance pointers */
-		cursrc1++;
-		cursrc2++;
-		curdst++;
 	}
 
 	return (0);
@@ -652,7 +683,6 @@ int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 */
 int SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
 {
-	static unsigned char Mask[8] = { 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F };
 	unsigned int i, istart;
 	int iC;
 	unsigned char *cursrc1;
@@ -792,21 +822,21 @@ int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 }
 
 /*!
-\brief Filter using ShiftRight: D = saturation0(S >> N)
+\brief Filter using ShiftRightUint: D = saturation0((uint)S[i] >> N)
 
-\param Src1 Pointer to the start of the source byte array (S).
+\param Src1 Pointer to the start of the source byte array (S1).
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source array.
 \param N Number of bit-positions to shift (N). Valid range is 0 to 8.
 
 \return Returns 0 for success or -1 for error.
 */
-int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
+int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned char N)
 {
-	static unsigned char Mask[8] = { 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F };
-	unsigned int i, istart;
-	unsigned char *cursrc1;
-	unsigned char *curdest;
+	unsigned int i,istart;
+	unsigned char *cursrc1, *curdest;
+	unsigned int *icursrc1, *icurdest;
+	int j, result;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
@@ -831,65 +861,19 @@ int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned
 	curdest = Dest;
 
 	/* Routine to process image */
-	for (i = istart; i < length; i++) {
-		*curdest = (unsigned char) *cursrc1 >> N;
-		/* Advance pointers */
-		cursrc1++;
-		curdest++;
-	}
-
-	return (0);
-}
-
-/*!
-\brief Filter using ShiftRightUint: D = saturation0((uint)S[i] >> N)
-
-\param Src1 Pointer to the start of the source byte array (S1).
-\param Dest Pointer to the start of the destination byte array (D).
-\param length The number of bytes in the source array.
-\param N Number of bit-positions to shift (N). Valid range is 0 to 32.
-
-\return Returns 0 for success or -1 for error.
-*/
-int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
-{
-	unsigned int i, istart;
-	unsigned char *cursrc1, *curdest;
-	unsigned int *icursrc1, *icurdest;
-	unsigned int result;
-
-	/* Validate input parameters */
-	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
-	if (length == 0)
-		return(0);
-
-	if (N > 32) {
-		return (-1);
-	}
-
-	/* Special case: N==0 */
-	if (N == 0) {
-		memcpy(Src1, Dest, length);
-		return (0); 
-	}
-
-	/* Setup to process whole image */
-	istart = 0;
-	cursrc1 = Src1;
-	curdest = Dest;
-
-	/* Routine to process image */
-	icursrc1=(unsigned int *)cursrc1;
-	icurdest=(unsigned int *)curdest;
-	for (i = istart; i < length; i += 4) {
-		if ((i+4)<length) {
-			result = ((unsigned int)*icursrc1 >> N);
-			*icurdest = result;
+	for (i = istart; i < length; i += bpp) {
+		if ((i + bpp) < length) {
+			result = 0;
+			for (j = bpp; j >= 0; j--) {
+				result |= (unsigned int) ((cursrc1[i + j] << (sizeof(unsigned int) * j)));
+			}
+			/* Do the actual uint shift */
+			result = result >> N;
+			/* Pass the shifted value to each byte */
+			for (j = 0; j < bpp; j++) {
+				curdest[i + j] = (result >> bpp) & 0xFF;
+			}
 		}
-		/* Advance pointers */
-		icursrc1++;
-		icurdest++;
 	}
 
 	return (0);
@@ -908,10 +892,10 @@ int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsi
 int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
 {
 	unsigned int i, istart;
-	int iC;
 	unsigned char *cursrc1;
 	unsigned char *curdest;
 	int result;
+	float tmp, fSrc1, fC;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
@@ -931,15 +915,13 @@ int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned
 	curdest = Dest;
 
 	/* Routine to process image */
-	iC = (int) C;
+	fC = C / 255.0f;
 	for (i = istart; i < length; i++) {
-		result = (int) *cursrc1 * iC;
-		if (result > 255)
-			result = 255;
-		*curdest = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		curdest++;
+		fSrc1 = cursrc1[i] / 255.0f;
+		tmp = fSrc1 * fC;
+		if (tmp > 1.0f)
+			tmp = 1.0f;
+		curdest[i] = (unsigned char) (tmp * 255);
 	}
 
 	return (0);
@@ -960,10 +942,10 @@ int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *D
 										   unsigned char C)
 {
 	unsigned int i, istart;
-	int iC;
 	unsigned char *cursrc1;
 	unsigned char *curdest;
 	int result;
+	float tmp, fSrc1, fC;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
@@ -986,17 +968,65 @@ int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *D
 	istart = 0;
 	cursrc1 = Src1;
 	curdest = Dest;
+	
+	/* Routine to process image */
+	fC = C / 255.0f;
+	for (i = istart; i < length; i++) {
+		fSrc1 = (cursrc1[i] >> N) / 255.0f;
+		tmp = fSrc1 * fC;
+		if (tmp > 1.0f)
+			tmp = 1.0f;
+		curdest[i] = (unsigned char) (tmp * 255);
+	}
+
+	return (0);
+}
+
+/*!
+\brief Filter using ShiftRight: D = saturation0(S >> N)
+
+\param Src1 Pointer to the start of the source byte array (S).
+\param Dest Pointer to the start of the destination byte array (D).
+\param length The number of bytes in the source arrays.
+\param N Number of bit-positions to shift (N). Valid range is 0 to 8.
+
+\return Returns 0 for success or -1 for error.
+*/
+int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
+{
+	unsigned int i, istart;
+	unsigned char *cursrc1, *curdest;
+	int result;
+
+	/* Validate input parameters */
+	if ((Src1 == NULL) || (Dest == NULL))
+		return(-1);
+	if (length == 0)
+		return(0);
+
+	/* Check shift */
+	if (N > 8) {
+		return (-1);
+	}
+
+	/* Special case: N==0 */
+	if (N == 0) {
+		memcpy(Src1, Dest, length);
+		return (0); 
+	}
+
+	/* Setup to process whole image */
+	istart = 0;
+	cursrc1 = Src1;
+	curdest = Dest;
 
 	/* Routine to process image */
-	iC = (int) C;
 	for (i = istart; i < length; i++) {
-		result = (int) (*cursrc1 >> N) * iC;
-		if (result > 255)
-			result = 255;
-		*curdest = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		curdest++;
+		result = ((int) cursrc1[i]) >> N;
+		if (result < 0) {
+			result = 0;
+		}
+		curdest[i] = (unsigned char) result;
 	}
 
 	return (0);
@@ -1014,7 +1044,6 @@ int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *D
 */
 int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
 {
-	static unsigned char Mask[8] = { 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE };
 	unsigned int i, istart;
 	unsigned char *cursrc1, *curdest;
 	int result;
@@ -1062,9 +1091,10 @@ int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsig
 
 \return Returns 0 for success or -1 for error.
 */
-int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
+int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned char N)
 {
 	unsigned int i, istart;
+	int j;
 	unsigned char *cursrc1, *curdest;
 	unsigned int *icursrc1, *icurdest;
 	unsigned int result;
@@ -1091,16 +1121,19 @@ int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsig
 	curdest = Dest;
 
 	/* Routine to process image */
-	icursrc1=(unsigned int *)cursrc1;
-	icurdest=(unsigned int *)curdest;
-	for (i = istart; i < length; i += 4) {
-		if ((i+4)<length) {
-			result = ((unsigned int)*icursrc1 << N);
-			*icurdest = result;
+	for (i = istart; i < length; i += bpp) {
+		if ((i + bpp) < length) {
+			result = 0;
+			for (j = bpp; j >= 0; j--) {
+				result |= (int) ((cursrc1[i + j] << (sizeof(unsigned int) * j)));
+			}
+			/* Do the actual uint shift */
+			result = result << N;
+			/* Pass the shifted value to each byte position */
+			for (j = 0; j < bpp; j++) {
+				curdest[i + j] = (result >> bpp) & 0xFF;
+			}
 		}
-		/* Advance pointers */
-		icursrc1++;
-		icurdest++;
 	}
 
 	return (0);
@@ -1145,13 +1178,11 @@ int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned 
 
 	/* Routine to process image */
 	for (i = istart; i < length; i++) {
-		result = (int) *cursrc1 << N;
-		if (result > 255)
+		result = ((int) cursrc1[i]) << N;
+		if (result > 255) {
 			result = 255;
-		*curdest = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		curdest++;
+		}
+		curdest[i] = (unsigned char) result;
 	}
 
 	return (0);
@@ -1272,8 +1303,8 @@ int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsi
 	unsigned int i, istart;
 	unsigned char *cursrc;
 	unsigned char *curdest;
-	int dN, dC, factor;
-	int result;
+	float dN, dC, factor, fCMin, fCMax;
+	float fNMin, fNMax, fSrc1, tmp;
 
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL))
@@ -1287,19 +1318,22 @@ int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsi
 	curdest = Dest;
 
 	/* Routine to process image */
-	dC = Cmax - Cmin;
+	fCMin = Cmin / 255.0f;
+	fCMax = Cmax / 255.0f;
+	fNMin = Nmin / 255.0f;
+	fNMax = Nmax / 255.0f;
+
+	dC = fCMax - fCMin;
 	if (dC == 0)
 		return (0);
-	dN = Nmax - Nmin;
+	dN = fNMax - fNMin;
 	factor = dN / dC;
 	for (i = istart; i < length; i++) {
-		result = factor * ((int) (*cursrc) - Cmin) + Nmin;
-		if (result > 255)
-			result = 255;
-		*curdest = (unsigned char) result;
-		/* Advance pointers */
-		cursrc++;
-		curdest++;
+		fSrc1 = cursrc[i] / 255.0f;
+		tmp = (factor * (fSrc1 - fCMin)) + fNMin;
+		if (tmp > 1.0f)
+			tmp = 1.0f;
+		curdest[i] = (unsigned char) (tmp * 255);
 	}
 
 	return (0);
