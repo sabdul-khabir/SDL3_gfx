@@ -103,7 +103,7 @@ int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char 
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
-	int result;
+	float tmp, fSrc1, fSrc2;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
@@ -119,12 +119,10 @@ int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char 
 
 	/* Routine to process image */
 	for (i = istart; i < length; i++) {
-		result = (int) *cursrc1 / 2 + (int) *cursrc2 / 2;
-		*curdst = (unsigned char) result;
-		/* Advance pointers */
-		cursrc1++;
-		cursrc2++;
-		curdst++;
+		fSrc1 = cursrc1[i] / 255.0f;
+		fSrc2 = cursrc2[i] / 255.0f;
+		tmp = fSrc1 / 2 + fSrc2 / 2;
+		curdst[i] = (unsigned char) (tmp * 255) ;
 	}
 
 	return (0);
