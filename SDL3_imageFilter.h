@@ -74,8 +74,8 @@ extern "C" {
 	//  SDL_imageFilterMult: D = saturation(S1 * S2)
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
-	//  SDL_imageFilterMultNor: D = S1 * S2 unbound
-	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultNor(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
+	//  SDL_imageFilterMultUnbound: D = S1 * S2 unbound
+	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultUnbound(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);
 
 	//  SDL_imageFilterMultInv: D = 255 - ((255 - S1) * (255 - S2))
 	SDL3_IMAGEFILTER_SCOPE int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length);

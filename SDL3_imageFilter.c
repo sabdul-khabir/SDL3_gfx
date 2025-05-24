@@ -247,7 +247,7 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 }
 
 /*!
-\brief Filter using MultNor: D = S1 * S2
+\brief Filter using MultUnbound: D = S1 * S2 - No saturation
 
 \param Src1 Pointer to the start of the first source byte array (S1).
 \param Src2 Pointer to the start of the second source byte array (S2).
@@ -256,7 +256,7 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 
 \return Returns 0 for success or -1 for error.
 */
-int SDL_imageFilterMultNor(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+int SDL_imageFilterMultUnbound(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart, tmp;
 	unsigned char *cursrc1, *cursrc2, *curdst;

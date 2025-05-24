@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
 			FUNC(Mean),
 			FUNC(Sub),
 			FUNC(Mult),
-			FUNC(MultNor),
+			FUNC(MultUnbound),
 			FUNC(MultInv),
 			FUNC(MultDivby2),
 			FUNC(MultDivby4),
