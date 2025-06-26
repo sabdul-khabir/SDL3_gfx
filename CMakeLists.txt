@@ -91,13 +91,13 @@ target_include_directories(${PROJECT_NAME}_Static PUBLIC
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   find_library(SDL3_LIB libSDL3.a)
 else()
-  find_library(SDL3_LIB SDL3)
+  find_package(SDL3 REQUIRED)
 endif()
 
 # Specify libraries directories that we will link with SDL3_gfx.
 # Static libraries don't need linking.
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
-  target_link_libraries(${PROJECT_NAME}_Shared PUBLIC ${SDL3_LIB})
+  target_link_libraries(${PROJECT_NAME}_Shared PRIVATE SDL3::SDL3)
 endif()
 
 # copy to default locations
