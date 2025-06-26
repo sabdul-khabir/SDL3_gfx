@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.16.0)
 # Set the project name
 project(SDL3_gfx LANGUAGES C VERSION "1.0.1")
 set(SDL_REQUIRED_VERSION 3.2.0)
-string(REPLACE "." ";" SO_VERSION_COMPONENTS "${CMAKE_PROJECT_VERSION}")
+string(REPLACE "." ";" SO_VERSION_COMPONENTS "${PROJECT_VERSION}")
 list(GET SO_VERSION_COMPONENTS 0 SO_VERSION_MAJOR)
 
 ################################################################################
