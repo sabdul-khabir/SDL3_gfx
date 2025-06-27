@@ -52,10 +52,6 @@ if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
 endif()
 add_library(${PROJECT_NAME}_Static STATIC ${ALL_FILES})
 
-add_library(${PROJECT_NAME} ${ALL_FILES})
-
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 # Set 3 properties on the static target
 set_target_properties(
     ${PROJECT_NAME}_Static PROPERTIES
