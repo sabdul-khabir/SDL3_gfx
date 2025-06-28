@@ -76,13 +76,16 @@ endif()
 if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   target_include_directories(${PROJECT_NAME}_Shared PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
+    ${CMAKE_CURRENT_SOURCE_DIR}
   )
 endif()
 
 # Add the include directories of standard SDL3 for static library.
 target_include_directories(${PROJECT_NAME}_Static PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
 ################################################################################
 # Dependencies
 ################################################################################
