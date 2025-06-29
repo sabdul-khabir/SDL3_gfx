@@ -77,6 +77,7 @@ if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   target_include_directories(${PROJECT_NAME}_Shared PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${SDL3_INCLUDE_DIR}
   )
 endif()
 
@@ -84,6 +85,7 @@ endif()
 target_include_directories(${PROJECT_NAME}_Static PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${SDL3_INCLUDE_DIR}
 )
 
 ################################################################################
