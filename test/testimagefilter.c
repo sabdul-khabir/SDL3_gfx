@@ -150,7 +150,8 @@ int main(int argc, char *argv[])
 			FUNC(Mean),
 			FUNC(Sub),
 			FUNC(Mult),
-			FUNC(MultNor),
+			FUNC(MultUnbound),
+			FUNC(MultInv),
 			FUNC(MultDivby2),
 			FUNC(MultDivby4),
 			FUNC(Div),
@@ -205,12 +206,10 @@ int main(int argc, char *argv[])
 			FUNC(AddByte,                3),
 			FUNC(AddByteToHalf,          3),
 			FUNC(SubByte,                3),
-			FUNC(ShiftRight,             1),
-			FUNC(ShiftRightUint,         4),
+			FUNC(ShiftRight,             3),
 			FUNC(MultByByte,             3),
 			FUNC(ShiftLeftByte,          3),
 			FUNC(ShiftLeft,              3),
-			FUNC(ShiftLeftUint,          4),
 			FUNC(BinarizeUsingThreshold, 9),
 		};
 
@@ -232,7 +231,43 @@ int main(int argc, char *argv[])
 			SDL_Log(" Speed test (%d x %dk byte array): %lums\n", i, size/1024, SDL_GetTicks() - start);
 			print_line();
 		}
-    }
+	}
+
+	/* fourth batch, all that use one unsigned int (bpp) and an additional N constant */
+	{
+#undef FUNC
+#define FUNC(f, bpp, n) { #f, SDL_imageFilter ## f, bpp, n }
+		struct func {
+			char* name;
+			int (*f)(unsigned char*, unsigned char*, unsigned int, unsigned int, unsigned char);
+			unsigned int arg1;
+			unsigned char arg2;
+		};
+
+		struct func funcs[] = {
+			FUNC(ShiftRightUint, 3, 4),
+			FUNC(ShiftLeftUint,  3, 4),
+		};
+
+		int k;
+		for (k = 0; k < sizeof(funcs)/sizeof(struct func); k++) {
+			Uint64 start;
+			int i;
+			char call[1024];
+			SDL_snprintf(call, 1024, "%s(%d, %u)", funcs[k].name, funcs[k].arg1, funcs[k].arg2);
+			setup_src(src1, src2);
+
+			funcs[k].f(src1, dstc, SRC_SIZE, funcs[k].arg1, funcs[k].arg2);
+			print_result(call, src1, NULL, dstc);
+
+			start = SDL_GetTicks();
+			for (i = 0; i < 50; i++) {
+				funcs[k].f(t1, d, size, funcs[k].arg1, funcs[k].arg2);
+			}
+			SDL_Log(" Speed test (%d x %dk byte array): %lums\n", i, size/1024, SDL_GetTicks() - start);
+			print_line();
+		}
+	}
 
 	/* Fourth batch, ones that use two constants*/
 	{
