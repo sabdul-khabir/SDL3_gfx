@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.16.0)
 # Set the project name
 project(SDL3_gfx LANGUAGES C VERSION "1.0.1")
 set(SDL_REQUIRED_VERSION 3.2.0)
-string(REPLACE "." ";" SO_VERSION_COMPONENTS "${CMAKE_PROJECT_VERSION}")
+string(REPLACE "." ";" SO_VERSION_COMPONENTS "${PROJECT_VERSION}")
 list(GET SO_VERSION_COMPONENTS 0 SO_VERSION_MAJOR)
 
 ################################################################################
@@ -76,13 +76,18 @@ endif()
 if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
   target_include_directories(${PROJECT_NAME}_Shared PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${SDL3_INCLUDE_DIR}
   )
 endif()
 
 # Add the include directories of standard SDL3 for static library.
 target_include_directories(${PROJECT_NAME}_Static PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../SDL/include"
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${SDL3_INCLUDE_DIR}
 )
+
 ################################################################################
 # Dependencies
 ################################################################################
@@ -91,13 +96,13 @@ target_include_directories(${PROJECT_NAME}_Static PUBLIC
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   find_library(SDL3_LIB libSDL3.a)
 else()
-  find_library(SDL3_LIB SDL3)
+  find_package(SDL3 REQUIRED)
 endif()
 
 # Specify libraries directories that we will link with SDL3_gfx.
 # Static libraries don't need linking.
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
-  target_link_libraries(${PROJECT_NAME}_Shared PUBLIC ${SDL3_LIB})
+  target_link_libraries(${PROJECT_NAME}_Shared PRIVATE SDL3::SDL3)
 endif()
 
 # copy to default locations
