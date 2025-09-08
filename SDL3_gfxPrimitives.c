@@ -47,7 +47,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 \returns Returns true on success, false on failure.
 */
-bool pixel(SDL_Renderer *renderer, Sint16 x, Sint16 y)
+bool pixel(SDL_Renderer *renderer, float x, float y)
 {
 	return SDL_RenderPoint(renderer, x, y);
 }
@@ -62,7 +62,7 @@ bool pixel(SDL_Renderer *renderer, Sint16 x, Sint16 y)
 
 \returns Returns true on success, false on failure.
 */
-bool pixelColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint32 color)
+bool pixelColor(SDL_Renderer * renderer, float x, float y, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return pixelRGBA(renderer, x, y, c[0], c[1], c[2], c[3]);
@@ -81,7 +81,7 @@ bool pixelColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint32 color)
 
 \returns Returns true on success, false on failure.
 */
-bool pixelRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool pixelRGBA(SDL_Renderer * renderer, float x, float y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result = true;
 	result &= SDL_SetRenderDrawBlendMode(renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
@@ -104,12 +104,12 @@ bool pixelRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Ui
 
 \returns Returns true on success, false on failure.
 */
-bool pixelRGBAWeight(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint32 weight)
+bool pixelRGBAWeight(SDL_Renderer * renderer, float x, float y, Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int weight)
 {
 	/*
 	* Modify Alpha by weight 
 	*/
-	Uint32 ax = a;
+	unsigned int ax = a;
 	ax = ((ax * weight) >> 8);
 	if (ax > 255) {
 		a = 255;
@@ -132,7 +132,7 @@ bool pixelRGBAWeight(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint8 r, Uint8
 
 \returns Returns true on success, false on failure.
 */
-bool hline(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y)
+bool hline(SDL_Renderer * renderer, float x1, float x2, float y)
 {
 	return SDL_RenderLine(renderer, x1, y, x2, y);;
 }
@@ -149,7 +149,7 @@ bool hline(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y)
 
 \returns Returns true on success, false on failure.
 */
-bool hlineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
+bool hlineColor(SDL_Renderer * renderer, float x1, float x2, float y, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return hlineRGBA(renderer, x1, x2, y, c[0], c[1], c[2], c[3]);
@@ -169,7 +169,7 @@ bool hlineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint32 
 
 \returns Returns true on success, false on failure.
 */
-bool hlineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool hlineRGBA(SDL_Renderer * renderer, float x1, float x2, float y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result = true;
 	result &= SDL_SetRenderDrawBlendMode(renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
@@ -190,7 +190,7 @@ bool hlineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r,
 
 \returns Returns true on success, false on failure.
 */
-bool vline(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2)
+bool vline(SDL_Renderer * renderer, float x, float y1, float y2)
 {
 	return SDL_RenderLine(renderer, x, y1, x, y2);;
 }
@@ -206,7 +206,7 @@ bool vline(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2)
 
 \returns Returns true on success, false on failure.
 */
-bool vlineColor(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
+bool vlineColor(SDL_Renderer * renderer, float x, float y1, float y2, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return vlineRGBA(renderer, x, y1, y2, c[0], c[1], c[2], c[3]);
@@ -226,7 +226,7 @@ bool vlineColor(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint32 
 
 \returns Returns true on success, false on failure.
 */
-bool vlineRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool vlineRGBA(SDL_Renderer * renderer, float x, float y1, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result = true;
 	result &= SDL_SetRenderDrawBlendMode(renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
@@ -249,7 +249,7 @@ bool vlineRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint8 r,
 
 \returns Returns true on success, false on failure.
 */
-bool rectangleColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)
+bool rectangleColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return rectangleRGBA(renderer, x1, y1, x2, y2, c[0], c[1], c[2], c[3]);
@@ -270,10 +270,10 @@ bool rectangleColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Si
 
 \returns Returns true on success, false on failure.
 */
-bool rectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool rectangleRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	Sint16 tmp;
+	float tmp;
 	SDL_FRect rect;
 
 	/*
@@ -342,7 +342,7 @@ bool rectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sin
 
 \returns Returns true on success, false on failure.
 */
-bool roundedRectangleColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint32 color)
+bool roundedRectangleColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float rad, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return roundedRectangleRGBA(renderer, x1, y1, x2, y2, rad, c[0], c[1], c[2], c[3]);
@@ -364,14 +364,14 @@ bool roundedRectangleColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool roundedRectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool roundedRectangleRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	int result = 0;
-	Sint16 tmp;
-	Sint16 w, h;
-	Sint16 xx1, xx2;
-	Sint16 yy1, yy2;
-	
+	float tmp;
+	float w, h;
+	float xx1, xx2;
+	float yy1, yy2;
+
 	/*
 	* Check renderer
 	*/
@@ -487,7 +487,7 @@ bool roundedRectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 
 
 \returns Returns true on success, false on failure.
 */
-bool roundedBoxColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint32 color)
+bool roundedBoxColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float rad, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return roundedBoxRGBA(renderer, x1, y1, x2, y2, rad, c[0], c[1], c[2], c[3]);
@@ -509,21 +509,21 @@ bool roundedBoxColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, S
 
 \returns Returns true on success, false on failure.
 */
-bool roundedBoxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,
-	Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool roundedBoxRGBA(SDL_Renderer * renderer, float x1, float y1, float x2,
+	float y2, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	Sint16 w, h, r2, tmp;
-	Sint16 cx = 0;
-	Sint16 cy = rad;
-	Sint16 ocx = (Sint16) 0xffff;
-	Sint16 ocy = (Sint16) 0xffff;
-	Sint16 df = 1 - rad;
-	Sint16 d_e = 3;
-	Sint16 d_se = -2 * rad + 5;
-	Sint16 xpcx, xmcx, xpcy, xmcy;
-	Sint16 ypcy, ymcy, ypcx, ymcx;
-	Sint16 x, y, dx, dy;
+	float w, h, r2, tmp;
+	float cx = 0;
+	float cy = rad;
+	float ocx = (float) 0xffff;
+	float ocy = (float) 0xffff;
+	float df = 1 - rad;
+	float d_e = 3;
+	float d_se = -2 * rad + 5;
+	float xpcx, xmcx, xpcy, xmcy;
+	float ypcy, ymcy, ypcx, ymcx;
+	float x, y, dx, dy;
 
 	/* 
 	* Check destination renderer 
@@ -684,7 +684,7 @@ bool roundedBoxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,
 
 \returns Returns true on success, false on failure.
 */
-bool boxColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)
+bool boxColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return boxRGBA(renderer, x1, y1, x2, y2, c[0], c[1], c[2], c[3]);
@@ -705,10 +705,10 @@ bool boxColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 
 \returns Returns true on success, false on failure.
 */
-bool boxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool boxRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	Sint16 tmp;
+	float tmp;
 	SDL_FRect rect;
 
 	/*
@@ -775,7 +775,7 @@ bool boxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 
 \returns Returns true on success, false on failure.
 */
-bool line(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2)
+bool line(SDL_Renderer * renderer, float x1, float y1, float x2, float y2)
 {
 	/*
 	* Draw
@@ -795,7 +795,7 @@ bool line(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2)
 
 \returns Returns true on success, false on failure.
 */
-bool lineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)
+bool lineColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return lineRGBA(renderer, x1, y1, x2, y2, c[0], c[1], c[2], c[3]);
@@ -816,7 +816,7 @@ bool lineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 
 \returns Returns true on success, false on failure.
 */
-bool lineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool lineRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
 	* Draw
@@ -856,12 +856,12 @@ with alpha<255.
 
 \returns Returns true on success, false on failure.
 */
-int _aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int draw_endpoint)
+bool _aalineRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool draw_endpoint)
 {
-	Sint32 xx0, yy0, xx1, yy1;
+	float xx0, yy0, xx1, yy1;
 	bool result;
-	Uint32 intshift, erracc, erradj;
-	Uint32 erracctmp, wgt, wgtcompmask;
+	unsigned int intshift, erracc, erradj;
+	unsigned int erracctmp, wgt;
 	int dx, dy, tmp, xdir, y0p1, x0pxdir;
 
 	/*
@@ -955,12 +955,7 @@ int _aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16
 	intshift = 32 - AAbits;
 
 	/*
-	* Mask used to flip all bits in an intensity weighting 
-	*/
-	wgtcompmask = AAlevels - 1;
-
-	/*
-	* Draw the initial pixel in the foreground color 
+	* Draw the initial pixel in the foreground color
 	*/
 	result &= pixelRGBA(renderer, x1, y1, r, g, b, a);
 
@@ -1070,7 +1065,7 @@ int _aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool aalineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color)
+bool aalineColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _aalineRGBA(renderer, x1, y1, x2, y2, c[0], c[1], c[2], c[3], 1);
@@ -1091,9 +1086,9 @@ bool aalineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint1
 
 \returns Returns true on success, false on failure.
 */
-bool aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool aalineRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return _aalineRGBA(renderer, x1, y1, x2, y2, r, g, b, a, 1);
+	return _aalineRGBA(renderer, x1, y1, x2, y2, r, g, b, a, true);
 }
 
 /* ----- Circle */
@@ -1109,7 +1104,7 @@ bool aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool circleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
+bool circleColor(SDL_Renderer * renderer, float x, float y, float rad, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return ellipseRGBA(renderer, x, y, rad, rad, c[0], c[1], c[2], c[3]);
@@ -1129,7 +1124,7 @@ bool circleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint32
 
 \returns Returns true on success, false on failure.
 */
-bool circleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool circleRGBA(SDL_Renderer * renderer, float x, float y, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return ellipseRGBA(renderer, x, y, rad, rad, r, g, b, a);
 }
@@ -1149,7 +1144,7 @@ bool circleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r
 
 \returns Returns true on success, false on failure.
 */
-bool arcColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint32 color)
+bool arcColor(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return arcRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3]);
@@ -1172,16 +1167,16 @@ bool arcColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 st
 \returns Returns true on success, false on failure.
 */
 /* TODO: rewrite algorithm; arc endpoints are not always drawn */
-bool arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool arcRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	Sint16 cx = 0;
-	Sint16 cy = rad;
-	Sint16 df = 1 - rad;
-	Sint16 d_e = 3;
-	Sint16 d_se = -2 * rad + 5;
-	Sint16 xpcx, xmcx, xpcy, xmcy;
-	Sint16 ypcy, ymcy, ypcx, ymcx;
+	float cx = 0;
+	float cy = rad;
+	float df = 1 - rad;
+	float d_e = 3;
+	float d_se = -2 * rad + 5;
+	float xpcx, xmcx, xpcy, xmcy;
+	float ypcy, ymcy, ypcx, ymcx;
 	Uint8 drawoct;
 	int startoct, endoct, oct, stopval_start = 0, stopval_end = 0;
 	double dstart, dend, temp = 0.;
@@ -1261,6 +1256,8 @@ bool arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 sta
 			case 7:
 				temp = -sin(dstart * M_PI / 180.);
 				break;
+			default:
+				break;
 			}
 			temp *= rad;
 			stopval_start = (int)temp;
@@ -1294,6 +1291,8 @@ bool arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 sta
 			case 4:
 			case 7:
 				temp = -sin(dend * M_PI / 180);
+				break;
+			default:
 				break;
 			}
 			temp *= rad;
@@ -1407,7 +1406,7 @@ bool arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 sta
 
 \returns Returns true on success, false on failure.
 */
-bool aacircleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
+bool aacircleColor(SDL_Renderer * renderer, float x, float y, float rad, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return aaellipseRGBA(renderer, x, y, rad, rad, c[0], c[1], c[2], c[3]);
@@ -1427,7 +1426,7 @@ bool aacircleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint
 
 \returns Returns true on success, false on failure.
 */
-bool aacircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool aacircleRGBA(SDL_Renderer * renderer, float x, float y, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
 	* Draw 
@@ -1449,11 +1448,11 @@ bool aacircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8
 
 \returns Returns true on success, false on failure.
 */
-int _drawQuadrants(SDL_Renderer * renderer,  Sint16 x, Sint16 y, Sint16 dx, Sint16 dy, Sint32 f)
+bool _drawQuadrants(SDL_Renderer * renderer,  float x, float y, float dx, float dy, bool f)
 {
 	bool result = true;
-	Sint16 xpdx, xmdx;
-	Sint16 ypdy, ymdy;
+	float xpdx, xmdx;
+	float ypdy, ymdy;
 
 	if (dx == 0) {
 		if (dy == 0) {
@@ -1504,16 +1503,16 @@ int _drawQuadrants(SDL_Renderer * renderer,  Sint16 x, Sint16 y, Sint16 dx, Sint
 \returns Returns true on success, false on failure.
 */
 #define DEFAULT_ELLIPSE_OVERSCAN	4
-bool _ellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a, Sint32 f)
+bool _ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool f)
 {
 	bool result;
-	Sint32 rxi, ryi;
-	Sint32 rx2, ry2, rx22, ry22; 
-    Sint32 error;
-    Sint32 curX, curY, curXp1, curYm1;
-	Sint32 scrX, scrY, oldX, oldY;
-    Sint32 deltaX, deltaY;
-	Sint32 ellipseOverscan;
+	float rxi, ryi;
+	float rx2, ry2, rx22, ry22;
+    int error;
+    float curX, curY, curXp1, curYm1;
+	int scrX, scrY, oldX, oldY;
+    int deltaX, deltaY;
+	int ellipseOverscan;
 
 	/*
 	* Sanity check radii 
@@ -1666,7 +1665,7 @@ bool _ellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool ellipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)
+bool ellipseColor(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _ellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3], 0);
@@ -1687,7 +1686,7 @@ bool ellipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool ellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _ellipseRGBA(renderer, x, y, rx, ry, r, g, b, a, 0);
 }
@@ -1705,7 +1704,7 @@ bool ellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 
 
 \returns Returns true on success, false on failure.
 */
-bool filledCircleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
+bool filledCircleColor(SDL_Renderer * renderer, float x, float y, float rad, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return filledEllipseRGBA(renderer, x, y, rad, rad, c[0], c[1], c[2], c[3]);
@@ -1725,7 +1724,7 @@ bool filledCircleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, 
 
 \returns Returns true on success, false on failure.
 */
-bool filledCircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool filledCircleRGBA(SDL_Renderer * renderer, float x, float y, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _ellipseRGBA(renderer, x, y, rad, rad, r, g ,b, a, 1);
 }
@@ -1785,7 +1784,7 @@ __declspec(naked) long int
 
 \returns Returns true on success, false on failure.
 */
-bool aaellipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)
+bool aaellipseColor(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return aaellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3]);
@@ -1806,12 +1805,12 @@ bool aaellipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint
 
 \returns Returns true on success, false on failure.
 */
-bool aaellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool aaellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
 	int i;
 	int a2, b2, ds, dt, dxt, t, s, d;
-	Sint16 xp, yp, xs, ys, dyt, od, xx, yy, xc2, yc2;
+	float xp, yp, xs, ys, dyt, od, xx, yy, xc2, yc2;
 	float cp;
 	double sab;
 	Uint8 weight, iweight;
@@ -1849,8 +1848,8 @@ bool aaellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint1
 	yc2 = 2 * y;
 
 	sab = sqrt((double)(a2 + b2));
-	od = (Sint16)lrint(sab*0.01) + 1; /* introduce some overdraw */
-	dxt = (Sint16)lrint((double)a2 / sab) + od;
+	od = (float)lrint(sab*0.01) + 1; /* introduce some overdraw */
+	dxt = (float)lrint((double)a2 / sab) + od;
 
 	t = 0;
 	s = -2 * a2 * ry;
@@ -1926,7 +1925,7 @@ bool aaellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint1
 	}
 
 	/* Replaces original approximation code dyt = abs(yp - yc); */
-	dyt = (Sint16)lrint((double)b2 / sab ) + od;    
+	dyt = (float)lrint((double)b2 / sab ) + od;
 
 	for (i = 1; i <= dyt; i++) {
 		yp++;
@@ -2001,7 +2000,7 @@ bool aaellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint1
 
 \returns Returns true on success, false on failure.
 */
-bool filledEllipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color)
+bool filledEllipseColor(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _ellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3], 1);
@@ -2022,7 +2021,7 @@ bool filledEllipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, 
 
 \returns Returns true on success, false on failure.
 */
-bool filledEllipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool filledEllipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _ellipseRGBA(renderer, x, y, rx, ry, r, g, b, a, 1);
 }
@@ -2049,14 +2048,14 @@ Note: Determines vertex array and uses polygon or filledPolygon drawing routines
 \returns Returns true on success, false on failure.
 */
 /* TODO: rewrite algorithm; pie is not always accurate */
-bool _pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end,  Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint8 filled)
+bool _pieRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, int end,  Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled)
 {
 	bool result;
 	double angle, start_angle, end_angle;
 	double deltaAngle;
 	double dr;
 	int numpoints, i;
-	Sint16 *vx, *vy;
+	float *vx, *vy;
 
 	/*
 	* Sanity check radii 
@@ -2100,7 +2099,7 @@ bool _pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 st
 	}
 
 	/* Allocate combined vertex array */
-	vx = vy = (Sint16 *) malloc(2 * sizeof(Uint16) * numpoints);
+	vx = vy = (float *) malloc(2 * sizeof(float) * numpoints);
 	if (vx == NULL) {
 		return (false);
 	}
@@ -2164,8 +2163,8 @@ bool _pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 st
 
 \returns Returns true on success, false on failure.
 */
-bool pieColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, 
-	Sint16 start, Sint16 end, Uint32 color) 
+bool pieColor(SDL_Renderer * renderer, float x, float y, float rad,
+	int start, int end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], 0);
@@ -2187,8 +2186,8 @@ bool pieColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,
 
 \returns Returns true on success, false on failure.
 */
-bool pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,
-	Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool pieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
+	int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, 0);
 }
@@ -2206,7 +2205,7 @@ bool pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,
 
 \returns Returns true on success, false on failure.
 */
-bool filledPieColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint32 color)
+bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], 1);
@@ -2228,8 +2227,8 @@ bool filledPieColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sin
 
 \returns Returns true on success, false on failure.
 */
-bool filledPieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,
-	Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool filledPieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
+	int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, 1);
 }
@@ -2252,10 +2251,10 @@ Note: Creates vertex array and uses polygon routine to render.
 
 \returns Returns true on success, false on failure.
 */
-bool trigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color)
+bool trigonColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float x3, float y3, Uint32 color)
 {
-	Sint16 vx[3]; 
-	Sint16 vy[3];
+	float vx[3];
+	float vy[3];
 
 	vx[0]=x1;
 	vx[1]=x2;
@@ -2284,11 +2283,11 @@ bool trigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint1
 
 \returns Returns true on success, false on failure.
 */
-bool trigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,
+bool trigonRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float x3, float y3,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	Sint16 vx[3]; 
-	Sint16 vy[3];
+	float vx[3];
+	float vy[3];
 
 	vx[0]=x1;
 	vx[1]=x2;
@@ -2318,10 +2317,10 @@ Note: Creates vertex array and uses aapolygon routine to render.
 
 \returns Returns true on success, false on failure.
 */
-bool aatrigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color)
+bool aatrigonColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float x3, float y3, Uint32 color)
 {
-	Sint16 vx[3]; 
-	Sint16 vy[3];
+	float vx[3];
+	float vy[3];
 
 	vx[0]=x1;
 	vx[1]=x2;
@@ -2350,11 +2349,11 @@ bool aatrigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sin
 
 \returns Returns true on success, false on failure.
 */
-bool aatrigonRGBA(SDL_Renderer * renderer,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,
+bool aatrigonRGBA(SDL_Renderer * renderer,  float x1, float y1, float x2, float y2, float x3, float y3,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	Sint16 vx[3]; 
-	Sint16 vy[3];
+	float vx[3];
+	float vy[3];
 
 	vx[0]=x1;
 	vx[1]=x2;
@@ -2384,10 +2383,10 @@ Note: Creates vertex array and uses aapolygon routine to render.
 
 \returns Returns true on success, false on failure.
 */
-bool filledTrigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color)
+bool filledTrigonColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float x3, float y3, Uint32 color)
 {
-	Sint16 vx[3]; 
-	Sint16 vy[3];
+	float vx[3];
+	float vy[3];
 
 	vx[0]=x1;
 	vx[1]=x2;
@@ -2418,11 +2417,11 @@ Note: Creates vertex array and uses aapolygon routine to render.
 
 \returns Returns true on success, false on failure.
 */
-bool filledTrigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,
+bool filledTrigonRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float x3, float y3,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	Sint16 vx[3]; 
-	Sint16 vy[3];
+	float vx[3];
+	float vy[3];
 
 	vx[0]=x1;
 	vx[1]=x2;
@@ -2447,7 +2446,7 @@ bool filledTrigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, 
 
 \returns Returns true on success, false on failure.
 */
-bool polygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color)
+bool polygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return polygonRGBA(renderer, vx, vy, n, c[0], c[1], c[2], c[3]);
@@ -2463,7 +2462,7 @@ bool polygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,
 
 \returns Returns true on success, false on failure.
 */
-bool polygon(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n)
+bool polygon(SDL_Renderer * renderer, const float * vx, const float * vy, int n)
 {
 	/*
 	* Draw 
@@ -2529,13 +2528,13 @@ bool polygon(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int 
 
 \returns Returns true on success, false on failure.
 */
-bool polygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool polygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
 	* Draw 
 	*/
 	bool result;
-	const Sint16 *x1, *y1, *x2, *y2;
+	const float *x1, *y1, *x2, *y2;
 
 	/*
 	* Vertex array NULL check 
@@ -2590,7 +2589,7 @@ bool polygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, 
 
 \returns Returns true on success, false on failure.
 */
-bool aapolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color)
+bool aapolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return aapolygonRGBA(renderer, vx, vy, n, c[0], c[1], c[2], c[3]);
@@ -2610,11 +2609,11 @@ bool aapolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * v
 
 \returns Returns true on success, false on failure.
 */
-bool aapolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool aapolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
 	int i;
-	const Sint16 *x1, *y1, *x2, *y2;
+	const float *x1, *y1, *x2, *y2;
 
 	/*
 	* Vertex array NULL check 
@@ -2685,7 +2684,7 @@ static int *gfxPrimitivesPolyIntsGlobal = NULL;
 
 Note: Used for non-multithreaded (default) operation of filledPolygonMT.
 */
-static int gfxPrimitivesPolyAllocatedGlobal = 0;
+static bool gfxPrimitivesPolyAllocatedGlobal = false;
 
 /*!
 \brief Draw filled polygon with alpha blending (multi-threaded capable).
@@ -2705,7 +2704,7 @@ Note: The last two parameters are optional; but are required for multithreaded o
 
 \returns Returns true on success, false on failure.
 */
-int filledPolygonRGBAMT(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int **polyInts, int *polyAllocated)
+bool filledPolygonRGBAMT(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int **polyInts, bool *polyAllocated)
 {
 	bool result;
 	int i;
@@ -2717,7 +2716,7 @@ int filledPolygonRGBAMT(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 	int ints;
 	int *gfxPrimitivesPolyInts = NULL;
 	int *gfxPrimitivesPolyIntsNew = NULL;
-	int gfxPrimitivesPolyAllocated = 0;
+	bool gfxPrimitivesPolyAllocated = false;
 
 	/*
 	* Vertex array NULL check 
@@ -2792,8 +2791,8 @@ int filledPolygonRGBAMT(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 	/*
 	* Check temp array again
 	*/
-	if (gfxPrimitivesPolyInts==NULL) {        
-		return(false);
+	if (gfxPrimitivesPolyInts==NULL) {
+		return false;
 	}
 
 	/*
@@ -2846,8 +2845,8 @@ int filledPolygonRGBAMT(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 		* Set color 
 		*/
 		result = true;
-	   result &= SDL_SetRenderDrawBlendMode(renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
-		result &= SDL_SetRenderDrawColor(renderer, r, g, b, a);	
+	    result &= SDL_SetRenderDrawBlendMode(renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+		result &= SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
 		for (i = 0; (i < ints); i += 2) {
 			xa = gfxPrimitivesPolyInts[i] + 1;
@@ -2858,7 +2857,7 @@ int filledPolygonRGBAMT(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 		}
 	}
 
-	return (result);
+	return result;
 }
 
 /*!
@@ -2872,7 +2871,7 @@ int filledPolygonRGBAMT(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool filledPolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color)
+bool filledPolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return filledPolygonRGBAMT(renderer, vx, vy, n, c[0], c[1], c[2], c[3], NULL, NULL);
@@ -2892,7 +2891,7 @@ bool filledPolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 
 \returns Returns true on success, false on failure.
 */
-bool filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool filledPolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return filledPolygonRGBAMT(renderer, vx, vy, n, r, g, b, a, NULL, NULL);
 }
@@ -2914,10 +2913,10 @@ bool filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 
 
 \returns Returns true on success, false on failure.
 */
-bool _HLineTextured(SDL_Renderer *renderer, Sint16 x1, Sint16 x2, Sint16 y, SDL_Texture *texture, int texture_w, int texture_h, int texture_dx, int texture_dy)
+bool _HLineTextured(SDL_Renderer *renderer, float x1, float x2, float y, SDL_Texture *texture, int texture_w, int texture_h, int texture_dx, int texture_dy)
 {
-	Sint16 w;
-	Sint16 xtmp;
+	float w;
+	float xtmp;
 	bool result = true;
 	int texture_x_walker;    
 	int texture_y_start;    
@@ -2941,12 +2940,12 @@ bool _HLineTextured(SDL_Renderer *renderer, Sint16 x1, Sint16 x2, Sint16 y, SDL_
 	/*
 	* Determine where in the texture we start drawing
 	*/
-	texture_x_walker =   (x1 - texture_dx)  % texture_w;
+	texture_x_walker = ((int)x1 - texture_dx)  % texture_w;
 	if (texture_x_walker < 0){
 		texture_x_walker = texture_w + texture_x_walker ;
 	}
 
-	texture_y_start = (y + texture_dy) % texture_h;
+	texture_y_start = ((int)y + texture_dy) % texture_h;
 	if (texture_y_start < 0){
 		texture_y_start = texture_h + texture_y_start;
 	}
@@ -3013,8 +3012,8 @@ to the left and want the texture to apear the same you need to increase the text
 
 \returns Returns true on success, false on failure.
 */
-bool texturedPolygonMT(SDL_Renderer *renderer, const Sint16 * vx, const Sint16 * vy, int n, 
-	SDL_Surface * texture, int texture_dx, int texture_dy, int **polyInts, int *polyAllocated)
+bool texturedPolygonMT(SDL_Renderer *renderer, const float * vx, const float * vy, int n,
+	SDL_Surface * texture, int texture_dx, int texture_dy, int **polyInts, bool *polyAllocated)
 {
 	bool result;
 	int i;
@@ -3089,7 +3088,7 @@ bool texturedPolygonMT(SDL_Renderer *renderer, const Sint16 * vx, const Sint16 *
 	* Check temp array again
 	*/
 	if (gfxPrimitivesPolyInts==NULL) {        
-		return(false);
+		return false;
 	}
 
 	/*
@@ -3165,7 +3164,7 @@ bool texturedPolygonMT(SDL_Renderer *renderer, const Sint16 * vx, const Sint16 *
 
 	SDL_DestroyTexture(textureAsTexture);
 
-	return (result);
+	return result;
 }
 
 /*!
@@ -3184,7 +3183,7 @@ to the left and want the texture to apear the same you need to increase the text
 
 \returns Returns true on success, false on failure.
 */
-bool texturedPolygon(SDL_Renderer *renderer, const Sint16 * vx, const Sint16 * vy, int n, SDL_Surface *texture, int texture_dx, int texture_dy)
+bool texturedPolygon(SDL_Renderer *renderer, const float * vx, const float * vy, int n, SDL_Surface *texture, int texture_dx, int texture_dy)
 {
 	/*
 	* Draw
@@ -3207,37 +3206,37 @@ static const unsigned char *currentFontdata = gfxPrimitivesFontdata;
 /*!
 \brief Width of the current font. Default is 8. 
 */
-static Uint32 charWidth = 8;
+static unsigned int charWidth = 8;
 
 /*!
 \brief Height of the current font. Default is 8. 
 */
-static Uint32 charHeight = 8;
+static unsigned int charHeight = 8;
 
 /*!
 \brief Width for rendering. Autocalculated.
 */
-static Uint32 charWidthLocal = 8;
+static unsigned int charWidthLocal = 8;
 
 /*!
 \brief Height for rendering. Autocalculated.
 */
-static Uint32 charHeightLocal = 8;
+static unsigned int charHeightLocal = 8;
 
 /*!
 \brief Pitch of the current font in bytes. Default is 1. 
 */
-static Uint32 charPitch = 1;
+static unsigned int charPitch = 1;
 
 /*!
 \brief Characters 90deg clockwise rotations. Default is 0. Max is 3. 
 */
-static Uint32 charRotation = 0;
+static unsigned int charRotation = 0;
 
 /*!
 \brief Character data size in bytes of the current font. Default is 8. 
 */
-static Uint32 charSize = 8;
+static unsigned int charSize = 8;
 
 /*!
 \brief Sets or resets the current global font data.
@@ -3252,7 +3251,7 @@ The font data array is organized in follows:
 \param cw Width of character in bytes. Ignored if fontdata==NULL.
 \param ch Height of character in bytes. Ignored if fontdata==NULL.
 */
-void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch)
+void gfxPrimitivesSetFont(const void *fontdata, unsigned int cw, unsigned int ch)
 {
 	int i;
 
@@ -3298,7 +3297,7 @@ Changing the rotation, will reset the character cache.
 
 \param rotation Number of 90deg clockwise steps to rotate
 */
-void gfxPrimitivesSetFontRotation(Uint32 rotation)
+void gfxPrimitivesSetFontRotation(unsigned int rotation)
 {
 	int i;
 
@@ -3344,20 +3343,20 @@ void gfxPrimitivesSetFontRotation(Uint32 rotation)
 
 \returns Returns true on success, false on failure.
 */
-bool characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool characterRGBA(SDL_Renderer *renderer, float x, float y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	SDL_FRect srect;
 	SDL_FRect drect;
 	bool result;
-	Uint32 ix, iy;
+	unsigned int ix, iy;
 	const unsigned char *charpos;
 	Uint8 *curpos;
 	Uint8 patt, mask;
 	Uint8 *linepos;
-	Uint32 pitch;
+	unsigned int pitch;
 	SDL_Surface *character;
 	SDL_Surface *rotatedCharacter;
-	Uint32 ci;
+	unsigned int ci;
 
 	/*
 	* Setup source rectangle
@@ -3409,9 +3408,9 @@ bool characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, 
 					mask = 0x80;
 				}
 				if (patt & mask) {
-					*(Uint32 *)curpos = 0xffffffff;
+					*(unsigned int *)curpos = 0xffffffff;
 				} else {
-					*(Uint32 *)curpos = 0;
+					*(unsigned int *)curpos = 0;
 				}
 				curpos += 4;
 			}
@@ -3465,7 +3464,7 @@ bool characterRGBA(SDL_Renderer *renderer, Sint16 x, Sint16 y, char c, Uint8 r, 
 
 \returns Returns true on success, false on failure.
 */
-bool characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color)
+bool characterColor(SDL_Renderer * renderer, float x, float y, char c, Uint32 color)
 {
 	Uint8 *co = (Uint8 *)&color; 
 	return characterRGBA(renderer, x, y, c, co[0], co[1], co[2], co[3]);
@@ -3486,7 +3485,7 @@ of the character width of the current global font.
 
 \returns Returns true on success, false on failure.
 */
-bool stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint32 color)
+bool stringColor(SDL_Renderer * renderer, float x, float y, const char *s, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return stringRGBA(renderer, x, y, s, c[0], c[1], c[2], c[3]);
@@ -3506,11 +3505,11 @@ bool stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uin
 
 \returns Returns true on success, false on failure.
 */
-bool stringRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool stringRGBA(SDL_Renderer * renderer, float x, float y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result = true;
-	Sint16 curx = x;
-	Sint16 cury = y;
+	float curx = x;
+	float cury = y;
 	const char *curchar = s;
 
 	while (*curchar && result) {
@@ -3606,7 +3605,7 @@ double _evaluateBezier (double *data, int ndata, double t)
 
 \returns Returns true on success, false on failure.
 */
-bool bezierColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint32 color)
+bool bezierColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, int s, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return bezierRGBA(renderer, vx, vy, n, s, c[0], c[1], c[2], c[3]);
@@ -3627,12 +3626,12 @@ bool bezierColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, 
 
 \returns Returns true on success, false on failure.
 */
-bool bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool bezierRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
 	int i;
 	double *x, *y, t, stepsize;
-	Sint16 x1, y1, x2, y2;
+	float x1, y1, x2, y2;
 
 	/*
 	* Sanity check 
@@ -3675,12 +3674,12 @@ bool bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, i
 	* Draw 
 	*/
 	t=0.0;
-	x1=(Sint16)lrint(_evaluateBezier(x,n+1,t));
-	y1=(Sint16)lrint(_evaluateBezier(y,n+1,t));
+	x1=(float)lrint(_evaluateBezier(x,n+1,t));
+	y1=(float)lrint(_evaluateBezier(y,n+1,t));
 	for (i = 0; i <= (n*s); i++) {
 		t += stepsize;
-		x2=(Sint16)_evaluateBezier(x,n,t);
-		y2=(Sint16)_evaluateBezier(y,n,t);
+		x2=(float)_evaluateBezier(x,n,t);
+		y2=(float)_evaluateBezier(y,n,t);
 		result &= line(renderer, x1, y1, x2, y2);
 		x1 = x2;
 		y1 = y2;
@@ -3707,8 +3706,8 @@ bool bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, i
 
 \returns Returns true on success, false on failure.
 */
-bool thickLineColor(SDL_Renderer *renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint32 color)
-{	
+bool thickLineColor(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, Uint8 width, Uint32 color)
+{
 	Uint8 *c = (Uint8 *)&color; 
 	return thickLineRGBA(renderer, x1, y1, x2, y2, width, c[0], c[1], c[2], c[3]);
 }
@@ -3728,13 +3727,13 @@ bool thickLineColor(SDL_Renderer *renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sin
 \param a The alpha value of the character to draw.
 
 \returns Returns true on success, false on failure.
-*/	
-bool thickLineRGBA(SDL_Renderer *renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+*/
+bool thickLineRGBA(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	int wh;
 	double dx, dy, dx1, dy1, dx2, dy2;
 	double l, wl2, nx, ny, ang, adj;
-	Sint16 px[4], py[4];
+	float px[4], py[4];
 
 	if (renderer == NULL) {
 		return false;
@@ -3770,14 +3769,14 @@ bool thickLineRGBA(SDL_Renderer *renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint
 	dy1 = (double)y1;
 	dx2 = (double)x2;
 	dy2 = (double)y2;
-	px[0] = (Sint16)(dx1 + ny);
-	px[1] = (Sint16)(dx1 - ny);
-	px[2] = (Sint16)(dx2 - ny);
-	px[3] = (Sint16)(dx2 + ny);
-	py[0] = (Sint16)(dy1 - nx);
-	py[1] = (Sint16)(dy1 + nx);
-	py[2] = (Sint16)(dy2 + nx);
-	py[3] = (Sint16)(dy2 - nx);
+	px[0] = (float)(dx1 + ny);
+	px[1] = (float)(dx1 - ny);
+	px[2] = (float)(dx2 - ny);
+	px[3] = (float)(dx2 + ny);
+	py[0] = (float)(dy1 - nx);
+	py[1] = (float)(dy1 + nx);
+	py[2] = (float)(dy2 + nx);
+	py[3] = (float)(dy2 - nx);
 
 	/* Draw polygon */
 	return filledPolygonRGBA(renderer, px, py, 4, r, g, b, a);
