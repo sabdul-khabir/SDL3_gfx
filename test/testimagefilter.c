@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 
 		struct func {
 			char* name;
-			int (*f)(unsigned char*, unsigned char*, unsigned char*, unsigned int);
+			bool (*f)(unsigned char*, unsigned char*, unsigned char*, unsigned int);
 		};
 
 		struct func funcs[] = {
@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 #define FUNC(f, c) { #f, SDL_imageFilter ## f, c }
 		struct func {
 			char* name;
-			int (*f)(unsigned char*, unsigned char*, unsigned int, unsigned char);
+			bool (*f)(unsigned char*, unsigned char*, unsigned int, unsigned char);
 			unsigned char arg;
 		};
 
@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
 #define FUNC(f, bpp, n) { #f, SDL_imageFilter ## f, bpp, n }
 		struct func {
 			char* name;
-			int (*f)(unsigned char*, unsigned char*, unsigned int, unsigned int, unsigned char);
+			bool (*f)(unsigned char*, unsigned char*, unsigned int, unsigned int, unsigned char);
 			unsigned int arg1;
 			unsigned char arg2;
 		};
@@ -275,7 +275,7 @@ int main(int argc, char *argv[])
 #define FUNC(f, c1, c2) { #f, SDL_imageFilter ## f, c1, c2 }
 		struct func {
 			char* name;
-			int (*f)(unsigned char*, unsigned char*, unsigned int, unsigned char, unsigned char);
+			bool (*f)(unsigned char*, unsigned char*, unsigned int, unsigned char, unsigned char);
 			unsigned char arg1, arg2;
 		};
 		struct func funcs[] = {
@@ -331,7 +331,7 @@ int main(int argc, char *argv[])
 #define FUNC(f, b, c) { #f, SDL_imageFilter ## f, b, c }
 		struct func {
 			char* name;
-			int (*f)(unsigned char*, unsigned char*, unsigned int, unsigned int, unsigned int);
+			bool (*f)(unsigned char*, unsigned char*, unsigned int, unsigned int, unsigned int);
 			unsigned int arg1;
 			unsigned int arg2;
 		};
