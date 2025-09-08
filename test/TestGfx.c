@@ -34,22 +34,22 @@ static SDLTest_CommonState *state;
 #define NUM_RANDOM	4096
 
 /* Coordinates */
-static Sint16 rx[NUM_RANDOM], rx[NUM_RANDOM], ry[NUM_RANDOM], ry[NUM_RANDOM];
+static float rx[NUM_RANDOM], rx[NUM_RANDOM], ry[NUM_RANDOM], ry[NUM_RANDOM];
 
 /* Triangles */
-static Sint16 tx1[NUM_RANDOM][3], tx1[NUM_RANDOM][3], ty1[NUM_RANDOM][3], ty1[NUM_RANDOM][3];
+static float tx1[NUM_RANDOM][3], tx1[NUM_RANDOM][3], ty1[NUM_RANDOM][3], ty1[NUM_RANDOM][3];
 
 /* Squares (made of 2 triangles) */
-static Sint16 sx1[NUM_RANDOM][6], sx1[NUM_RANDOM][6], sy1[NUM_RANDOM][6], sy1[NUM_RANDOM][6];
+static float sx1[NUM_RANDOM][6], sx1[NUM_RANDOM][6], sy1[NUM_RANDOM][6], sy1[NUM_RANDOM][6];
 
 /* Line widths */
-static Uint8 lw[NUM_RANDOM];
+static float lw[NUM_RANDOM];
 
 /* Radii and offsets */
-static Sint16 rr1[NUM_RANDOM], rr2[NUM_RANDOM];
+static float rr1[NUM_RANDOM], rr2[NUM_RANDOM];
 
 /* Start and stop angles */
-static Sint16 a1[NUM_RANDOM], a2[NUM_RANDOM];
+static int a1[NUM_RANDOM], a2[NUM_RANDOM];
 
 /* RGB colors and alpha */
 static char rr[NUM_RANDOM], rg[NUM_RANDOM], rb[NUM_RANDOM], ra[NUM_RANDOM];
@@ -156,7 +156,7 @@ void ClearScreen(SDL_Renderer *renderer, const char *title)
 	int x,y;
 	float stepx, stepy, fx, fy, fxy;
 	char titletext[TLEN+1];
-	Sint16 textlength;
+	int textlength;
 
 	/* Clear the screen */
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -170,7 +170,7 @@ void ClearScreen(SDL_Renderer *renderer, const char *title)
 		fy=0.0;
 		for (y=(HEIGHT-40)/2+60; y<HEIGHT; y++) {
 			fxy=1.0f-fx*fy;
-			pixelRGBA(renderer,x,y,(int)(128.0*fx*fx),(int)(128.0*fxy*fxy),(int)(128.0*fy*fy),255);
+			pixelRGBA(renderer,x,y,128.0f*fx*fx,128.0f*fxy*fxy,128.0f*fy*fy,255);
 			fy += stepy;
 		}
 		fx += stepx;
@@ -185,19 +185,19 @@ void ClearScreen(SDL_Renderer *renderer, const char *title)
 	SDL_strlcpy(titletext,"Current Primitive: ",TLEN);
 	SDL_strlcat(titletext,title,TLEN);
 	SDL_strlcat(titletext,"  -  Space to continue. ESC to Quit.",TLEN);
-	textlength = (Sint16)strlen(titletext);
+	textlength = (int)strlen(titletext);
 	stringRGBA (renderer, WIDTH/2-4*textlength,10-4,titletext,255,255,0,255);
 	SDL_strlcpy(titletext,"A=255 on Black",TLEN);
-	textlength = (Sint16)strlen(titletext);
+	textlength = (int)strlen(titletext);
 	stringRGBA (renderer, WIDTH/4-4*textlength,50-4,titletext,255,255,255,255);
 	SDL_strlcpy(titletext,"A=0-254 on Black",TLEN);
-	textlength = (Sint16)strlen(titletext);
+	textlength = (int)strlen(titletext);
 	stringRGBA (renderer, 3*WIDTH/4-4*textlength,50-4,titletext,255,255,255,255);
 	SDL_strlcpy(titletext,"A=255, Color Test",TLEN);
-	textlength = (Sint16)strlen(titletext);
+	textlength = (int)strlen(titletext);
 	stringRGBA (renderer, WIDTH/4-4*textlength,(HEIGHT-40)/2+50-4,titletext,255,255,255,255);
 	SDL_strlcpy(titletext,"A=0-254 on Color",TLEN);
-	textlength = (Sint16)strlen(titletext);
+	textlength = (int)strlen(titletext);
 	stringRGBA (renderer, 3*WIDTH/4-4*textlength,(HEIGHT-40)/2+50-4,titletext,255,255,255,255);
 }
 
@@ -206,7 +206,7 @@ void ClearCenter(SDL_Renderer *renderer, const char *title)
 {
 	SDL_FRect r;
 	int i, j;
-	Sint16 textlength;
+	int textlength;
 
 	r.x = WIDTH/2 - 60;
 	r.y = HEIGHT/2 - 30;
@@ -223,7 +223,7 @@ void ClearCenter(SDL_Renderer *renderer, const char *title)
 		  SDL_RenderPoint(renderer, WIDTH/2 + i, HEIGHT/2 + j);
 	  }
 	}
-	textlength = (Sint16)strlen(title);
+	textlength = (int)strlen(title);
 	stringRGBA (renderer, WIDTH/2 - 4*textlength,r.y + 2,title,255,255,255,255);
 }
 
@@ -234,7 +234,7 @@ void ExecuteTest(SDL_Renderer *renderer, PrimitivesTestCaseFp testCase, int test
 {
 	char titletext[TLEN+1];
     Uint64 then, now, numPrimitives;
-	Sint16 textlength;
+	int textlength;
 
 	ClearScreen(renderer, testName);
 	then = SDL_GetTicks();
@@ -243,7 +243,7 @@ void ExecuteTest(SDL_Renderer *renderer, PrimitivesTestCaseFp testCase, int test
     if (now > then) {
         double fps = ((double) numPrimitives * 1000) / (now - then);
         SDL_snprintf(titletext, TLEN, "Test %2i %20s: %10.1f /sec", testNum, testName, fps);
-		textlength = (Sint16)strlen(titletext);
+		textlength = (int)strlen(titletext);
 	    stringRGBA (renderer, WIDTH/2-4*textlength,30-4,titletext,255,255,255,255);
 		SDL_Log("%s", titletext);
     }
@@ -254,7 +254,7 @@ void ExecuteTest(SDL_Renderer *renderer, PrimitivesTestCaseFp testCase, int test
 int TestPixel(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 1;
 
 	/* Draw A=255 */
@@ -301,7 +301,7 @@ int TestPixel(SDL_Renderer *renderer)
 int TestHline(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -348,7 +348,7 @@ int TestHline(SDL_Renderer *renderer)
 int TestVline(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -395,7 +395,7 @@ int TestVline(SDL_Renderer *renderer)
 int TestRectangle(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -442,7 +442,7 @@ int TestRectangle(SDL_Renderer *renderer)
 int TestRoundedRectangle(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -489,7 +489,7 @@ int TestRoundedRectangle(SDL_Renderer *renderer)
 int TestBox(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -536,7 +536,7 @@ int TestBox(SDL_Renderer *renderer)
 int TestRoundedBox(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -583,7 +583,7 @@ int TestRoundedBox(SDL_Renderer *renderer)
 int TestLine(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -680,7 +680,7 @@ int TestAALine(SDL_Renderer *renderer)
 int TestCircle(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -727,7 +727,7 @@ int TestCircle(SDL_Renderer *renderer)
 int TestAACircle(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 4;
 
 	/* Draw A=255 */
@@ -774,7 +774,7 @@ int TestAACircle(SDL_Renderer *renderer)
 int TestFilledCircle(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -821,7 +821,7 @@ int TestFilledCircle(SDL_Renderer *renderer)
 int TestEllipse(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -868,7 +868,7 @@ int TestEllipse(SDL_Renderer *renderer)
 int TestAAEllipse(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 4;
 
 	/* Draw A=255 */
@@ -915,7 +915,7 @@ int TestAAEllipse(SDL_Renderer *renderer)
 int TestFilledEllipse(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 2;
 
 	/* Draw A=255 */
@@ -962,7 +962,7 @@ int TestFilledEllipse(SDL_Renderer *renderer)
 int TestBezier(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 5;
 
 	/* Draw A=255 */
@@ -1016,7 +1016,7 @@ int TestBezier(SDL_Renderer *renderer)
 int TestPolygon(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 3;
 
 	/* Draw A=255 */
@@ -1070,7 +1070,7 @@ int TestPolygon(SDL_Renderer *renderer)
 int TestAAPolygon(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 4;
 
 	/* Draw A=255 */
@@ -1124,7 +1124,7 @@ int TestAAPolygon(SDL_Renderer *renderer)
 int TestFilledPolygon(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 4;
 
 	/* Draw A=255 */
@@ -1178,7 +1178,7 @@ int TestFilledPolygon(SDL_Renderer *renderer)
 int TestTrigon(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 1;
 
 	/* Draw A=255 */
@@ -1228,7 +1228,7 @@ int TestTrigon(SDL_Renderer *renderer)
 int TestArc(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 1;
 
 	/* Draw A=255 */
@@ -1275,7 +1275,7 @@ int TestArc(SDL_Renderer *renderer)
 int TestPie(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 1;
 
 	/* Draw A=255 */
@@ -1322,7 +1322,7 @@ int TestPie(SDL_Renderer *renderer)
 int TestFilledPie(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 1;
 
 	/* Draw A=255 */
@@ -1369,7 +1369,7 @@ int TestFilledPie(SDL_Renderer *renderer)
 int TestThickLine(SDL_Renderer *renderer)
 {
 	int i;
-	char r,g,b;
+	Uint8 r,g,b;
 	int step = 6;
 	
 	/* Draw A=255 */
@@ -1470,15 +1470,15 @@ int TestTexturedPolygon(SDL_Renderer *renderer)
 {
 	/* Define masking bytes */
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-	Uint32 rmask = 0xff000000; 
-	Uint32 gmask = 0x00ff0000;
-	Uint32 bmask = 0x0000ff00; 
-	Uint32 amask = 0x000000ff;
+	unsigned int rmask = 0xff000000;
+	unsigned int gmask = 0x00ff0000;
+	unsigned int bmask = 0x0000ff00;
+	unsigned int amask = 0x000000ff;
 #else
-	Uint32 amask = 0xff000000; 
-	Uint32 bmask = 0x00ff0000;
-	Uint32 gmask = 0x0000ff00; 
-	Uint32 rmask = 0x000000ff;
+	unsigned int amask = 0xff000000;
+	unsigned int bmask = 0x00ff0000;
+	unsigned int gmask = 0x0000ff00;
+	unsigned int rmask = 0x000000ff;
 #endif
 	int i;
 	int step = 24;
@@ -1605,7 +1605,7 @@ int TestBigCircle(SDL_Renderer *renderer)
 				circleRGBA(renderer,
 					WIDTH / 2,
 					HEIGHT / (2 - k + 1),
-					(Sint16)(256 * k - 1 + 2 * j),
+					256 * k - 1 + 2 * j,
 					r,
 					g,
 					b,
@@ -1675,8 +1675,8 @@ int TestBigEllipse(SDL_Renderer *renderer)
 				ellipseRGBA(renderer,
 					WIDTH / 2,
 					HEIGHT / 2,
-					(Sint16)(256 * k - 1 + 2 * j),
-					(Sint16)(256 * k - 1 - 2 * j),
+					256 * k - 1 + 2 * j,
+					256 * k - 1 - 2 * j,
 					r,
 					g,
 					b,
@@ -1685,8 +1685,8 @@ int TestBigEllipse(SDL_Renderer *renderer)
 				ellipseRGBA(renderer,
 					WIDTH / 2,
 					HEIGHT / 2,
-					(Sint16)(256 * k - 1 - 2 * j),
-					(Sint16)(256 * k - 1 + 2 * j),
+					256 * k - 1 - 2 * j,
+					256 * k - 1 + 2 * j,
 					r,
 					g,
 					b,
