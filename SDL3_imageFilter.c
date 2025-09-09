@@ -54,9 +54,9 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterAdd(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterAdd(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -64,9 +64,9 @@ int SDL_imageFilterAdd(unsigned char *Src1, unsigned char *Src2, unsigned char *
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 	
 		/* Setup to process whole image */
 	istart = 0;
@@ -86,7 +86,7 @@ int SDL_imageFilterAdd(unsigned char *Src1, unsigned char *Src2, unsigned char *
 		curdst++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -97,9 +97,9 @@ int SDL_imageFilterAdd(unsigned char *Src1, unsigned char *Src2, unsigned char *
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -107,9 +107,9 @@ int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char 
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -125,7 +125,7 @@ int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char 
 		curdst[i] = (unsigned char) (tmp * 255) ;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -136,9 +136,9 @@ int SDL_imageFilterMean(unsigned char *Src1, unsigned char *Src2, unsigned char 
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterSub(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterSub(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -146,9 +146,9 @@ int SDL_imageFilterSub(unsigned char *Src1, unsigned char *Src2, unsigned char *
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -163,7 +163,7 @@ int SDL_imageFilterSub(unsigned char *Src1, unsigned char *Src2, unsigned char *
 			result = 0;
 		curdst[i] = (unsigned char) result;
 	}
-	return (0);
+	return true;
 }
 
 /*!
@@ -174,9 +174,9 @@ int SDL_imageFilterSub(unsigned char *Src1, unsigned char *Src2, unsigned char *
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterAbsDiff(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterAbsDiff(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -184,9 +184,9 @@ int SDL_imageFilterAbsDiff(unsigned char *Src1, unsigned char *Src2, unsigned ch
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -204,7 +204,7 @@ int SDL_imageFilterAbsDiff(unsigned char *Src1, unsigned char *Src2, unsigned ch
 		curdst++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -215,9 +215,9 @@ int SDL_imageFilterAbsDiff(unsigned char *Src1, unsigned char *Src2, unsigned ch
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -225,9 +225,9 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -243,7 +243,7 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -254,18 +254,18 @@ int SDL_imageFilterMult(unsigned char *Src1, unsigned char *Src2, unsigned char 
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMultUnbound(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterMultUnbound(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart, tmp;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -279,7 +279,7 @@ int SDL_imageFilterMultUnbound(unsigned char *Src1, unsigned char *Src2, unsigne
 		curdst[i] = (unsigned char) tmp;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -290,9 +290,9 @@ int SDL_imageFilterMultUnbound(unsigned char *Src1, unsigned char *Src2, unsigne
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -300,9 +300,9 @@ int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned ch
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -318,7 +318,7 @@ int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned ch
 		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -329,9 +329,9 @@ int SDL_imageFilterMultInv(unsigned char *Src1, unsigned char *Src2, unsigned ch
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -340,9 +340,9 @@ int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -360,7 +360,7 @@ int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned
 		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -371,9 +371,9 @@ int SDL_imageFilterMultDivby2(unsigned char *Src1, unsigned char *Src2, unsigned
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -382,9 +382,9 @@ int SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -402,7 +402,7 @@ int SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned
 		curdst[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -413,18 +413,18 @@ int SDL_imageFilterMultDivby4(unsigned char *Src1, unsigned char *Src2, unsigned
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterBitAnd(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterBitAnd(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -441,7 +441,7 @@ int SDL_imageFilterBitAnd(unsigned char *Src1, unsigned char *Src2, unsigned cha
 		curdst++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -452,18 +452,18 @@ int SDL_imageFilterBitAnd(unsigned char *Src1, unsigned char *Src2, unsigned cha
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterBitOr(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterBitOr(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -480,7 +480,7 @@ int SDL_imageFilterBitOr(unsigned char *Src1, unsigned char *Src2, unsigned char
 		curdst++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -491,9 +491,9 @@ int SDL_imageFilterBitOr(unsigned char *Src1, unsigned char *Src2, unsigned char
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source arrays.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *cursrc2, *curdst;
@@ -501,9 +501,9 @@ int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Src2 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 	
 	/* Setup to process whole image */
 	istart = 0;
@@ -524,7 +524,7 @@ int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *
 		}
 	}
 
-	return (0);
+	return true;
 }
 
 /* ------------------------------------------------------------------------------------ */
@@ -536,18 +536,18 @@ int SDL_imageFilterDiv(unsigned char *Src1, unsigned char *Src2, unsigned char *
 \param Dest Pointer to the start of the destination byte array (D).
 \param length The number of bytes in the source array.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterBitNegation(unsigned char *Src1, unsigned char *Dest, unsigned int length)
+bool SDL_imageFilterBitNegation(unsigned char *Src1, unsigned char *Dest, unsigned int length)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *curdst;
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -562,7 +562,7 @@ int SDL_imageFilterBitNegation(unsigned char *Src1, unsigned char *Dest, unsigne
 		curdst++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -573,9 +573,9 @@ int SDL_imageFilterBitNegation(unsigned char *Src1, unsigned char *Dest, unsigne
 \param length The number of bytes in the source array.
 \param C Constant value to add (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
+bool SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
 {
 	unsigned int i, istart;
 	int iC;
@@ -584,14 +584,14 @@ int SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Special case: C==0 */
 	if (C == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -610,7 +610,7 @@ int SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 		cursrc1++;
 		curdest++;
 	}
-	return (0);
+	return true;
 }
 
 /*!
@@ -622,9 +622,9 @@ int SDL_imageFilterAddByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 \param bpp The bytes per unit length (BPP)
 \param C Constant to add (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)
+bool SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)
 {
 	unsigned int i, j, istart;
 	int iC[MAX_BYTES_PER_PIXEL], k;
@@ -634,14 +634,14 @@ int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Special case: C==0 */
 	if (C == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -666,7 +666,7 @@ int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 			}
 		}
 	}
-	return (0);
+	return true;
 }
 
 /*!
@@ -677,9 +677,9 @@ int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 \param length The number of bytes in the source array.
 \param C Constant to add (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
+bool SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
 {
 	unsigned int i, istart;
 	int iC;
@@ -689,9 +689,9 @@ int SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsig
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Setup to process whole image */
 	istart = 0;
@@ -710,7 +710,7 @@ int SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsig
 		curdest++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -721,9 +721,9 @@ int SDL_imageFilterAddByteToHalf(unsigned char *Src1, unsigned char *Dest, unsig
 \param length The number of bytes in the source arrays.
 \param C Constant to subtract (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
+bool SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
 {
 	unsigned int i, istart;
 	int iC;
@@ -733,14 +733,14 @@ int SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Special case: C==0 */
 	if (C == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -759,7 +759,7 @@ int SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 		cursrc1++;
 		curdest++;
 	}
-	return (0);
+	return true;
 }
 
 /*!
@@ -771,9 +771,9 @@ int SDL_imageFilterSubByte(unsigned char *Src1, unsigned char *Dest, unsigned in
 \param bpp The bytes per unit length (BPP)
 \param C Constant to subtract (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)
+bool SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned int C)
 {
 	unsigned int i, j, istart;
 	int iC[MAX_BYTES_PER_PIXEL], k;
@@ -783,14 +783,14 @@ int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
     /* Special case: C==0 */
 	if (C == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -816,7 +816,7 @@ int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 		}
 	}
 	
-	return (0);
+	return true;
 }
 
 /*!
@@ -827,9 +827,9 @@ int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, unsigned in
 \param length The number of bytes in the source array.
 \param N Number of bit-positions to shift (N). Valid range is 0 to 8.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned char N)
+bool SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned char N)
 {
 	unsigned int i,istart;
 	unsigned char *cursrc1, *curdest;
@@ -838,13 +838,13 @@ int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsi
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Check shift */
 	if (N > 8) {
-		return (-1);
+		return false;
 	}
 
 	/* Special case: N==0 */
@@ -874,7 +874,7 @@ int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsi
 		}
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -885,9 +885,9 @@ int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, unsi
 \param length The number of bytes in the source arrays.
 \param C Constant to multiply with (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
+bool SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char C)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1;
@@ -897,14 +897,14 @@ int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Special case: C==1 */
 	if (C == 1) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -922,7 +922,7 @@ int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned
 		curdest[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -934,9 +934,9 @@ int SDL_imageFilterMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned
 \param N Number of bit-positions to shift (N). Valid range is 0 to 8.
 \param C Constant to multiply with (C).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N,
+bool SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N,
 										   unsigned char C)
 {
 	unsigned int i, istart;
@@ -947,19 +947,19 @@ int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *D
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Check shift */
 	if (N > 8) {
-		return (-1);
+		return false;
 	}
 
 	/* Special case: N==0 && C==1 */
 	if ((N == 0) && (C == 1)) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -977,7 +977,7 @@ int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *D
 		curdest[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -988,9 +988,9 @@ int SDL_imageFilterShiftRightAndMultByByte(unsigned char *Src1, unsigned char *D
 \param length The number of bytes in the source arrays.
 \param N Number of bit-positions to shift (N). Valid range is 0 to 8.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
+bool SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *curdest;
@@ -998,13 +998,13 @@ int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Check shift */
 	if (N > 8) {
-		return (-1);
+		return false;
 	}
 
 	/* Special case: N==0 */
@@ -1027,7 +1027,7 @@ int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned
 		curdest[i] = (unsigned char) result;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -1038,9 +1038,9 @@ int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, unsigned
 \param length The number of bytes in the source arrays.
 \param N Number of bit-positions to shift (N). Valid range is 0 to 8.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
+bool SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *curdest;
@@ -1048,9 +1048,9 @@ int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsig
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	if (N > 8) {
 		return (-1);
@@ -1059,7 +1059,7 @@ int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsig
 	/* Special case: N==0 */
 	if (N == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -1076,7 +1076,7 @@ int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsig
 		curdest++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -1087,9 +1087,9 @@ int SDL_imageFilterShiftLeftByte(unsigned char *Src1, unsigned char *Dest, unsig
 \param length The number of bytes in the source array.
 \param N Number of bit-positions to shift (N). Valid range is 0 to 32.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned char N)
+bool SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned int bpp, unsigned char N)
 {
 	unsigned int i, istart;
 	int j;
@@ -1099,18 +1099,18 @@ int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsig
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	if (N > 32) {
-		return (-1);
+		return false;
 	}
 
 	/* Special case: N==0 */
 	if (N == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -1134,7 +1134,7 @@ int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsig
 		}
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -1145,9 +1145,9 @@ int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, unsig
 \param length The number of bytes in the source array.
 \param N Number of bit-positions to shift (N). Valid range is 0 to 8.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
+bool SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char N)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1, *curdest;
@@ -1155,18 +1155,18 @@ int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned 
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	if (N > 8) {
-		return (-1);
+		return false;
 	}
 
 	/* Special case: N==0 */
 	if (N == 0) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -1183,7 +1183,7 @@ int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned 
 		curdest[i] = (unsigned char) result;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -1194,9 +1194,9 @@ int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, unsigned 
 \param length The number of bytes in the source array.
 \param T The threshold boundary (inclusive).
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterBinarizeUsingThreshold(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char T)
+bool SDL_imageFilterBinarizeUsingThreshold(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char T)
 {
 	unsigned int i, istart;
 	unsigned char *cursrc1;
@@ -1204,14 +1204,14 @@ int SDL_imageFilterBinarizeUsingThreshold(unsigned char *Src1, unsigned char *De
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Special case: T==0 */
 	if (T == 0) {
 		memset(Dest, 255, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -1227,7 +1227,7 @@ int SDL_imageFilterBinarizeUsingThreshold(unsigned char *Src1, unsigned char *De
 		curdest++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -1239,9 +1239,9 @@ int SDL_imageFilterBinarizeUsingThreshold(unsigned char *Src1, unsigned char *De
 \param Tmin Lower (inclusive) boundary of the clipping range.
 \param Tmax Upper (inclusive) boundary of the clipping range.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterClipToRange(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char Tmin,
+bool SDL_imageFilterClipToRange(unsigned char *Src1, unsigned char *Dest, unsigned int length, unsigned char Tmin,
 							   unsigned char Tmax)
 {
 	unsigned int i, istart;
@@ -1250,14 +1250,14 @@ int SDL_imageFilterClipToRange(unsigned char *Src1, unsigned char *Dest, unsigne
 
 	/* Validate input parameters */
 	if ((Src1 == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if (length == 0)
-		return(0);
+		return true;
 
 	/* Special case: Tmin==0 && Tmax = 255 */
 	if ((Tmin == 0) && (Tmax == 25)) {
 		memcpy(Src1, Dest, length);
-		return (0); 
+		return true;
 	}
 
 	/* Setup to process whole image */
@@ -1279,7 +1279,7 @@ int SDL_imageFilterClipToRange(unsigned char *Src1, unsigned char *Dest, unsigne
 		curdest++;
 	}
 
-	return (0);
+	return true;
 }
 
 /*!
@@ -1293,9 +1293,9 @@ int SDL_imageFilterClipToRange(unsigned char *Src1, unsigned char *Dest, unsigne
 \param Nmin Normalization constant.
 \param Nmax Normalization constant.
 
-\return Returns 0 for success or -1 for error.
+\return Returns true for success or false for error.
 */
-int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsigned int length, int Cmin, int Cmax, int Nmin,
+bool SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsigned int length, int Cmin, int Cmax, int Nmin,
 								   int Nmax)
 {
 	unsigned int i, istart;
@@ -1323,7 +1323,7 @@ int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsi
 
 	dC = fCMax - fCMin;
 	if (dC == 0)
-		return (0);
+		return true;
 	dN = fNMax - fNMin;
 	factor = dN / dC;
 	for (i = istart; i < length; i++) {
@@ -1334,7 +1334,7 @@ int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsi
 		curdest[i] = (unsigned char) (tmp * 255);
 	}
 
-	return (0);
+	return true;
 }
 
 /* ------------------------------------------------------------------------------------ */
@@ -1351,20 +1351,20 @@ int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsi
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel3x3Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel3x3Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 										   signed short *Kernel, unsigned char Divisor)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 3) || (rows < 3) || (Divisor == 0))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1379,20 +1379,20 @@ int SDL_imageFilterConvolveKernel3x3Divide(unsigned char *Src, unsigned char *De
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel5x5Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel5x5Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 										   signed short *Kernel, unsigned char Divisor)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 5) || (rows < 5) || (Divisor == 0))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1407,20 +1407,20 @@ int SDL_imageFilterConvolveKernel5x5Divide(unsigned char *Src, unsigned char *De
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel7x7Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel7x7Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 										   signed short *Kernel, unsigned char Divisor)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 7) || (rows < 7) || (Divisor == 0))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1435,20 +1435,20 @@ int SDL_imageFilterConvolveKernel7x7Divide(unsigned char *Src, unsigned char *De
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel9x9Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel9x9Divide(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 										   signed short *Kernel, unsigned char Divisor)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 9) || (rows < 9) || (Divisor == 0))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1463,20 +1463,20 @@ int SDL_imageFilterConvolveKernel9x9Divide(unsigned char *Src, unsigned char *De
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel3x3ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel3x3ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 											   signed short *Kernel, unsigned char NRightShift)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 3) || (rows < 3) || (NRightShift > 7))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1491,20 +1491,20 @@ int SDL_imageFilterConvolveKernel3x3ShiftRight(unsigned char *Src, unsigned char
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel5x5ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel5x5ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 											   signed short *Kernel, unsigned char NRightShift)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 5) || (rows < 5) || (NRightShift > 7))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1519,20 +1519,20 @@ int SDL_imageFilterConvolveKernel5x5ShiftRight(unsigned char *Src, unsigned char
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel7x7ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel7x7ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 											   signed short *Kernel, unsigned char NRightShift)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 7) || (rows < 7) || (NRightShift > 7))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1547,20 +1547,20 @@ int SDL_imageFilterConvolveKernel7x7ShiftRight(unsigned char *Src, unsigned char
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterConvolveKernel9x9ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterConvolveKernel9x9ShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 											   signed short *Kernel, unsigned char NRightShift)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL) || (Kernel == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 9) || (rows < 9) || (NRightShift > 7))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /* ------------------------------------------------------------------------------------ */
@@ -1575,19 +1575,19 @@ int SDL_imageFilterConvolveKernel9x9ShiftRight(unsigned char *Src, unsigned char
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterSobelX(unsigned char *Src, unsigned char *Dest, int rows, int columns)
+bool SDL_imageFilterSobelX(unsigned char *Src, unsigned char *Dest, int rows, int columns)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 
 	if ((columns < 8) || (rows < 3))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
 
 /*!
@@ -1601,17 +1601,17 @@ int SDL_imageFilterSobelX(unsigned char *Src, unsigned char *Dest, int rows, int
 
 Note: No implementation available for this function yet.
 
-\return Returns 1 if filter was applied, 0 otherwise.
+\return Returns true if filter was applied, false otherwise.
 */
-int SDL_imageFilterSobelXShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
+bool SDL_imageFilterSobelXShiftRight(unsigned char *Src, unsigned char *Dest, int rows, int columns,
 									unsigned char NRightShift)
 {
 	/* Validate input parameters */
 	if ((Src == NULL) || (Dest == NULL))
-		return(-1);
+		return false;
 	if ((columns < 8) || (rows < 3) || (NRightShift > 7))
-		return (-1);
+		return false;
 
 	/* No implementation yet */
-	return (-1);
+	return false;
 }
