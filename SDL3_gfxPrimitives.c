@@ -104,12 +104,12 @@ bool pixelRGBA(SDL_Renderer * renderer, float x, float y, Uint8 r, Uint8 g, Uint
 
 \returns Returns true on success, false on failure.
 */
-bool pixelRGBAWeight(SDL_Renderer * renderer, float x, float y, Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int weight)
+bool pixelRGBAWeight(SDL_Renderer * renderer, float x, float y, Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint32 weight)
 {
 	/*
 	* Modify Alpha by weight 
 	*/
-	unsigned int ax = a;
+	Uint32 ax = a;
 	ax = ((ax * weight) >> 8);
 	if (ax > 255) {
 		a = 255;
@@ -366,7 +366,7 @@ bool roundedRectangleColor(SDL_Renderer * renderer, float x1, float y1, float x2
 */
 bool roundedRectangleRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	int result = 0;
+	Sint32 result = 0;
 	float tmp;
 	float w, h;
 	float xx1, xx2;
@@ -860,9 +860,9 @@ bool _aalineRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2
 {
 	float xx0, yy0, xx1, yy1;
 	bool result;
-	unsigned int intshift, erracc, erradj;
-	unsigned int erracctmp, wgt;
-	int dx, dy, tmp, xdir, y0p1, x0pxdir;
+	Uint32 intshift, erracc, erradj;
+	Uint32 erracctmp, wgt;
+	Sint32 dx, dy, tmp, xdir, y0p1, x0pxdir;
 
 	/*
 	* Keep on working with 32bit numbers 
@@ -1144,7 +1144,7 @@ bool circleRGBA(SDL_Renderer * renderer, float x, float y, float rad, Uint8 r, U
 
 \returns Returns true on success, false on failure.
 */
-bool arcColor(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint32 color)
+bool arcColor(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return arcRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3]);
@@ -1167,7 +1167,7 @@ bool arcColor(SDL_Renderer * renderer, float x, float y, float rad, int start, i
 \returns Returns true on success, false on failure.
 */
 /* TODO: rewrite algorithm; arc endpoints are not always drawn */
-bool arcRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool arcRGBA(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
 	float cx = 0;
@@ -1178,7 +1178,7 @@ bool arcRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, in
 	float xpcx, xmcx, xpcy, xmcy;
 	float ypcy, ymcy, ypcx, ymcx;
 	Uint8 drawoct;
-	int startoct, endoct, oct, stopval_start = 0, stopval_end = 0;
+	Sint32 startoct, endoct, oct, stopval_start = 0, stopval_end = 0;
 	double dstart, dend, temp = 0.;
 
 	/*
@@ -1508,11 +1508,11 @@ bool _ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry,
 	bool result;
 	float rxi, ryi;
 	float rx2, ry2, rx22, ry22;
-    int error;
+    Sint32 error;
     float curX, curY, curXp1, curYm1;
-	int scrX, scrY, oldX, oldY;
-    int deltaX, deltaY;
-	int ellipseOverscan;
+	Sint32 scrX, scrY, oldX, oldY;
+    Sint32 deltaX, deltaY;
+	Sint32 ellipseOverscan;
 
 	/*
 	* Sanity check radii 
@@ -1808,8 +1808,8 @@ bool aaellipseColor(SDL_Renderer * renderer, float x, float y, float rx, float r
 bool aaellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	int i;
-	int a2, b2, ds, dt, dxt, t, s, d;
+	Sint32 i;
+	Sint32 a2, b2, ds, dt, dxt, t, s, d;
 	float xp, yp, xs, ys, dyt, od, xx, yy, xc2, yc2;
 	float cp;
 	double sab;
@@ -2048,13 +2048,13 @@ Note: Determines vertex array and uses polygon or filledPolygon drawing routines
 \returns Returns true on success, false on failure.
 */
 /* TODO: rewrite algorithm; pie is not always accurate */
-bool _pieRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, int end,  Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled)
+bool _pieRGBA(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end,  Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled)
 {
 	bool result;
 	double angle, start_angle, end_angle;
 	double deltaAngle;
 	double dr;
-	int numpoints, i;
+	Sint32 numpoints, i;
 	float *vx, *vy;
 
 	/*
@@ -2164,7 +2164,7 @@ bool _pieRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, i
 \returns Returns true on success, false on failure.
 */
 bool pieColor(SDL_Renderer * renderer, float x, float y, float rad,
-	int start, int end, Uint32 color)
+	Sint32 start, Sint32 end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], 0);
@@ -2187,7 +2187,7 @@ bool pieColor(SDL_Renderer * renderer, float x, float y, float rad,
 \returns Returns true on success, false on failure.
 */
 bool pieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
-	int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+	Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, 0);
 }
@@ -2205,7 +2205,7 @@ bool pieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
 
 \returns Returns true on success, false on failure.
 */
-bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint32 color)
+bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], 1);
@@ -2228,7 +2228,7 @@ bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad, int st
 \returns Returns true on success, false on failure.
 */
 bool filledPieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
-	int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+	Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, 1);
 }
@@ -2446,7 +2446,7 @@ bool filledTrigonRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, flo
 
 \returns Returns true on success, false on failure.
 */
-bool polygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color)
+bool polygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return polygonRGBA(renderer, vx, vy, n, c[0], c[1], c[2], c[3]);
@@ -2462,13 +2462,13 @@ bool polygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, i
 
 \returns Returns true on success, false on failure.
 */
-bool polygon(SDL_Renderer * renderer, const float * vx, const float * vy, int n)
+bool polygon(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n)
 {
 	/*
 	* Draw 
 	*/
 	bool result = true;
-	int i, nn;
+	Sint32 i, nn;
 	SDL_FPoint* points;
 
 	/*
@@ -2528,7 +2528,7 @@ bool polygon(SDL_Renderer * renderer, const float * vx, const float * vy, int n)
 
 \returns Returns true on success, false on failure.
 */
-bool polygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool polygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
 	* Draw 
@@ -2589,7 +2589,7 @@ bool polygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, in
 
 \returns Returns true on success, false on failure.
 */
-bool aapolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color)
+bool aapolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return aapolygonRGBA(renderer, vx, vy, n, c[0], c[1], c[2], c[3]);
@@ -2609,10 +2609,10 @@ bool aapolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy,
 
 \returns Returns true on success, false on failure.
 */
-bool aapolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool aapolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	int i;
+	Sint32 i;
 	const float *x1, *y1, *x2, *y2;
 
 	/*
@@ -2667,9 +2667,9 @@ bool aapolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, 
 
 \returns Returns 0 if a==b, a negative number if a<b or a positive number if a>b.
 */
-int _gfxPrimitivesCompareInt(const void *a, const void *b)
+Sint32 _gfxPrimitivesCompareInt(const void *a, const void *b)
 {
-	return (*(const int *) a) - (*(const int *) b);
+	return (*(const Sint32 *) a) - (*(const Sint32 *) b);
 }
 
 /*!
@@ -2677,7 +2677,7 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 
 Note: Used for non-multithreaded (default) operation of filledPolygonMT.
 */
-static int *gfxPrimitivesPolyIntsGlobal = NULL;
+static Sint32 *gfxPrimitivesPolyIntsGlobal = NULL;
 
 /*!
 \brief Flag indicating if global vertex array was already allocated.
@@ -2704,18 +2704,18 @@ Note: The last two parameters are optional; but are required for multithreaded o
 
 \returns Returns true on success, false on failure.
 */
-bool filledPolygonRGBAMT(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int **polyInts, bool *polyAllocated)
+bool filledPolygonRGBAMT(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a, Sint32 **polyInts, bool *polyAllocated)
 {
 	bool result;
-	int i;
-	int y, xa, xb;
-	int miny, maxy;
-	int x1, y1;
-	int x2, y2;
-	int ind1, ind2;
-	int ints;
-	int *gfxPrimitivesPolyInts = NULL;
-	int *gfxPrimitivesPolyIntsNew = NULL;
+	Sint32 i;
+	Sint32 y, xa, xb;
+	Sint32 miny, maxy;
+	Sint32 x1, y1;
+	Sint32 x2, y2;
+	Sint32 ind1, ind2;
+	Sint32 ints;
+	Sint32 *gfxPrimitivesPolyInts = NULL;
+	Sint32 *gfxPrimitivesPolyIntsNew = NULL;
 	bool gfxPrimitivesPolyAllocated = false;
 
 	/*
@@ -2752,11 +2752,11 @@ bool filledPolygonRGBAMT(SDL_Renderer * renderer, const float * vx, const float 
 	* Allocate temp array, only grow array 
 	*/
 	if (!gfxPrimitivesPolyAllocated) {
-		gfxPrimitivesPolyInts = (int *) malloc(sizeof(int) * n);
+		gfxPrimitivesPolyInts = (Sint32 *) malloc(sizeof(int) * n);
 		gfxPrimitivesPolyAllocated = n;
 	} else {
 		if (gfxPrimitivesPolyAllocated < n) {
-			gfxPrimitivesPolyIntsNew = (int *) realloc(gfxPrimitivesPolyInts, sizeof(int) * n);
+			gfxPrimitivesPolyIntsNew = (Sint32 *) realloc(gfxPrimitivesPolyInts, sizeof(int) * n);
 			if (!gfxPrimitivesPolyIntsNew) {
 				if (!gfxPrimitivesPolyInts) {
 					free(gfxPrimitivesPolyInts);
@@ -2871,7 +2871,7 @@ bool filledPolygonRGBAMT(SDL_Renderer * renderer, const float * vx, const float 
 
 \returns Returns true on success, false on failure.
 */
-bool filledPolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color)
+bool filledPolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return filledPolygonRGBAMT(renderer, vx, vy, n, c[0], c[1], c[2], c[3], NULL, NULL);
@@ -2891,7 +2891,7 @@ bool filledPolygonColor(SDL_Renderer * renderer, const float * vx, const float *
 
 \returns Returns true on success, false on failure.
 */
-bool filledPolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool filledPolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	return filledPolygonRGBAMT(renderer, vx, vy, n, r, g, b, a, NULL, NULL);
 }
@@ -2913,15 +2913,15 @@ bool filledPolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * 
 
 \returns Returns true on success, false on failure.
 */
-bool _HLineTextured(SDL_Renderer *renderer, float x1, float x2, float y, SDL_Texture *texture, int texture_w, int texture_h, int texture_dx, int texture_dy)
+bool _HLineTextured(SDL_Renderer *renderer, float x1, float x2, float y, SDL_Texture *texture, Sint32 texture_w, Sint32 texture_h, Sint32 texture_dx, Sint32 texture_dy)
 {
 	float w;
 	float xtmp;
 	bool result = true;
-	int texture_x_walker;    
-	int texture_y_start;    
+	Sint32 texture_x_walker;
+	Sint32 texture_y_start;
 	SDL_FRect source_rect,dst_rect;
-	int pixels_written,write_width;
+	Sint32 pixels_written,write_width;
 
 	/*
 	* Swap x1, x2 if required to ensure x1<=x2
@@ -3012,20 +3012,20 @@ to the left and want the texture to apear the same you need to increase the text
 
 \returns Returns true on success, false on failure.
 */
-bool texturedPolygonMT(SDL_Renderer *renderer, const float * vx, const float * vy, int n,
-	SDL_Surface * texture, int texture_dx, int texture_dy, int **polyInts, bool *polyAllocated)
+bool texturedPolygonMT(SDL_Renderer *renderer, const float * vx, const float * vy, Sint32 n,
+	SDL_Surface * texture, Sint32 texture_dx, Sint32 texture_dy, Sint32 **polyInts, bool *polyAllocated)
 {
 	bool result;
-	int i;
-	int y, xa, xb;
-	int minx,maxx,miny, maxy;
-	int x1, y1;
-	int x2, y2;
-	int ind1, ind2;
-	int ints;
-	int *gfxPrimitivesPolyInts = NULL;
-	int *gfxPrimitivesPolyIntsTemp = NULL;
-	int gfxPrimitivesPolyAllocated = 0;
+	Sint32 i;
+	Sint32 y, xa, xb;
+	Sint32 minx,maxx,miny, maxy;
+	Sint32 x1, y1;
+	Sint32 x2, y2;
+	Sint32 ind1, ind2;
+	Sint32 ints;
+	Sint32 *gfxPrimitivesPolyInts = NULL;
+	Sint32 *gfxPrimitivesPolyIntsTemp = NULL;
+	Sint32 gfxPrimitivesPolyAllocated = 0;
 	SDL_Texture *textureAsTexture = NULL;
 
 	/*
@@ -3052,11 +3052,11 @@ bool texturedPolygonMT(SDL_Renderer *renderer, const float * vx, const float * v
 	* Allocate temp array, only grow array 
 	*/
 	if (!gfxPrimitivesPolyAllocated) {
-		gfxPrimitivesPolyInts = (int *) malloc(sizeof(int) * n);
+		gfxPrimitivesPolyInts = (Sint32 *) malloc(sizeof(int) * n);
 		gfxPrimitivesPolyAllocated = n;
 	} else {
 		if (gfxPrimitivesPolyAllocated < n) {
-			gfxPrimitivesPolyIntsTemp = (int *) realloc(gfxPrimitivesPolyInts, sizeof(int) * n);
+			gfxPrimitivesPolyIntsTemp = (Sint32 *) realloc(gfxPrimitivesPolyInts, sizeof(int) * n);
 			if (gfxPrimitivesPolyIntsTemp == NULL) {
 				/* Realloc failed - keeps original memory block, but fails this operation */
 				return(false);
@@ -3183,7 +3183,7 @@ to the left and want the texture to apear the same you need to increase the text
 
 \returns Returns true on success, false on failure.
 */
-bool texturedPolygon(SDL_Renderer *renderer, const float * vx, const float * vy, int n, SDL_Surface *texture, int texture_dx, int texture_dy)
+bool texturedPolygon(SDL_Renderer *renderer, const float * vx, const float * vy, Sint32 n, SDL_Surface *texture, Sint32 texture_dx, Sint32 texture_dy)
 {
 	/*
 	* Draw
@@ -3206,37 +3206,37 @@ static const unsigned char *currentFontdata = gfxPrimitivesFontdata;
 /*!
 \brief Width of the current font. Default is 8. 
 */
-static unsigned int charWidth = 8;
+static Uint32 charWidth = 8;
 
 /*!
 \brief Height of the current font. Default is 8. 
 */
-static unsigned int charHeight = 8;
+static Uint32 charHeight = 8;
 
 /*!
 \brief Width for rendering. Autocalculated.
 */
-static unsigned int charWidthLocal = 8;
+static Uint32 charWidthLocal = 8;
 
 /*!
 \brief Height for rendering. Autocalculated.
 */
-static unsigned int charHeightLocal = 8;
+static Uint32 charHeightLocal = 8;
 
 /*!
 \brief Pitch of the current font in bytes. Default is 1. 
 */
-static unsigned int charPitch = 1;
+static Uint32 charPitch = 1;
 
 /*!
 \brief Characters 90deg clockwise rotations. Default is 0. Max is 3. 
 */
-static unsigned int charRotation = 0;
+static Uint32 charRotation = 0;
 
 /*!
 \brief Character data size in bytes of the current font. Default is 8. 
 */
-static unsigned int charSize = 8;
+static Uint32 charSize = 8;
 
 /*!
 \brief Sets or resets the current global font data.
@@ -3251,9 +3251,9 @@ The font data array is organized in follows:
 \param cw Width of character in bytes. Ignored if fontdata==NULL.
 \param ch Height of character in bytes. Ignored if fontdata==NULL.
 */
-void gfxPrimitivesSetFont(const void *fontdata, unsigned int cw, unsigned int ch)
+void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch)
 {
-	int i;
+	Sint32 i;
 
 	if ((fontdata) && (cw) && (ch)) {
 		currentFontdata = (unsigned char *)fontdata;
@@ -3297,9 +3297,9 @@ Changing the rotation, will reset the character cache.
 
 \param rotation Number of 90deg clockwise steps to rotate
 */
-void gfxPrimitivesSetFontRotation(unsigned int rotation)
+void gfxPrimitivesSetFontRotation(Uint32 rotation)
 {
-	int i;
+	Sint32 i;
 
 	rotation = rotation & 3;
 	if (charRotation != rotation)
@@ -3348,15 +3348,15 @@ bool characterRGBA(SDL_Renderer *renderer, float x, float y, char c, Uint8 r, Ui
 	SDL_FRect srect;
 	SDL_FRect drect;
 	bool result;
-	unsigned int ix, iy;
+	Uint32 ix, iy;
 	const unsigned char *charpos;
 	Uint8 *curpos;
 	Uint8 patt, mask;
 	Uint8 *linepos;
-	unsigned int pitch;
+	Uint32 pitch;
 	SDL_Surface *character;
 	SDL_Surface *rotatedCharacter;
-	unsigned int ci;
+	Uint32 ci;
 
 	/*
 	* Setup source rectangle
@@ -3408,9 +3408,9 @@ bool characterRGBA(SDL_Renderer *renderer, float x, float y, char c, Uint8 r, Ui
 					mask = 0x80;
 				}
 				if (patt & mask) {
-					*(unsigned int *)curpos = 0xffffffff;
+					*(Uint32 *)curpos = 0xffffffff;
 				} else {
-					*(unsigned int *)curpos = 0;
+					*(Uint32 *)curpos = 0;
 				}
 				curpos += 4;
 			}
@@ -3546,10 +3546,10 @@ bool stringRGBA(SDL_Renderer * renderer, float x, float y, const char *s, Uint8 
 
 \returns Interpolated value at position t, value[0] when t<0, value[n-1] when t>n.
 */
-double _evaluateBezier (double *data, int ndata, double t) 
+double _evaluateBezier (double *data, Sint32 ndata, double t)
 {
 	double mu, result;
-	int n,k,kn,nn,nkn;
+	Sint32 n,k,kn,nn,nkn;
 	double blend,muk,munk;
 
 	/* Sanity check bounds */
@@ -3605,7 +3605,7 @@ double _evaluateBezier (double *data, int ndata, double t)
 
 \returns Returns true on success, false on failure.
 */
-bool bezierColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, int s, Uint32 color)
+bool bezierColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Sint32 s, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return bezierRGBA(renderer, vx, vy, n, s, c[0], c[1], c[2], c[3]);
@@ -3626,10 +3626,10 @@ bool bezierColor(SDL_Renderer * renderer, const float * vx, const float * vy, in
 
 \returns Returns true on success, false on failure.
 */
-bool bezierRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool bezierRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Sint32 s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	bool result;
-	int i;
+	Sint32 i;
 	double *x, *y, t, stepsize;
 	float x1, y1, x2, y2;
 
@@ -3730,7 +3730,7 @@ bool thickLineColor(SDL_Renderer *renderer, float x1, float y1, float x2, float 
 */
 bool thickLineRGBA(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	int wh;
+	Sint32 wh;
 	double dx, dy, dx1, dy1, dx2, dy2;
 	double l, wl2, nx, ny, ang, adj;
 	float px[4], py[4];

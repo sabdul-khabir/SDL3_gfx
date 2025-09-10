@@ -130,8 +130,8 @@ extern "C" {
 
 	/* Arc */
 
-	SDL3_GFXPRIMITIVES_SCOPE bool arcColor(SDL_Renderer * renderer, float x, float y, float rad, int start, int end, Uint32 color);
-	SDL3_GFXPRIMITIVES_SCOPE bool arcRGBA(SDL_Renderer * renderer, float x, float y, float rad, int start, int end,
+	SDL3_GFXPRIMITIVES_SCOPE bool arcColor(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end, Uint32 color);
+	SDL3_GFXPRIMITIVES_SCOPE bool arcRGBA(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end,
 		Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* AA Circle */
@@ -167,16 +167,16 @@ extern "C" {
 	/* Pie */
 
 	SDL3_GFXPRIMITIVES_SCOPE bool pieColor(SDL_Renderer * renderer, float x, float y, float rad,
-		int start, int end, Uint32 color);
+		Sint32 start, Sint32 end, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool pieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
-		int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Filled Pie */
 
 	SDL3_GFXPRIMITIVES_SCOPE bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad,
-		int start, int end, Uint32 color);
+		Sint32 start, Sint32 end, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool filledPieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
-		int start, int end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Trigon */
 
@@ -198,36 +198,36 @@ extern "C" {
 
 	/* Polygon */
 
-	SDL3_GFXPRIMITIVES_SCOPE bool polygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color);
+	SDL3_GFXPRIMITIVES_SCOPE bool polygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool polygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy,
-		int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* AA-Polygon */
 
-	SDL3_GFXPRIMITIVES_SCOPE bool aapolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color);
+	SDL3_GFXPRIMITIVES_SCOPE bool aapolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool aapolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy,
-		int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Filled Polygon */
 
-	SDL3_GFXPRIMITIVES_SCOPE bool filledPolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, Uint32 color);
+	SDL3_GFXPRIMITIVES_SCOPE bool filledPolygonColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool filledPolygonRGBA(SDL_Renderer * renderer, const float * vx,
-		const float * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		const float * vy, Sint32 n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Textured Polygon */
 
-	SDL3_GFXPRIMITIVES_SCOPE bool texturedPolygon(SDL_Renderer * renderer, const float * vx, const float * vy, int n, SDL_Surface * texture,int texture_dx,int texture_dy);
+	SDL3_GFXPRIMITIVES_SCOPE bool texturedPolygon(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, SDL_Surface * texture,Sint32 texture_dx,Sint32 texture_dy);
 
 	/* Bezier */
 
-	SDL3_GFXPRIMITIVES_SCOPE bool bezierColor(SDL_Renderer * renderer, const float * vx, const float * vy, int n, int s, Uint32 color);
+	SDL3_GFXPRIMITIVES_SCOPE bool bezierColor(SDL_Renderer * renderer, const float * vx, const float * vy, Sint32 n, Sint32 s, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool bezierRGBA(SDL_Renderer * renderer, const float * vx, const float * vy,
-		int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		Sint32 n, Sint32 s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Characters/Strings */
 
-	SDL3_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, unsigned int cw, unsigned int ch);
-	SDL3_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFontRotation(unsigned int rotation);
+	SDL3_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch);
+	SDL3_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFontRotation(Uint32 rotation);
 	SDL3_GFXPRIMITIVES_SCOPE bool characterColor(SDL_Renderer * renderer, float x, float y, char c, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool characterRGBA(SDL_Renderer * renderer, float x, float y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	SDL3_GFXPRIMITIVES_SCOPE bool stringColor(SDL_Renderer * renderer, float x, float y, const char *s, Uint32 color);
