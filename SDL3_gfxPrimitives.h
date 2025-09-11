@@ -119,9 +119,9 @@ extern "C" {
 
 	/* Thick Line */
 	SDL3_GFXPRIMITIVES_SCOPE bool thickLineColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2,
-		Uint8 width, Uint32 color);
+		float width, Uint32 color);
 	SDL3_GFXPRIMITIVES_SCOPE bool thickLineRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2,
-		Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		float width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Circle */
 

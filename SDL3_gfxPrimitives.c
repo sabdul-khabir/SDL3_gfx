@@ -3706,7 +3706,7 @@ bool bezierRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, Sin
 
 \returns Returns true on success, false on failure.
 */
-bool thickLineColor(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, Uint8 width, Uint32 color)
+bool thickLineColor(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, float width, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
 	return thickLineRGBA(renderer, x1, y1, x2, y2, width, c[0], c[1], c[2], c[3]);
@@ -3728,7 +3728,7 @@ bool thickLineColor(SDL_Renderer *renderer, float x1, float y1, float x2, float 
 
 \returns Returns true on success, false on failure.
 */
-bool thickLineRGBA(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+bool thickLineRGBA(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, float width, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	Sint32 wh;
 	double dx, dy, dx1, dy1, dx2, dy2;
