@@ -438,11 +438,11 @@ bool roundedRectangleRGBA(SDL_Renderer * renderer, float x1, float y1, float x2,
 	*/
 	if ((rad * 2) > w)  
 	{
-		rad = w / 2;
+		rad = (Sint32) w / 2;
 	}
 	if ((rad * 2) > h)
 	{
-		rad = h / 2;
+		rad = (Sint32) h / 2;
 	}
 
 	/*
@@ -592,12 +592,12 @@ bool roundedBoxRGBA(SDL_Renderer * renderer, float x1, float y1, float x2,
 	r2 = rad + rad;
 	if (r2 > w)  
 	{
-		rad = w / 2;
+		rad = (Sint32) w / 2;
 		r2 = rad + rad;
 	}
 	if (r2 > h)
 	{
-		rad = h / 2;
+		rad = (Sint32) h / 2;
 	}
 
 	/* Setup filled circle drawing for corners */
@@ -1068,7 +1068,7 @@ bool _aalineRGBA(SDL_Renderer * renderer, float x1, float y1, float x2, float y2
 bool aalineColor(SDL_Renderer * renderer, float x1, float y1, float x2, float y2, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
-	return _aalineRGBA(renderer, x1, y1, x2, y2, c[0], c[1], c[2], c[3], 1);
+	return _aalineRGBA(renderer, x1, y1, x2, y2, c[0], c[1], c[2], c[3], true);
 }
 
 /*!
@@ -1506,10 +1506,10 @@ bool _drawQuadrants(SDL_Renderer * renderer,  float x, float y, float dx, float 
 bool _ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool f)
 {
 	bool result;
-	float rxi, ryi;
-	float rx2, ry2, rx22, ry22;
+	Sint32 rxi, ryi;
+	Sint32 rx2, ry2, rx22, ry22;
     Sint32 error;
-    float curX, curY, curXp1, curYm1;
+    Sint32 curX, curY, curXp1, curYm1;
 	Sint32 scrX, scrY, oldX, oldY;
     Sint32 deltaX, deltaY;
 	Sint32 ellipseOverscan;
@@ -1668,7 +1668,7 @@ bool _ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry,
 bool ellipseColor(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
-	return _ellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3], 0);
+	return _ellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3], false);
 }
 
 /*!
@@ -1688,7 +1688,7 @@ bool ellipseColor(SDL_Renderer * renderer, float x, float y, float rx, float ry,
 */
 bool ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return _ellipseRGBA(renderer, x, y, rx, ry, r, g, b, a, 0);
+	return _ellipseRGBA(renderer, x, y, rx, ry, r, g, b, a, false);
 }
 
 /* ----- Filled Circle */
@@ -1726,7 +1726,7 @@ bool filledCircleColor(SDL_Renderer * renderer, float x, float y, float rad, Uin
 */
 bool filledCircleRGBA(SDL_Renderer * renderer, float x, float y, float rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return _ellipseRGBA(renderer, x, y, rad, rad, r, g ,b, a, 1);
+	return _ellipseRGBA(renderer, x, y, rad, rad, r, g ,b, a, true);
 }
 
 
@@ -2003,7 +2003,7 @@ bool aaellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry
 bool filledEllipseColor(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
-	return _ellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3], 1);
+	return _ellipseRGBA(renderer, x, y, rx, ry, c[0], c[1], c[2], c[3], true);
 }
 
 /*!
@@ -2023,7 +2023,7 @@ bool filledEllipseColor(SDL_Renderer * renderer, float x, float y, float rx, flo
 */
 bool filledEllipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return _ellipseRGBA(renderer, x, y, rx, ry, r, g, b, a, 1);
+	return _ellipseRGBA(renderer, x, y, rx, ry, r, g, b, a, true);
 }
 
 /* ----- Pie */
@@ -2167,7 +2167,7 @@ bool pieColor(SDL_Renderer * renderer, float x, float y, float rad,
 	Sint32 start, Sint32 end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
-	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], 0);
+	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], false);
 }
 
 /*!
@@ -2189,7 +2189,7 @@ bool pieColor(SDL_Renderer * renderer, float x, float y, float rad,
 bool pieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
 	Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, 0);
+	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, false);
 }
 
 /*!
@@ -2208,7 +2208,7 @@ bool pieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
 bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad, Sint32 start, Sint32 end, Uint32 color)
 {
 	Uint8 *c = (Uint8 *)&color; 
-	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], 1);
+	return _pieRGBA(renderer, x, y, rad, start, end, c[0], c[1], c[2], c[3], true);
 }
 
 /*!
@@ -2230,7 +2230,7 @@ bool filledPieColor(SDL_Renderer * renderer, float x, float y, float rad, Sint32
 bool filledPieRGBA(SDL_Renderer * renderer, float x, float y, float rad,
 	Sint32 start, Sint32 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, 1);
+	return _pieRGBA(renderer, x, y, rad, start, end, r, g, b, a, true);
 }
 
 /* ------ Trigon */
@@ -2645,14 +2645,14 @@ bool aapolygonRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, 
 	*/
 	result = true;
 	for (i = 1; i < n; i++) {
-		result &= _aalineRGBA(renderer, *x1, *y1, *x2, *y2, r, g, b, a, 0);
+		result &= _aalineRGBA(renderer, *x1, *y1, *x2, *y2, r, g, b, a, false);
 		x1 = x2;
 		y1 = y2;
 		x2++;
 		y2++;
 	}
 
-	result &= _aalineRGBA(renderer, *x1, *y1, *vx, *vy, r, g, b, a, 0);
+	result &= _aalineRGBA(renderer, *x1, *y1, *vx, *vy, r, g, b, a, false);
 
 	return (result);
 }
@@ -2966,7 +2966,7 @@ bool _HLineTextured(SDL_Renderer *renderer, float x1, float x2, float y, SDL_Tex
 		source_rect.x = texture_x_walker;
 		dst_rect.x= x1;
 		dst_rect.w = source_rect.w;
-		result = (SDL_RenderTexture(renderer, texture, &source_rect, &dst_rect) == 0);
+		result = SDL_RenderTexture(renderer, texture, &source_rect, &dst_rect);
 	} else { 
 		/* we need to draw multiple times */
 		/* draw the first segment */
@@ -2975,7 +2975,7 @@ bool _HLineTextured(SDL_Renderer *renderer, float x1, float x2, float y, SDL_Tex
 		source_rect.x = texture_x_walker;
 		dst_rect.x= x1;
 		dst_rect.w = source_rect.w;
-		result &= (SDL_RenderTexture(renderer, texture, &source_rect, &dst_rect) == 0);
+		result &= SDL_RenderTexture(renderer, texture, &source_rect, &dst_rect);
 		write_width = texture_w;
 
 		/* now draw the rest */
@@ -2988,7 +2988,7 @@ bool _HLineTextured(SDL_Renderer *renderer, float x1, float x2, float y, SDL_Tex
 			source_rect.w = write_width;
 			dst_rect.x = x1 + pixels_written;
 			dst_rect.w = source_rect.w;
-			result &= (SDL_RenderTexture(renderer, texture, &source_rect, &dst_rect) == 0);
+			result &= SDL_RenderTexture(renderer, texture, &source_rect, &dst_rect);
 			pixels_written += write_width;
 		}
 	}
@@ -3674,12 +3674,12 @@ bool bezierRGBA(SDL_Renderer * renderer, const float * vx, const float * vy, Sin
 	* Draw 
 	*/
 	t=0.0;
-	x1=(float)lrint(_evaluateBezier(x,n+1,t));
-	y1=(float)lrint(_evaluateBezier(y,n+1,t));
+	x1=(Sint32)lrint(_evaluateBezier(x,n+1,t));
+	y1=(Sint32)lrint(_evaluateBezier(y,n+1,t));
 	for (i = 0; i <= (n*s); i++) {
 		t += stepsize;
-		x2=(float)_evaluateBezier(x,n,t);
-		y2=(float)_evaluateBezier(y,n,t);
+		x2=(Sint32)_evaluateBezier(x,n,t);
+		y2=(Sint32)_evaluateBezier(y,n,t);
 		result &= line(renderer, x1, y1, x2, y2);
 		x1 = x2;
 		y1 = y2;
