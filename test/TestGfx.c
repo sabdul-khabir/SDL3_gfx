@@ -102,8 +102,15 @@ void InitRandomPoints(int seed)
 		lw[i]=2 + (rand() % 7);
 
 		/* Random Radii */
-		rr1[i]=rand() % 32;
-		rr2[i]=rand() % 32;
+		if (i == 0) {
+			/* Special case for radii bigger than 0 and less than 1 */
+			rr1[i]=0.5f;
+			rr2[i]=0.25f;
+		} else {
+			rr1[i]=rand() % 32;
+			rr2[i]=rand() % 32;
+		}
+
 
 		/* Random Angles */
 		a1[i]=rand() % 360;

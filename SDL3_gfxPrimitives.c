@@ -1542,9 +1542,20 @@ bool _ellipseRGBA(SDL_Renderer * renderer, float x, float y, float rx, float ry,
 			return (hline(renderer, x - rx, x + rx, y));
 		}
 	}
-	
+
 	/*
- 	 * Adjust overscan 
+	* Special case for radii > 0 and < 1
+	*/
+	if (rx > 0 && rx < 1) {
+		rx = 1.0f;
+	}
+
+	if (ry > 0 && ry < 1) {
+		ry = 1.0f;
+	}
+
+	/*
+ 	 * Adjust overscan
 	 */
 	rxi = rx;
 	ryi = ry;
