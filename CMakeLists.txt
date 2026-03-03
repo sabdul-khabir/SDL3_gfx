@@ -1,5 +1,6 @@
 #Sets the minimum required version of cmake for a project
 cmake_minimum_required(VERSION 3.16.0)
+include(CMakePackageConfigHelpers)
 
 # Set the project name
 project(SDL3_gfx LANGUAGES C VERSION "1.0.1")
@@ -96,7 +97,7 @@ target_include_directories(${PROJECT_NAME}_Static PUBLIC
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   find_library(SDL3_LIB libSDL3.a)
 else()
-  find_package(SDL3 REQUIRED)
+  find_package(SDL3 REQUIRED NO_CMAKE_FIND_ROOT_PATH)
 endif()
 
 # Specify libraries directories that we will link with SDL3_gfx.
@@ -124,10 +125,41 @@ install (TARGETS ${PROJECT_NAME}_Static
 # pkg-config
 ################################################################################
 include( GNUInstallDirs )
-configure_file(sdl3-gfx.pc.in sdl3-gfx.pc @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sdl3-gfx.pc"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 
+configure_file(sdl3-gfx.pc.in sdl3-gfx.pc @ONLY)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sdl3-gfx.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+
+################################################################################
+# cmake configuration
+################################################################################
+if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Emscripten"))
+
+  install(TARGETS ${PROJECT_NAME}_Static
+    EXPORT ${PROJECT_NAME}_Static
+    DESTINATION lib/cmake/${PROJECT_NAME}
+  )
+  
+  set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+      CACHE PATH "Location of header files")
+  set(LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}
+      CACHE PATH "Location of library files")
+
+  configure_package_config_file(${PROJECT_NAME}Config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+    PATH_VARS INCLUDE_INSTALL_DIR LIB_INSTALL_DIR)
+
+  write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+    VERSION ${CMAKE_PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion )
+    
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+                ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+
+endif()
 
 ################################################################################
 # Sub-projects
