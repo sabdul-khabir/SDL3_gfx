@@ -64,6 +64,12 @@ extern "C" {
 #  define SDL3_GFXPRIMITIVES_SCOPE extern
 #endif
 
+	/* ---- Init/Cleanup */
+
+	SDL3_GFXPRIMITIVES_SCOPE bool GFX_Init();
+	SDL3_GFXPRIMITIVES_SCOPE void GFX_Quit();
+
+
 	/* Note: all ___Color routines expect the color to be in format 0xRRGGBBAA */
 
 	/* Pixel */

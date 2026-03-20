@@ -36,6 +36,50 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #include "SDL3_rotozoom.h"
 #include "SDL3_gfxPrimitives_font.h"
 
+
+/*!
+\brief Global vertex array to use if optional parameters are not given in filledPolygonMT calls.
+
+Note: Used for non-multithreaded (default) operation of filledPolygonMT.
+*/
+static Sint32* gfxPrimitivesPolyIntsGlobal = NULL;
+
+/*!
+\brief Flag indicating if global vertex array was already allocated.
+
+Note: Used for non-multithreaded (default) operation of filledPolygonMT.
+*/
+static bool gfxPrimitivesPolyAllocatedGlobal = false;
+
+
+/* ---- Init/Cleanup */
+
+/*!
+\brief Initializes internal data used by GFX functions
+
+\returns Returns true on success, false on failure.
+*/
+bool GFX_Init()
+{
+	return true;
+}
+
+/*!
+\brief Cleans up internal data used by GFX functions
+
+*/
+void GFX_Quit()
+{
+	if (gfxPrimitivesPolyAllocatedGlobal)
+	{
+		gfxPrimitivesPolyAllocatedGlobal = false;
+		free(gfxPrimitivesPolyIntsGlobal);
+		gfxPrimitivesPolyIntsGlobal = NULL;
+	}
+}
+
+
+
 /* ---- Pixel */
 
 /*!
@@ -2682,20 +2726,6 @@ Sint32 _gfxPrimitivesCompareInt(const void *a, const void *b)
 {
 	return (*(const Sint32 *) a) - (*(const Sint32 *) b);
 }
-
-/*!
-\brief Global vertex array to use if optional parameters are not given in filledPolygonMT calls.
-
-Note: Used for non-multithreaded (default) operation of filledPolygonMT.
-*/
-static Sint32 *gfxPrimitivesPolyIntsGlobal = NULL;
-
-/*!
-\brief Flag indicating if global vertex array was already allocated.
-
-Note: Used for non-multithreaded (default) operation of filledPolygonMT.
-*/
-static bool gfxPrimitivesPolyAllocatedGlobal = false;
 
 /*!
 \brief Draw filled polygon with alpha blending (multi-threaded capable).
